@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/idWindow"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/inputId"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/findId"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress|textNoSuggestions"
+                android:maxLength="30"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/checkIdBtn"
+                android:text="@string/checkId"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pwWindow"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/inputId"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/findPw"
+                android:hint="@string/pw"
+                android:inputType="textPassword|textNoSuggestions"
+                android:maxLength="20"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/newPwBtn"
+                android:text="비밀번호변경"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/home"
+            android:text="@string/backLogin"/>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

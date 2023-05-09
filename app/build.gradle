@@ -7,10 +7,14 @@ android {
     namespace 'kr.ac.kpu.red_lighthouse'
     compileSdk 33
 
+    buildFeatures{
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "kr.ac.kpu.red_lighthouse"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 

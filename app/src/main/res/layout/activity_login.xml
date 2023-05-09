@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:rowCount="6"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:text="@string/title"
+            android:textSize="100px" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/login_id"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress|textNoSuggestions"
+            android:maxLength="30"
+            tools:ignore="RtlSymmetry"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/login_pw"
+            android:hint="@string/pw"
+            android:inputType="textPassword|textNoSuggestions"
+            android:maxLength="20"
+            tools:ignore="RtlSymmetry" />
+
+        <Button
+            android:id="@+id/find_login"
+            android:text="비밀번호찾기"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/login"
+            android:text="@string/login">
+        </Button>
+
+        <Button
+            android:id="@+id/create_id"
+            android:text="@string/create_id">
+        </Button>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

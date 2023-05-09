@@ -14,11 +14,11 @@
 
         <TextView
             android:text="@string/title"
-            android:textSize="100px" />
+            android:textSize="30sp" />
 
         <EditText
             android:layout_width="match_parent"
-            android:id="@+id/login_id"
+            android:id="@+id/userId"
             android:hint="@string/email"
             android:inputType="textEmailAddress|textNoSuggestions"
             android:maxLength="30"
@@ -27,19 +27,18 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:id="@+id/login_pw"
+            android:id="@+id/userPw"
             android:hint="@string/pw"
             android:inputType="textPassword|textNoSuggestions"
             android:maxLength="20"
             tools:ignore="RtlSymmetry" />
 
         <Button
-            android:id="@+id/find_login"
-            android:text="비밀번호찾기"
-            android:textSize="30sp" />
+            android:id="@+id/userPwFindBtn"
+            android:text="@string/findPw"/>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/loginSubmitBtn"
             android:text="@string/login">
         </Button>
 

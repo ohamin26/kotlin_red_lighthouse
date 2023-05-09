@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "129156889664",
+    "project_id": "red-lighthouse",
+    "storage_bucket": "red-lighthouse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129156889664:android:1ba6efb7b92d5a3be7f3a5",
+        "android_client_info": {
+          "package_name": "kr.ac.kpu.red_lighthouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129156889664-tmmat4jloeg6s3si20p6lv98m0h39kk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.ac.kpu.red_lighthouse",
+            "certificate_hash": "2306f1b5f6893eee5d18af8006d76e1950020479"
+          }
+        },
+        {
+          "client_id": "129156889664-s1r31arhf2o0pg06bteqdd0rk33o9t7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt0IQv5dWwYB9Pa8gMqOzWShVw3_Fy-ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129156889664-s1r31arhf2o0pg06bteqdd0rk33o9t7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

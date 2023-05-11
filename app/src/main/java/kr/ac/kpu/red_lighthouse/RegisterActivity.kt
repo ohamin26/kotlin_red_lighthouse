@@ -1,15 +1,11 @@
 package kr.ac.kpu.red_lighthouse
 
-
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -25,6 +21,7 @@ import kotlinx.coroutines.launch
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -77,8 +74,17 @@ class RegisterActivity : AppCompatActivity() {
             if(!isExistBlank && isPWSame){
                 CoroutineScope(Dispatchers.Main).launch {
 
-                    createAccount()
-                }
+                // 유저가 입력한 id, pw를 쉐어드에 저장한다.
+                val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
+                val editor = sharedPreference.edit()
+                editor.putString("name", name)
+                editor.putString("id", id)
+                editor.putString("pw", pw)
+                editor.apply()
+
+                // 로그인 화면으로 이동
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
 
             }
             else{
@@ -99,6 +105,15 @@ class RegisterActivity : AppCompatActivity() {
     fun dialog(type: String){
         val dialog = AlertDialog.Builder(this)
 
+        if(!CheckUserId().checkEmail(binding.editId.text.toString())){
+            Toast.makeText(this@RegisterActivity,"올바른 이메일이 아닙니다",Toast.LENGTH_SHORT).show()
+            binding.editId.requestFocus()
+        }
+
+        if(!CheckUserId().checkPw(binding.editPw.text.toString())){
+            Toast.makeText(this@RegisterActivity,"올바른 비밀번호 형식이 아닙니다",Toast.LENGTH_SHORT).show()
+            binding.editPw.requestFocus()
+        }
         // 작성 안한 항목이 있을 경우
         if(type.equals("blank")){
             dialog.setTitle("회원가입 실패")

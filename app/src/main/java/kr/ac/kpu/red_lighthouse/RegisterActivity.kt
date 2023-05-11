@@ -7,6 +7,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,20 +34,23 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val edit_id = binding.edit_id
-        val edit_pw = binding.edit_pw
-        val edit_pw_re = binding.edit_pw_re
-        val btn_Register = binding.btn_Register
 
-        btn_Register.setOnClickListener {
+        val btn_register : Button = binding.btnRegister
+        val edit_pw : EditText = binding.editPw
+        val edit_id : EditText = binding.editId
+        val edit_pw_re : EditText = binding.editPwRe
+        val edit_name: EditText = binding.editName
+
+        btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
-            val id = edit_id.text.toString()
-            val pw = edit_pw.text.toString()
-            val pw_re = edit_pw_re.text.toString()
+            val id = binding.editId.text.toString()
+            val pw = binding.editPw.text.toString()
+            val pw_re = binding.editPwRe.text.toString()
+            val name = binding.editName.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
-            if(id.isEmpty() || pw.isEmpty() || pw_re.isEmpty()){
+            if(id.isEmpty() || pw.isEmpty() || pw_re.isEmpty() || name.isEmpty()){
                 isExistBlank = true
             }
             else{
@@ -62,6 +67,7 @@ class RegisterActivity : AppCompatActivity() {
                 // 유저가 입력한 id, pw를 쉐어드에 저장한다.
                 val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
                 val editor = sharedPreference.edit()
+                editor.putString("name", name)
                 editor.putString("id", id)
                 editor.putString("pw", pw)
                 editor.apply()

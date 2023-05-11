@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -34,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
     private var auth : FirebaseAuth = Firebase.auth
     private val db = Firebase.firestore
     lateinit var userInfo : HashMap<String,String?>
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -55,10 +58,17 @@ class RegisterActivity : AppCompatActivity() {
             val nickname = binding.editName.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
-            if(email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || name.isEmpty()){
+            if(email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || nickname.isEmpty()){
                 isExistBlank = true
             }
             else{
+
+                if(password == pw_re){
+                    isPWSame = true
+                }
+            }
+
+            if(!isExistBlank && isPWSame){
                 userInfo = hashMapOf(
                     "uid" to "",
                     "email" to email,
@@ -66,36 +76,18 @@ class RegisterActivity : AppCompatActivity() {
                     "nickname" to nickname,
                     "dateOfRegist" to ""
                 )
-                if(password == pw_re){
-                    isPWSame = true
-                }
-            }
-
-            if(!isExistBlank && isPWSame){
                 CoroutineScope(Dispatchers.Main).launch {
+                    createAccount()
+                }
+         } else{
 
-                // 유저가 입력한 id, pw를 쉐어드에 저장한다.
-                val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
-                val editor = sharedPreference.edit()
-                editor.putString("name", name)
-                editor.putString("id", id)
-                editor.putString("pw", pw)
-                editor.apply()
-
-                // 로그인 화면으로 이동
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-
-            }
-            else{
-
-                // 상태에 따라 다른 다이얼로그 띄워주기
-                if(isExistBlank){   // 작성 안한 항목이 있을 경우
+               // 상태에 따라 다른 다이얼로그 띄워주기
+               if(isExistBlank){   // 작성 안한 항목이 있을 경우
                     dialog("blank")
-                }
-                else if(!isPWSame){ // 입력한 비밀번호가 다를 경우
+              }
+               else if(!isPWSame){ // 입력한 비밀번호가 다를 경우
                     dialog("not same")
-                }
+               }
             }
 
         }
@@ -139,7 +131,7 @@ class RegisterActivity : AppCompatActivity() {
     }
     // 계정 생성
     @RequiresApi(Build.VERSION_CODES.O)
-    private suspend fun createAccount() {
+    suspend fun createAccount() {
         if (userInfo["email"] != "" && userInfo["password"] != "" && userInfo["nickname"] != "") { //입련한 정보가 null이 아닐 때 실행.
             auth?.createUserWithEmailAndPassword(userInfo["email"].toString(), userInfo["password"].toString()) //계정 생성
                 ?.addOnCompleteListener(this) { task ->

@@ -12,8 +12,9 @@
             android:layout_height="wrap_content"
             android:text="지도화면입니다" />
         <Button
+            android:id="@+id/logoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="돌아가기"/>
+            android:text="로그아웃"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

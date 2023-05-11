@@ -1,15 +1,21 @@
 package kr.ac.kpu.red_lighthouse
 
+
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 
-class Register : AppCompatActivity() {
+
+class RegisterActivity : AppCompatActivity() {
+
+    lateinit var binding:ActivityRegisterBinding
 
     val TAG: String = "Register"
     var isExistBlank = false
@@ -17,9 +23,16 @@ class Register : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_activity)
 
-        btn_register2.setOnClickListener {
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val edit_id = binding.edit_id
+        val edit_pw = binding.edit_pw
+        val edit_pw_re = binding.edit_pw_re
+        val btn_Register = binding.btn_Register
+
+        btn_Register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
             val id = edit_id.text.toString()

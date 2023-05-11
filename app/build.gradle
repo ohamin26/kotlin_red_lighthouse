@@ -8,10 +8,6 @@ android {
     namespace 'kr.ac.kpu.red_lighthouse'
     compileSdk 33
 
-    buildFeatures{
-        viewBinding true
-    }
-
     defaultConfig {
         applicationId "kr.ac.kpu.red_lighthouse"
         minSdk 21
@@ -34,6 +30,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures{
+        viewBinding true
     }
 }
 

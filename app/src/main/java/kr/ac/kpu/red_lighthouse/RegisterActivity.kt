@@ -10,20 +10,25 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 
 
 class RegisterActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityRegisterBinding
-
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
 
+    private var auth : FirebaseAuth = Firebase.auth
+    private val db = Firebase.firestore
+    lateinit var userInfo : HashMap<String,String?>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -106,5 +111,28 @@ class RegisterActivity : AppCompatActivity() {
 
         dialog.setPositiveButton("확인",dialog_listener)
         dialog.show()
+    }
+    // 계정 생성
+    private suspend fun createAccount() {
+        if (userInfo["email"] != "" && userInfo["password"] != "" && userInfo["nickname"] != "") { //입련한 정보가 null이 아닐 때 실행.
+            auth?.createUserWithEmailAndPassword(userInfo["email"].toString(), userInfo["password"].toString()) //계정 생성
+                ?.addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        val uid : String? = auth.currentUser?.uid
+                        if(uid !=null){ //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
+                            db.collection("users").document() //데이터베이스 정보 저장
+                                .set(userInfo)
+                                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                        }
+                        finish() // 가입창 종료
+                    } else {
+                        Toast.makeText(
+                            this, "계정 생성 실패",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
     }
 }

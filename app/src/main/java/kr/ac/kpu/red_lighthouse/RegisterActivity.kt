@@ -19,7 +19,7 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_activity)
 
-        btn_register2.setOnClickListener {
+        create_id.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
             val id = edit_id.text.toString()

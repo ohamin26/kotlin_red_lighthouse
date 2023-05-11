@@ -4,19 +4,27 @@ package kr.ac.kpu.red_lighthouse
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -44,37 +52,33 @@ class RegisterActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
-            val id = binding.editId.text.toString()
-            val pw = binding.editPw.text.toString()
+            val email = binding.editId.text.toString()
+            val password = binding.editPw.text.toString()
             val pw_re = binding.editPwRe.text.toString()
-            val name = binding.editName.text.toString()
+            val nickname = binding.editName.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
-            if(id.isEmpty() || pw.isEmpty() || pw_re.isEmpty() || name.isEmpty()){
+            if(email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || name.isEmpty()){
                 isExistBlank = true
             }
             else{
-                if(pw == pw_re){
+                userInfo = hashMapOf(
+                    "uid" to "",
+                    "email" to email,
+                    "password" to password,
+                    "nickname" to nickname,
+                    "dateOfRegist" to ""
+                )
+                if(password == pw_re){
                     isPWSame = true
                 }
             }
 
             if(!isExistBlank && isPWSame){
+                CoroutineScope(Dispatchers.Main).launch {
 
-                // 회원가입 성공 토스트 메세지 띄우기
-                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-
-                // 유저가 입력한 id, pw를 쉐어드에 저장한다.
-                val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
-                val editor = sharedPreference.edit()
-                editor.putString("name", name)
-                editor.putString("id", id)
-                editor.putString("pw", pw)
-                editor.apply()
-
-                // 로그인 화면으로 이동
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                    createAccount()
+                }
 
             }
             else{
@@ -119,12 +123,16 @@ class RegisterActivity : AppCompatActivity() {
         dialog.show()
     }
     // 계정 생성
+    @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun createAccount() {
         if (userInfo["email"] != "" && userInfo["password"] != "" && userInfo["nickname"] != "") { //입련한 정보가 null이 아닐 때 실행.
             auth?.createUserWithEmailAndPassword(userInfo["email"].toString(), userInfo["password"].toString()) //계정 생성
                 ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        val onlyDate: LocalDate = LocalDate.now()
                         val uid : String? = auth.currentUser?.uid
+                        userInfo["uid"] = uid
+                        userInfo["dateOfRegist"]=onlyDate.toString()
                         if(uid !=null){ //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
                             db.collection("users").document() //데이터베이스 정보 저장
                                 .set(userInfo)

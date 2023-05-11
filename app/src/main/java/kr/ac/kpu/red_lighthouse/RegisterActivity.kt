@@ -13,6 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
+import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -91,6 +92,15 @@ class RegisterActivity : AppCompatActivity() {
     fun dialog(type: String){
         val dialog = AlertDialog.Builder(this)
 
+        if(!CheckUserId().checkEmail(binding.editId.text.toString())){
+            Toast.makeText(this@RegisterActivity,"올바른 이메일이 아닙니다",Toast.LENGTH_SHORT).show()
+            binding.editId.requestFocus()
+        }
+
+        if(!CheckUserId().checkPw(binding.editPw.text.toString())){
+            Toast.makeText(this@RegisterActivity,"올바른 비밀번호 형식이 아닙니다",Toast.LENGTH_SHORT).show()
+            binding.editPw.requestFocus()
+        }
         // 작성 안한 항목이 있을 경우
         if(type.equals("blank")){
             dialog.setTitle("회원가입 실패")

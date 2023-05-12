@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
                         if(checkUser.isNotEmpty()) {//데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
                             Toast.makeText(applicationContext, "이미 가입된 계정입니다.", Toast.LENGTH_SHORT).show()
                         }else{
-                            var user  = User("",email,password,nickname,onlyDate.toString())
+                            var user  = User("",email,nickname,onlyDate.toString())
                             auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener()
                             { task ->
                                 if (task.isSuccessful) {

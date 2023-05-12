@@ -86,7 +86,6 @@ class LoginActivity : Activity(){
                                                 if (userInfo != null) {
                                                     editor.putString("user_id",userInfo.user_id)
                                                     editor.putString("user_email",userInfo.user_email)
-                                                    editor.putString("user_password",userInfo.user_password)
                                                     editor.putString("user_nickname",userInfo.user_nickname)
                                                     editor.putString("user_dateOfRegist",userInfo.user_dateOfRegist)
                                                     Toast.makeText(applicationContext, "로그인 성공. ${userInfo.user_nickname} 님 환영합니다.", Toast.LENGTH_SHORT).show()

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:rowCount="6"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:text="@string/title"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/userId"
+            android:layout_width="match_parent"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress|textNoSuggestions"
+            android:maxLength="30"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/userPw"
+            android:layout_width="match_parent"
+            android:hint="@string/pw"
+            android:inputType="textPassword|textNoSuggestions"
+            android:maxLength="20"
+            tools:ignore="RtlSymmetry" />
+
+        <Button
+            android:id="@+id/userPwFindBtn"
+            android:text="@string/findPw" />
+
+        <Button
+            android:id="@+id/loginSubmitBtn"
+            android:text="@string/login"></Button>
+
+        <Button
+            android:id="@+id/create_id"
+            android:text="@string/create_id"></Button>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

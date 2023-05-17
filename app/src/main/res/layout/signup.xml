@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--android:theme="@style/AppTheme.NoActionBar 뒤로가기 버튼, activity에 툴바 관련 코드 추가 필요-->
+
+
+    <TextView
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="회원 가입"
+        android:fontFamily="@font/suite"
+        android:textAlignment="center"
+        android:textColor="#1f1f1f"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="80dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/edit_pw_re"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:fontFamily="@font/suite"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+
+    <EditText
+        android:id="@+id/edit_id"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="188dp"
+        android:ems="10"
+        android:fontFamily="@font/suite"
+        android:hint="이메일"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:hint="닉네임"
+        android:fontFamily="@font/suite"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+
+    <EditText
+        android:id="@+id/edit_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:fontFamily="@font/suite"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_id" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_register"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="120dp"
+        android:background="#ff5f4d"
+        android:fontFamily="@font/suite"
+        android:text="회원가입"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw_re"
+        tools:ignore="MissingClass" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

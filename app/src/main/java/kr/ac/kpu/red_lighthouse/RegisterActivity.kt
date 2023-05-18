@@ -34,6 +34,8 @@ class RegisterActivity : AppCompatActivity() {
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
+    var isIDtrue = false
+    var isPWtrue = false
 
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
@@ -51,6 +53,7 @@ class RegisterActivity : AppCompatActivity() {
         val edit_id: EditText = binding.editId
         val edit_pw_re: EditText = binding.editPwRe
         val edit_name: EditText = binding.editName
+        val intent = Intent(this, LoginActivity::class.java)
 
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
@@ -62,6 +65,11 @@ class RegisterActivity : AppCompatActivity() {
 
             // 유저가 항목을 다 채우지 않았을 경우
             if (email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || nickname.isEmpty()) {
+                Toast.makeText(
+                    applicationContext,
+                    "회원가입에 실패하였습니다. 작성하지 않은 부분이 있습니다",
+                    Toast.LENGTH_SHORT
+                ).show()
                 isExistBlank = true
             } else {
 
@@ -70,84 +78,91 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            if (!isExistBlank && isPWSame) {
+            if (!CheckUserId().checkEmail(binding.editId.text.toString())) {
+                Toast.makeText(
+                    applicationContext,
+                    "회원가입에 실패했습니다. 이메일 형식이 올바르지 않습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.editId.requestFocus()
+            }else{
+                isIDtrue = true
+            }
+
+            if (!CheckUserId().checkPw(binding.editPw.text.toString())) {
+                Toast.makeText(
+                    applicationContext,
+                    "회원가입에 실패했습니다. 비밀번호 형식이 올바르지 않습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.editId.requestFocus()
+            }else{
+                isPWtrue = true
+            }
+
+            // 입력한 비밀번호가 다를 경우
+            if (password != pw_re) {
+                Toast.makeText(
+                    applicationContext,
+                    "회원가입에 실패했습니다. 비밀번호가 일치하지 않습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+
+
+
+            if (!isExistBlank && isPWSame && isIDtrue && isPWtrue) {
                 try {
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")
                         val onlyDate: LocalDate = LocalDate.now()
-                        var checkUser : List<User> = ref.whereEqualTo("user_email",email).get().await().toObjects(User::class.java)
-                        if(checkUser.isNotEmpty()) {//데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
-                            Toast.makeText(applicationContext, "이미 가입된 계정입니다.", Toast.LENGTH_SHORT).show()
-                        }else{
-                            var user  = User("",email,nickname,onlyDate.toString())
-                            auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener()
-                            { task ->
-                                if (task.isSuccessful) {
-                                    val uid : String? = auth.currentUser?.uid
-                                    if(uid !=null){ //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
-                                        user.user_id = uid;
-                                        ref.document(uid).set(user)
-                                        finish() // 가입창 종료
-                                        Toast.makeText(applicationContext, "회원가입 성공. 로그인해주세요.", Toast.LENGTH_SHORT).show()
+                        var checkUser: List<User> =
+                            ref.whereEqualTo("user_email", email).get().await()
+                                .toObjects(User::class.java)
+                        if (checkUser.isNotEmpty()) {//데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
+                            Toast.makeText(applicationContext, "이미 가입된 계정입니다.", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            var user = User("", email, nickname, onlyDate.toString())
+                            auth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener()
+                                { task ->
+                                    if (task.isSuccessful) {
+                                        val uid: String? = auth.currentUser?.uid
+                                        if (uid != null) { //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
+                                            user.user_id = uid;
+                                            ref.document(uid).set(user)
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "회원가입 성공. 로그인해주세요.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            finish()
+                                        }
+                                    } else {
+                                        //회원가입 실패 메세지 출력
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "회원가입에 실패했습니다. 나중에 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
-                                }else{
-                                    //회원가입 실패 메세지 출력
-                                    Toast.makeText(applicationContext, "회원가입에 실패했습니다. 나중에 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                                 }
-                            }
                         }
 
                     }
-                }catch (e : Error){
+                } catch (e: Error) {
                     //에러 메세지 출력
                     print(e)
-                    Toast.makeText(applicationContext, "회원가입에 실패했습니다. 나중에 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                // 상태에 따라 다른 다이얼로그 띄워주기
-                if (isExistBlank) {   // 작성 안한 항목이 있을 경우
-                    dialog("blank")
-                } else if (!isPWSame) { // 입력한 비밀번호가 다를 경우
-                    dialog("not same")
-                }
-            }
-
-        }
-    }
-    // 회원가입 실패시 다이얼로그를 띄워주는 메소드
-    fun dialog(type: String){
-        val dialog = AlertDialog.Builder(this)
-
-        if(!CheckUserId().checkEmail(binding.editId.text.toString())){
-            Toast.makeText(this@RegisterActivity,"올바른 이메일이 아닙니다",Toast.LENGTH_SHORT).show()
-            binding.editId.requestFocus()
-        }
-
-        if(!CheckUserId().checkPw(binding.editPw.text.toString())){
-            Toast.makeText(this@RegisterActivity,"올바른 비밀번호 형식이 아닙니다",Toast.LENGTH_SHORT).show()
-            binding.editPw.requestFocus()
-        }
-        // 작성 안한 항목이 있을 경우
-        if(type.equals("blank")){
-            dialog.setTitle("회원가입 실패")
-            dialog.setMessage("입력란을 모두 작성해주세요")
-        }
-        // 입력한 비밀번호가 다를 경우
-        else if(type.equals("not same")){
-            dialog.setTitle("회원가입 실패")
-            dialog.setMessage("비밀번호가 다릅니다")
-        }
-
-        val dialog_listener = object: DialogInterface.OnClickListener{
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-                when(which){
-                    DialogInterface.BUTTON_POSITIVE ->
-                        Log.d(TAG, "다이얼로그")
+                    Toast.makeText(
+                        applicationContext,
+                        "회원가입에 실패했습니다. 나중에 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
-
-        dialog.setPositiveButton("확인",dialog_listener)
-        dialog.show()
     }
 }

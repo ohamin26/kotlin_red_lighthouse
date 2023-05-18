@@ -61,7 +61,7 @@
             android:layout_marginTop="30dp"
             android:background="#ff5f4d"
             android:text="로그인"
-            android:fontFamily="@font/suite"
+            android:fontFamily="@font/suite1"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -74,7 +74,7 @@
             android:layout_marginTop="30dp"
             android:background="#ff5f4d"
             android:text="회원 가입"
-            android:fontFamily="@font/suite"
+            android:fontFamily="@font/suite1"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/suite"
+            android:fontFamily="@font/suite1"
             android:text="비밀번호를 잊어버리셨나요?"
             android:textSize="18dp"
             tools:ignore="MissingConstraints" />
@@ -99,7 +99,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:fontFamily="@font/suite"
+        android:fontFamily="@font/suite1"
         android:gravity="center_horizontal"
         android:text="회원 로그인"
         android:textAlignment="center"

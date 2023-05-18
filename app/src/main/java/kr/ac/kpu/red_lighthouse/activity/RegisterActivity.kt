@@ -21,7 +21,8 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kr.ac.kpu.red_lighthouse.databinding.ActivitySignupBinding
+import kr.ac.kpu.red_lighthouse.activity.LoginActivity
+import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.user.User
 import java.time.LocalDate
@@ -31,7 +32,7 @@ import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivitySignupBinding
+    lateinit var binding:ActivityRegisterBinding
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
@@ -42,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initialize Firebase Auth
@@ -51,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val btn_register: Button = binding.btnRegister
         val edit_pw: EditText = binding.editPw
-        val edit_id: EditText = binding.editId
+        val edit_id: EditText = binding.editEmail
         val edit_pw_re: EditText = binding.editPwRe
         val edit_name: EditText = binding.editNickname
         val intent = Intent(this, LoginActivity::class.java)
@@ -61,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
-            val email = binding.editId.text.toString()
+            val email = binding.editEmail.text.toString()
             val password = binding.editPw.text.toString()
             val pw_re = binding.editPwRe.text.toString()
             val nickname =  binding.editNickname.text.toString()

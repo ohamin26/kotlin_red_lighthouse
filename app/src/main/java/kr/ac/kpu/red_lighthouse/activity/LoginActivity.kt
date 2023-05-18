@@ -77,8 +77,7 @@ class LoginActivity : Activity(){
                                                 editor.putString("user_nickname",userInfo.user_nickname)
                                                 editor.putString("user_dateOfRegist",userInfo.user_dateOfRegist)
                                                 Toast.makeText(applicationContext, "로그인 성공. ${userInfo.user_nickname} 님 환영합니다.", Toast.LENGTH_SHORT).show()
-                                                var intent = Intent(applicationContext, MapActivity::class.java)
-                                                startActivity(intent)
+
                                             }else{
                                                 Toast.makeText(applicationContext, "이메일 혹은 비밀번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show()
                                             }

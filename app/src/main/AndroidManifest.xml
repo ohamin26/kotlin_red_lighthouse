@@ -35,7 +35,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".FindIdActivity"
+            android:name=".FindPwActivity"
             android:exported="true">
 
             <meta-data

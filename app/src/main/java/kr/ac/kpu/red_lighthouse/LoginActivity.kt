@@ -2,7 +2,6 @@ package kr.ac.kpu.red_lighthouse
 
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -18,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.user.User
-import java.time.LocalDate
 
 class LoginActivity : Activity(){
     private  lateinit var binding: ActivityLoginBinding
@@ -115,7 +113,7 @@ class LoginActivity : Activity(){
             }
             // 비밀번호 찾기 화면 이동 이벤트
             userPwFindBtn.setOnClickListener {
-                var intent = Intent(applicationContext, FindIdActivity::class.java)
+                var intent = Intent(applicationContext, FindPwActivity::class.java)
                 startActivityForResult(intent,0)
             }
 

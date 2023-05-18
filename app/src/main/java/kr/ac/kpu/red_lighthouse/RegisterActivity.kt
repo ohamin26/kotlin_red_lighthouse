@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
-    var isIDtrue = false
+    var isEmailtrue = false
     var isPWtrue = false
 
     private lateinit var auth: FirebaseAuth
@@ -50,18 +50,18 @@ class RegisterActivity : AppCompatActivity() {
 
         val btn_register: Button = binding.btnRegister
         val edit_pw: EditText = binding.editPw
-        val edit_id: EditText = binding.editId
+        val edit_email: EditText = binding.editEmail
         val edit_pw_re: EditText = binding.editPwRe
-        val edit_name: EditText = binding.editName
-        val intent = Intent(this, LoginActivity::class.java)
+        val edit_nickname: EditText = binding.editNickname
+
 
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 
-            val email = binding.editId.text.toString()
+            val email = binding.editEmail.text.toString()
             val password = binding.editPw.text.toString()
             val pw_re = binding.editPwRe.text.toString()
-            val nickname = binding.editName.text.toString()
+            val nickname = binding.editNickname.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
             if (email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || nickname.isEmpty()) {
@@ -78,15 +78,15 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            if (!CheckUserId().checkEmail(binding.editId.text.toString())) {
+            if (!CheckUserId().checkEmail(binding.editEmail.text.toString())) {
                 Toast.makeText(
                     applicationContext,
                     "회원가입에 실패했습니다. 이메일 형식이 올바르지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.editId.requestFocus()
+                binding.editEmail.requestFocus()
             }else{
-                isIDtrue = true
+                isEmailtrue = true
             }
 
             if (!CheckUserId().checkPw(binding.editPw.text.toString())) {
@@ -95,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
                     "회원가입에 실패했습니다. 비밀번호 형식이 올바르지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.editId.requestFocus()
+                binding.editEmail.requestFocus()
             }else{
                 isPWtrue = true
             }
@@ -113,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-            if (!isExistBlank && isPWSame && isIDtrue && isPWtrue) {
+            if (!isExistBlank && isPWSame && isEmailtrue && isPWtrue) {
                 try {
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")

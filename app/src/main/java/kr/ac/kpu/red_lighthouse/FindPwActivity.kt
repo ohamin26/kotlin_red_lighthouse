@@ -4,13 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kr.ac.kpu.red_lighthouse.databinding.ActivityFindidBinding
 
-class FindIdActivity : Activity(){
+class FindPwActivity : Activity(){
 
     private  lateinit var binding: ActivityFindidBinding
 

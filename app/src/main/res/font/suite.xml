@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <font android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/suite"
+        android:font="@font/suite1"
         tools:ignore="ResourceCycle" />
 </font-family>

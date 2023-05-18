@@ -1,22 +1,32 @@
-package kr.ac.kpu.red_lighthouse.activity
+package kr.ac.kpu.red_lighthouse
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.PrecomputedTextCompat
+import androidx.core.widget.TextViewCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.databinding.ActivitySignupBinding
+import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.user.User
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -25,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
-    var isIDtrue = false
+    var isEmailtrue = false
     var isPWtrue = false
 
     private lateinit var auth: FirebaseAuth
@@ -45,6 +55,8 @@ class RegisterActivity : AppCompatActivity() {
         val edit_pw_re: EditText = binding.editPwRe
         val edit_name: EditText = binding.editNickname
         val intent = Intent(this, LoginActivity::class.java)
+        val edit_nickname: EditText = binding.editNickname
+
 
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
@@ -69,15 +81,15 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            if (!CheckUserId().checkEmail(binding.editId.text.toString())) {
+            if (!CheckUserId().checkEmail(binding.editEmail.text.toString())) {
                 Toast.makeText(
                     applicationContext,
                     "회원가입에 실패했습니다. 이메일 형식이 올바르지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.editId.requestFocus()
+                binding.editEmail.requestFocus()
             }else{
-                isIDtrue = true
+                isEmailtrue = true
             }
 
             if (!CheckUserId().checkPw(binding.editPw.text.toString())) {
@@ -86,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
                     "회원가입에 실패했습니다. 비밀번호 형식이 올바르지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.editId.requestFocus()
+                binding.editEmail.requestFocus()
             }else{
                 isPWtrue = true
             }
@@ -104,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-            if (!isExistBlank && isPWSame && isIDtrue && isPWtrue) {
+            if (!isExistBlank && isPWSame && isEmailtrue && isPWtrue) {
                 try {
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")

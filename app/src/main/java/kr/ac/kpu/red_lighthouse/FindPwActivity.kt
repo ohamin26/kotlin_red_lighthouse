@@ -8,12 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kr.ac.kpu.red_lighthouse.databinding.ActivityFindPasswdBinding
-
-<<<<<<<< HEAD:app/src/main/java/kr/ac/kpu/red_lighthouse/activity/FindPasswordActivity.kt
-class FindPasswordActivity : Activity(){
-========
 class FindPwActivity : Activity(){
->>>>>>>> origin/master:app/src/main/java/kr/ac/kpu/red_lighthouse/FindPwActivity.kt
 
     private  lateinit var binding: ActivityFindPasswdBinding
 

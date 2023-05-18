@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kr.ac.kpu.red_lighthouse.RegisterActivity
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.user.User

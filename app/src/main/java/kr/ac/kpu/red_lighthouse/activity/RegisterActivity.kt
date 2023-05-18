@@ -1,36 +1,27 @@
-package kr.ac.kpu.red_lighthouse
+package kr.ac.kpu.red_lighthouse.activity
 
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.PrecomputedTextCompat
-import androidx.core.widget.TextViewCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
+import kr.ac.kpu.red_lighthouse.function.CheckUserId
+import kr.ac.kpu.red_lighthouse.databinding.ActivitySignupBinding
 import kr.ac.kpu.red_lighthouse.user.User
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivityRegisterBinding
+    lateinit var binding:ActivitySignupBinding
     val TAG: String = "Register"
     var isExistBlank = false
     var isPWSame = false
@@ -41,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initialize Firebase Auth
@@ -52,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
         val edit_pw: EditText = binding.editPw
         val edit_id: EditText = binding.editId
         val edit_pw_re: EditText = binding.editPwRe
-        val edit_name: EditText = binding.editName
+        val edit_name: EditText = binding.editNickname
         val intent = Intent(this, LoginActivity::class.java)
 
         btn_register.setOnClickListener {
@@ -61,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.editId.text.toString()
             val password = binding.editPw.text.toString()
             val pw_re = binding.editPwRe.text.toString()
-            val nickname = binding.editName.text.toString()
+            val nickname =  binding.editNickname.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
             if (email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || nickname.isEmpty()) {

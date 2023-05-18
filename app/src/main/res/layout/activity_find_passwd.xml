@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/find_pw"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:fontFamily="@font/suite"
@@ -22,7 +21,6 @@
         tools:layout_editor_absoluteY="97dp" />
 
     <TextView
-        android:id="@+id/enter_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -70,21 +68,5 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="430dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_move"
-        android:layout_width="200dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:background="#ff5f4d"
-        android:fontFamily="@font/suite"
-        android:text="로그인 화면으로 이동"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="519dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

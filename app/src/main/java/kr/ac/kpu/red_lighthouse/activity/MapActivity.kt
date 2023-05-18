@@ -1,9 +1,8 @@
-package kr.ac.kpu.red_lighthouse
+package kr.ac.kpu.red_lighthouse.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityMapBinding
 
 class MapActivity : Activity(){
@@ -15,7 +14,6 @@ class MapActivity : Activity(){
         setContentView(binding.root)
         val logoutBtn = binding.logoutBtn
         logoutBtn.setOnClickListener {
-            PreferenceUse.prefs.setString("id", "")
             var intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
         }

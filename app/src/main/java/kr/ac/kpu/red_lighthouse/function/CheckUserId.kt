@@ -1,4 +1,4 @@
-package kr.ac.kpu.red_lighthouse
+package kr.ac.kpu.red_lighthouse.function
 
 import java.util.regex.Pattern
 

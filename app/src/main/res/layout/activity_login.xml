@@ -22,7 +22,22 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="77dp" />
-
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:fontFamily="@font/suite"
+        android:gravity="center_horizontal"
+        android:text="회원 로그인"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="208dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -95,21 +110,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:fontFamily="@font/suite"
-        android:gravity="center_horizontal"
-        android:text="회원 로그인"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="208dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

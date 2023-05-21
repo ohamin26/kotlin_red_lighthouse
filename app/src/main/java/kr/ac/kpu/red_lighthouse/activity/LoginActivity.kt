@@ -1,11 +1,10 @@
 package kr.ac.kpu.red_lighthouse.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kr.ac.kpu.red_lighthouse.RegisterActivity
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.user.User
@@ -27,6 +25,7 @@ class LoginActivity : Activity(){
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
 
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -61,7 +60,7 @@ class LoginActivity : Activity(){
                     Log.i("Firebase", "로그인 : $email , $password")
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")
-                        if (email != null && password !=null && email != "" && password !="") {
+                        if (email != "" && password !="") {
                             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
@@ -77,7 +76,8 @@ class LoginActivity : Activity(){
                                                 editor.putString("user_nickname",userInfo.user_nickname)
                                                 editor.putString("user_dateOfRegist",userInfo.user_dateOfRegist)
                                                 Toast.makeText(applicationContext, "로그인 성공. ${userInfo.user_nickname} 님 환영합니다.", Toast.LENGTH_SHORT).show()
-
+                                                var intent = Intent(applicationContext, MenuSelectActivity::class.java)
+                                                startActivity(intent)
                                             }else{
                                                 Toast.makeText(applicationContext, "이메일 혹은 비밀번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show()
                                             }

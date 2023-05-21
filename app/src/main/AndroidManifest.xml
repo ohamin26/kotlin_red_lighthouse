@@ -41,7 +41,24 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".activity.RegisterActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+        <activity android:name=".activity.MenuSelectActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+
+        <activity android:name=".activity.MapActivity"
             android:exported="true">
 
             <meta-data

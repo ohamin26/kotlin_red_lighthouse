@@ -9,4 +9,6 @@
     <string name="inputId">이메일입력</string>
     <string name="backLogin">로그인하러가기</string>
     <string name="title">빨간등대</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

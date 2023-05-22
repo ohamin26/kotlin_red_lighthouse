@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--고객센터 버튼 클릭 시 전환되는 화면-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:fillViewport="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--cs 로고 이미지 뷰-->
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="115dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/cs" />
+
+
+            <!--대표 이메일 안내 텍스트 뷰-->
+            <TextView
+                android:id="@+id/contentTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/suite"
+                android:text="           대표 이메일\n shr0826@naver.com"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <!--한국어 안내사항 텍스트 뷰-->
+            <TextView
+                android:id="@+id/korTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/suite"
+                android:text="문의 사항은 위의 대표 이메일로 연락 부탁드립니다."
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <!--영문 안내사항 텍스트 뷰-->
+            <TextView
+                android:id="@+id/engTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/suite"
+                android:text="Please contact the above email."
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

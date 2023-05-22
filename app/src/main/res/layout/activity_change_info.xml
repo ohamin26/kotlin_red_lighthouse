@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--앱정보 버튼 클릭 시 전환되는 화면-->
+<!--추가로 들어갈 내용 토의 후 있으면 추가 업데이트 예정-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity ="center"
+        android:fillViewport="true"
+        android:layout_marginTop="0dp"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원 정보 변경"
+                android:textSize="40dp"
+                android:fontFamily="@font/suite"
+                android:textStyle="bold"
+                android:layout_marginTop="60dp"
+                android:layout_gravity="center">
+            </TextView>
+
+            <!--이메일 입력 칸, inputType : 입력 가능한 값을 모든 문자 / 기호 / 숫자로 설정-->
+            <EditText
+                android:id="@+id/change_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:ems="11"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:text="" />
+
+            <!--비밀번호 입력 칸-->
+
+            <!--닉네임 입력 칸-->
+            <EditText
+                android:id="@+id/change_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:ems="11"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:hint="Nickname"
+                android:inputType="textPassword"/>
+
+            <!--완료 버튼-->
+            <Button
+                android:id="@+id/btn_change"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="변경"
+                android:fontFamily="@font/suite"
+                android:textStyle="bold"
+                android:textSize="30dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

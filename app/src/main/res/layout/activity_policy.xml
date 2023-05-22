@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--개인정보 처리 방침 버튼 클릭 시 전환되는 화면-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity ="center"
+        android:fillViewport="true"
+        android:layout_marginTop="0dp"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:src="@drawable/logo2"
+                android:layout_width="400dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"/>
+
+            <!--'개인정보 처리 방침' 텍스트 뷰-->
+            <TextView
+                android:id="@+id/policy_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="30dp"
+                android:text="개인정보 처리 방침"
+                android:textStyle="bold
+"               android:fontFamily="@font/suite"
+                />
+            <!--개인정보 처리 방침 내용 추후 기입 예정-->
+            <TextView
+                android:id="@+id/policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="30dp"
+                android:text="내용"
+                android:textStyle="bold
+"               android:fontFamily="@font/suite"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

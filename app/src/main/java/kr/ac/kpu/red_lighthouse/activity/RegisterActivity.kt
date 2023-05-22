@@ -76,7 +76,6 @@ class RegisterActivity : AppCompatActivity() {
                 ).show()
                 isExistBlank = true
             } else {
-
                 if (password == pw_re) {
                     isPWSame = true
                 }
@@ -112,11 +111,6 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
-
-
-
-
             if (!isExistBlank && isPWSame && isEmailtrue && isPWtrue) {
                 try {
                     CoroutineScope(Dispatchers.Main).launch {
@@ -125,7 +119,8 @@ class RegisterActivity : AppCompatActivity() {
                         var checkUser: List<User> =
                             ref.whereEqualTo("user_email", email).get().await()
                                 .toObjects(User::class.java)
-                        if (checkUser.isNotEmpty()) {//데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
+                        if (checkUser.isNotEmpty()) {
+                            //데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
                             Toast.makeText(applicationContext, "이미 가입된 계정입니다.", Toast.LENGTH_SHORT)
                                 .show()
                         } else {
@@ -135,7 +130,8 @@ class RegisterActivity : AppCompatActivity() {
                                 { task ->
                                     if (task.isSuccessful) {
                                         val uid: String? = auth.currentUser?.uid
-                                        if (uid != null) { //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
+                                        if (uid != null) {
+                                            //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
                                             user.user_id = uid;
                                             ref.document(uid).set(user)
                                             Toast.makeText(

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--앱정보 버튼 클릭 시 전환되는 화면-->
 <!--추가로 들어갈 내용 토의 후 있으면 추가 업데이트 예정-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -35,7 +35,7 @@
 
             <!--이메일 입력 칸, inputType : 입력 가능한 값을 모든 문자 / 기호 / 숫자로 설정-->
             <EditText
-                android:id="@+id/change_email"
+                android:id="@+id/email_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -51,7 +51,7 @@
 
             <!--닉네임 입력 칸-->
             <EditText
-                android:id="@+id/change_nick"
+                android:id="@+id/nick_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -75,5 +75,5 @@
                 android:textSize="30dp"/>
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

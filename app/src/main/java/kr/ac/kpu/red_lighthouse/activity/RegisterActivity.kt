@@ -33,11 +33,11 @@ import java.util.regex.Pattern
 class RegisterActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityRegisterBinding
-    val TAG: String = "Register"
-    var isExistBlank = false
-    var isPWSame = false
-    var isEmailtrue = false
-    var isPWtrue = false
+    private val TAG: String = "Register"
+    private var isExistBlank = false
+    private var isPWSame = false
+    private var isEmailtrue = false
+    private var isPWtrue = false
 
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
@@ -51,12 +51,6 @@ class RegisterActivity : AppCompatActivity() {
 
 
         val btn_register: Button = binding.btnRegister
-        val edit_pw: EditText = binding.editPw
-        val edit_id: EditText = binding.editEmail
-        val edit_pw_re: EditText = binding.editPwRe
-        val edit_name: EditText = binding.editNickname
-        val intent = Intent(this, LoginActivity::class.java)
-        val edit_nickname: EditText = binding.editNickname
 
 
         btn_register.setOnClickListener {
@@ -64,19 +58,18 @@ class RegisterActivity : AppCompatActivity() {
 
             val email = binding.editEmail.text.toString()
             val password = binding.editPw.text.toString()
-            val pw_re = binding.editPwRe.text.toString()
+            val pwCheck = binding.editPwRe.text.toString()
             val nickname =  binding.editNickname.text.toString()
 
             // 유저가 항목을 다 채우지 않았을 경우
-            if (email.isEmpty() || password.isEmpty() || pw_re.isEmpty() || nickname.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || pwCheck.isEmpty() || nickname.isEmpty()) {
                 Toast.makeText(
                     applicationContext,
                     "회원가입에 실패하였습니다. 작성하지 않은 부분이 있습니다",
                     Toast.LENGTH_SHORT
                 ).show()
-                isExistBlank = true
             } else {
-                if (password == pw_re) {
+                if (password == pwCheck) {
                     isPWSame = true
                 }
             }
@@ -104,14 +97,18 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             // 입력한 비밀번호가 다를 경우
-            if (password != pw_re) {
+            if (password != pwCheck) {
                 Toast.makeText(
                     applicationContext,
                     "회원가입에 실패했습니다. 비밀번호가 일치하지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            if (!isExistBlank && isPWSame && isEmailtrue && isPWtrue) {
+
+
+
+
+            if (isPWSame && isEmailtrue && isPWtrue) {
                 try {
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")

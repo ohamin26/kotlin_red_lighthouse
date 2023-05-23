@@ -11,7 +11,7 @@ class CheckUserId {
     }
     //비밀번호 형식 검사
     fun checkPw(pw : String): Boolean {
-        val pwValidation = "^.*(?=^.{8,15}\$)(?=.*\\d)(?=.*[a-zA-Z]).*\$"
+        val pwValidation = "^.*(?=^.{6,15}\$)(?=.*\\d)(?=.*[a-zA-Z]).*\$"
         val check = pw.trim()
         return Pattern.matches(pwValidation, check)
     }

@@ -38,23 +38,29 @@ class LoginActivity : Activity(){
         // 아이디나 비밀번호나 공백이거나 형식에 맞지 않을 시 다시 입력하게 한다.
         // 맞을 경우 페이지 이동 로그인 정보 전송
         binding.btnLogin.setOnClickListener {
+            var dialog = LoadingDialog(this)
+            dialog.show()
             var email : String = binding.editEmail.text.toString()
             var password : String = binding.ediPassword.text.toString()
             if("".equals(email)){
                 Toast.makeText(this@LoginActivity,"아이디를 입력하세요",Toast.LENGTH_SHORT).show()
                 binding.editEmail.requestFocus()
+                dialog.dismiss()
             }
             else if(!CheckUserId().checkEmail(email)){
                 Toast.makeText(this@LoginActivity,"올바른 이메일이 아닙니다",Toast.LENGTH_SHORT).show()
                 binding.editEmail.requestFocus()
+                dialog.dismiss()
             }
             else if("".equals(password)){
                 Toast.makeText(this@LoginActivity,"비밀번호를 입력하세요",Toast.LENGTH_SHORT).show()
                 binding.ediPassword.requestFocus()
+                dialog.dismiss()
             }
             else if(!CheckUserId().checkPw(password)){
                 Toast.makeText(this@LoginActivity,"비밀번호는 숫자,문자,특수문자 포함 8~15자 이내로 입력하세요",Toast.LENGTH_SHORT).show()
                 binding.ediPassword.requestFocus()
+                dialog.dismiss()
             }
             else{
                 try {

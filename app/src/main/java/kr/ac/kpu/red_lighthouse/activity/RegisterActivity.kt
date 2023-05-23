@@ -21,6 +21,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
+import kr.ac.kpu.red_lighthouse.activity.LoadingDialog
 import kr.ac.kpu.red_lighthouse.activity.LoginActivity
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
@@ -49,6 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+        var dialog = LoadingDialog(this) //로딩바 선언
 
         val btn_register: Button = binding.btnRegister
 
@@ -57,7 +59,6 @@ class RegisterActivity : AppCompatActivity() {
         }
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
-
             val email = binding.editEmail.text.toString()
             val password = binding.editPw.text.toString()
             val pwCheck = binding.editPwRe.text.toString()
@@ -112,6 +113,7 @@ class RegisterActivity : AppCompatActivity() {
 
             if (isPWSame && isEmailtrue && isPWtrue) {
                 try {
+                    dialog.show() //로딩바 실행
                     CoroutineScope(Dispatchers.Main).launch {
                         val ref = db.collection("users")
                         val onlyDate: LocalDate = LocalDate.now()
@@ -160,6 +162,7 @@ class RegisterActivity : AppCompatActivity() {
                         "회원가입에 실패했습니다. 나중에 다시 시도해주세요.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    dialog.dismiss()
                 }
             }
         }

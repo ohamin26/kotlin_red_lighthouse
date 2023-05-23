@@ -22,6 +22,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- 상단 앱바 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="40dp">
+
+                <!-- 뒤로가기 버튼 -->
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_back_arrow"
+                    android:layout_margin="10dp"/>
+
+                <!-- 페이지 제목 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/suite1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="앱 정보"
+                    android:layout_marginRight="60dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
             <!--로고 이미지 뷰-->
             <ImageView
                 android:id="@+id/imageview"
@@ -31,7 +63,6 @@
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"/>
-
 
             <!--앱 버전 표기 텍스트 뷰-->
             <TextView

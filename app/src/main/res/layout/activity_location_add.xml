@@ -27,24 +27,14 @@
             android:gravity="center"
             android:orientation="vertical"
             android:background="@android:color/darker_gray">
-            <ImageButton
-                android:id="@+id/btn_camera"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_camera"
-                android:background="@android:color/darker_gray"/>
-            <TextView
-                android:id="@+id/tv_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/suite1"
-                android:padding="14dp"
-                android:text="사진 추가"
-                android:textStyle="bold"
-                android:textColor="#808080"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_camera"/>
         </LinearLayout>
+
+
+        <!-- 명소 주소 검색하는 뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,11 +59,9 @@
                 android:inputType="textPersonName" />
         </LinearLayout>
 
-        <!-- 이름을 알려주는 텍스트뷰 -->
 
 
-
-        <!-- 전화번호를 설명해주는 텍스트뷰 -->
+        <!-- 지역화폐 사용여부를 선택하는 뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,6 +100,9 @@
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
+
+
+        <!-- 인당 평균 가격을 작성하는 뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

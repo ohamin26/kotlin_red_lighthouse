@@ -2,11 +2,13 @@ package kr.ac.kpu.red_lighthouse.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -75,13 +77,14 @@ class LoginActivity : Activity(){
                                     if (user != null) {
                                         CoroutineScope(Dispatchers.Main).launch {
                                             val userInfo: User? =  ref.document(user.uid).get().await().toObject(User::class.java)
-                                            val sharedPreference = getSharedPreferences("user", 0)
+                                            val sharedPreference = getSharedPreferences("user", MODE_PRIVATE)
                                             val editor = sharedPreference.edit()
                                             if (userInfo != null) {
                                                 editor.putString("user_id",userInfo.user_id)
                                                 editor.putString("user_email",userInfo.user_email)
                                                 editor.putString("user_nickname",userInfo.user_nickname)
                                                 editor.putString("user_dateOfRegist",userInfo.user_dateOfRegist)
+                                                editor.apply()
                                                 Toast.makeText(applicationContext, "로그인 성공. ${userInfo.user_nickname} 님 환영합니다.", Toast.LENGTH_SHORT).show()
                                                 var intent = Intent(applicationContext, MenuSelectActivity::class.java)
                                                 startActivity(intent)

@@ -25,7 +25,7 @@
             <!--로고 이미지 뷰-->
             <ImageView
                 android:id="@+id/imageview"
-                android:src="@drawable/logo2"
+                android:src="@drawable/logo"
                 android:layout_width="400dp"
                 android:layout_height="250dp"
                 android:scaleType="fitCenter"

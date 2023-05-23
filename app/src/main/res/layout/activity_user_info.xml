@@ -4,11 +4,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.UserInfoActivity">
-
-    <TextView
-        android:id="@+id/text"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="first" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마이페이지"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:layout_marginLeft="105dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/suite"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사용자 이메일"
+                android:textStyle="bold"
+                android:textSize="32dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/suite"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사용자 닉네임"
+                android:textStyle="bold"
+                android:textSize="32dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/suite"
+                />
+
+            <!--이메일, 닉네임 정보 수정 페이지로 이동 버튼-->
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="75dp"
+                android:text="정보 수정"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:fontFamily="@font/suite"
+                />
+
+            <!--나의 리뷰 페이지로 이동 버튼-->
+            <Button
+                android:id="@+id/btn_review"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="13dp"
+                android:text="나의 리뷰 기록"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:fontFamily="@font/suite"
+                />
+
+            <!--고객센터 버튼, 대표 이메일 안내 화면으로 이동-->
+            <Button
+                android:id="@+id/btn_cs"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="13dp"
+                android:text="고객센터"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:fontFamily="@font/suite"
+                />
+
+            <!--앱 정보 화면 이동 버튼-->
+            <Button
+                android:id="@+id/btn_Info"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="13dp"
+                android:text="앱 정보"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:fontFamily="@font/suite"
+                />
+
+            <!--개인정보 처리 방침화면으로 이동 버튼-->
+            <Button
+                android:id="@+id/btn_policy"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="13dp"
+                android:text="개인정보 처리 방침"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:fontFamily="@font/suite"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>

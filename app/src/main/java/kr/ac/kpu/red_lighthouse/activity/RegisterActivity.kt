@@ -52,7 +52,9 @@ class RegisterActivity : AppCompatActivity() {
 
         val btn_register: Button = binding.btnRegister
 
-
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
         btn_register.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
 

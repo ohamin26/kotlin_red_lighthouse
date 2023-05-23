@@ -17,6 +17,9 @@ class FindPasswordActivity : Activity(){
         super.onCreate(savedInstanceState)
         binding = ActivityFindPasswdBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
         // 아이디 버튼 이벤트
         // 아이디 형식과 다르거나 데이터에 없는 아이디일 경우 경우 다시 입력하게 한다
         // 맞을 경우 새로운 비밀번호 생성 화면 표시

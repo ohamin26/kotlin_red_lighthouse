@@ -1,10 +1,11 @@
 package kr.ac.kpu.red_lighthouse.function
 
+import android.widget.EditText
 import java.util.regex.Pattern
 
 class CheckUserId {
     //아이디 형식 검사
-    fun checkEmail(email : String): Boolean {
+    fun checkEmail(email: String): Boolean {
         val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         val check = email.trim()
         return Pattern.matches(emailValidation, check)
@@ -16,3 +17,4 @@ class CheckUserId {
         return Pattern.matches(pwValidation, check)
     }
 }
+

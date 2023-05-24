@@ -1,5 +1,6 @@
 package kr.ac.kpu.red_lighthouse.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,16 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.databinding.ActivityMenuSelectBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityUserInfoBinding
 import kr.ac.kpu.red_lighthouse.user.User
 
 
 class UserInfoActivity : Fragment() {
+    @SuppressLint("CommitTransaction")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +35,7 @@ class UserInfoActivity : Fragment() {
         val btnPolicy = binding.btnPolicy // 개인정보 처리화면 이동 버튼
         val userEmail = binding.userEmail // 사용자 이메일 표시 텍스트 뷰
         val userName = binding.userName   // 사용자 닉네임 표시 텍스트 뷰
+        val btnBack = binding.btnBack     // 뒤로가기 버튼
 
         // LoginActivity.kt에서 지정한 preferences(user)값 가져오기
         val prefs = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
@@ -39,6 +45,14 @@ class UserInfoActivity : Fragment() {
         //가져온 preferences(user)값에서 user_nickname값 가져오기 및 출력
         val nickName = prefs.getString("user_nickname","null");
         userName.text = nickName
+
+        //바텀 바 버튼
+        val btn = (activity as MenuSelectActivity).findViewById<BottomNavigationView>(R.id.bnv_main)
+
+        //바텀 바 버튼의 포커스가 안맞을 시 포커스를 맞춰준다.
+        if(btn.selectedItemId != R.id.third){
+            btn.selectedItemId = R.id.third
+        }
         // 정보 수정 페이지 이동 이벤트
         btnEdit.setOnClickListener {
             val intent = Intent(getActivity(), ChangeInfoActivity::class.java)
@@ -58,6 +72,14 @@ class UserInfoActivity : Fragment() {
         btnPolicy.setOnClickListener {
             val intent = Intent(getActivity(), CsActivity::class.java)
             startActivity(intent)
+        }
+        // 뒤로가기 -- MapActivity로 되돌아간다.
+        btnBack.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+            activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fl_container, MapActivity())?.commit()
+            btn.selectedItemId = R.id.first
+
         }
         return binding.root
     }

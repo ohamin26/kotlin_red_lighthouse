@@ -2,13 +2,11 @@ package kr.ac.kpu.red_lighthouse.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -111,7 +109,7 @@ class LoginActivity : Activity(){
             }
         }
         // 비밀번호 찾기 화면 이동 이벤트
-        binding.forgetpasswd.setOnClickListener {
+        binding.btnFindPw.setOnClickListener {
             var intent = Intent(applicationContext, FindPasswordActivity::class.java)
             startActivityForResult(intent,0)
         }

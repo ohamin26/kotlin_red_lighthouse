@@ -72,12 +72,12 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName"
                 android:text="" />
 
             <!--닉네임 입력 칸-->
             <EditText
-                android:id="@+id/nick_change"
+                android:id="@+id/nickname_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

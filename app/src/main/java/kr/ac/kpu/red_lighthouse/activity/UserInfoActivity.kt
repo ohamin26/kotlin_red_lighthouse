@@ -17,6 +17,7 @@ class UserInfoActivity : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding = ActivityUserInfoBinding.inflate(inflater, container,false)
         val btnEdit = binding.btnEdit     // 이메일, 닉네임 정보 수정 페이지 이동 버튼
         val btnReview = binding.btnReview // 나의 리뷰 페이지 이동

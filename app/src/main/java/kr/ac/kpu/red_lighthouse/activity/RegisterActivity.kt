@@ -3,6 +3,7 @@ package kr.ac.kpu.red_lighthouse
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.media.metrics.Event
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +13,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.widget.TextViewCompat
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.core.EventManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -23,9 +27,11 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import kr.ac.kpu.red_lighthouse.activity.LoadingDialog
 import kr.ac.kpu.red_lighthouse.activity.LoginActivity
+import kr.ac.kpu.red_lighthouse.activity.MenuSelectActivity
 import kr.ac.kpu.red_lighthouse.databinding.ActivityRegisterBinding
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.user.User
+import kr.ac.kpu.red_lighthouse.user.UserDao
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.regex.Pattern
@@ -40,15 +46,12 @@ class RegisterActivity : AppCompatActivity() {
     private var isEmailtrue = false
     private var isPWtrue = false
 
-    private lateinit var auth: FirebaseAuth
-    private val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Initialize Firebase Auth
-        auth = Firebase.auth
+        val eventMessage = EventMessage()
+        val userDao = UserDao()
 
         var dialog = LoadingDialog(this) //로딩바 선언
 
@@ -107,61 +110,53 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
-
-
-
             if (isPWSame && isEmailtrue && isPWtrue) {
                 try {
-                    dialog.show() //로딩바 실행
+                    dialog.show() //로딩바 실행.
                     CoroutineScope(Dispatchers.Main).launch {
-                        val ref = db.collection("users")
                         val onlyDate: LocalDate = LocalDate.now()
-                        var checkUser: List<User> =
-                            ref.whereEqualTo("user_email", email).get().await()
-                                .toObjects(User::class.java)
-                        if (checkUser.isNotEmpty()) {
+                        var user = User("", email, nickname, onlyDate.toString())
+                        var checkEmail: List<User> = userDao.checkExistsWithEmail(email)
+                        var checkNickname: List<User> = userDao.checkExistsWithNickname(nickname)
+                        if (checkEmail.isNotEmpty()) {
                             //데이터베이스 안에 같은 이메일이 존재 한다면 알려주는 메세지.
-                            Toast.makeText(applicationContext, "이미 가입된 계정입니다.", Toast.LENGTH_SHORT)
-                                .show()
-                        } else {
-                            var user = User("", email, nickname, onlyDate.toString())
-                            auth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener()
-                                { task ->
-                                    if (task.isSuccessful) {
-                                        val uid: String? = auth.currentUser?.uid
-                                        if (uid != null) {
-                                            //UserId가 null이 아닐 때 데이터베이스 정보 저장 명령 실행
-                                            user.user_id = uid;
-                                            ref.document(uid).set(user)
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "회원가입 성공. 로그인해주세요.",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            finish()
-                                        }
-                                    } else {
-                                        //회원가입 실패 메세지 출력
+                            eventMessage.emailExists(applicationContext)
+                            dialog.dismiss()
+                        } else if(checkNickname.isNotEmpty()){
+                            eventMessage.nicknameExists(applicationContext)
+                            dialog.dismiss()
+                        } else{
+                            userDao.register(email,password).addOnSuccessListener {
+                                task ->
+                                Log.i("데이터베이스", "회원가입 완료.")
+                                val uid :String? = task.user?.uid
+                                if(uid!=null){
+                                    user.userId = uid
+                                    userDao.setDataToFirebase(user).addOnSuccessListener {
+                                        Log.i("데이터베이스", "데이터 저장 완료.")
                                         Toast.makeText(
                                             applicationContext,
-                                            "회원가입에 실패했습니다. 나중에 다시 시도해주세요.",
+                                            "회원가입 성공. 로그인해주세요.",
                                             Toast.LENGTH_SHORT
                                         ).show()
+                                        dialog.dismiss()
+                                        finish()
+                                    }.addOnFailureListener{
+                                        eventMessage.registerErr(applicationContext)
+                                        dialog.dismiss()
                                     }
                                 }
+                            }.addOnFailureListener {
+                                eventMessage.registerErr(applicationContext)
+                                dialog.dismiss()
+                            }
                         }
 
                     }
                 } catch (e: Error) {
                     //에러 메세지 출력
                     print(e)
-                    Toast.makeText(
-                        applicationContext,
-                        "회원가입에 실패했습니다. 나중에 다시 시도해주세요.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    eventMessage.registerErr(applicationContext)
                     dialog.dismiss()
                 }
             }

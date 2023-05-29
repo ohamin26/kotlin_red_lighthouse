@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,12 +40,12 @@ class UserInfoActivity : Fragment() {
         val btnBack = binding.btnBack     // 뒤로가기 버튼
 
         // LoginActivity.kt에서 지정한 preferences(user)값 가져오기
-        val prefs = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
+        val prefs = requireContext().getSharedPreferences("user", 0)
         //가져온 preferences(user)값에서 user_email값 가져오기 및 출력
-        val email = prefs.getString("user_email","null");
+        val email = prefs.getString("userEmail"," "); //이메일 널 값 나옴.
         userEmail.text = email
         //가져온 preferences(user)값에서 user_nickname값 가져오기 및 출력
-        val nickName = prefs.getString("user_nickname","null");
+        val nickName = prefs.getString("userNickname"," ");
         userName.text = nickName
 
         //바텀 바 버튼

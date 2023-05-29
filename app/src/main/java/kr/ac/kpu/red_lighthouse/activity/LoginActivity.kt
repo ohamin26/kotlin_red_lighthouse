@@ -80,6 +80,10 @@ class LoginActivity : Activity() {
                                             val sharedPreference = getSharedPreferences("user", 0)
                                             val editor = sharedPreference.edit()
                                             if (user != null) {
+                                                Log.i("데이터베이스", user.userId)
+                                                Log.i("데이터베이스", user.userEmail)
+                                                Log.i("데이터베이스", user.userNickname)
+                                                Log.i("데이터베이스", user.userDateOfRegist)
                                                 editor.putString("userId", user.userId)
                                                 editor.putString("userEmail", user.userEmail)
                                                 editor.putString("userNickname", user.userNickname)

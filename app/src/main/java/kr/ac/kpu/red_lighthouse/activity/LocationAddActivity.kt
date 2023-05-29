@@ -8,10 +8,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import kr.ac.kpu.red_lighthouse.R
-import kr.ac.kpu.red_lighthouse.databinding.ActivityFindpwBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationAddBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityMainBinding
 

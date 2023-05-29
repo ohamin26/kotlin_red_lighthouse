@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import kr.ac.kpu.red_lighthouse.function.CheckUserId
 
 class UserDao {
     private var databaseReference: DatabaseReference? = null
@@ -28,8 +29,8 @@ class UserDao {
     fun login(email:String,password:String):Task<AuthResult>{
         return auth.signInWithEmailAndPassword(email,password)
     }
-    suspend fun getDataFromFirebase(uid:String): User? {
-        return ref.document(uid).get().await().toObject(User::class.java)
+    suspend fun getDataFromFirebase(userId:String): User? {
+        return ref.document(userId).get().await().toObject(User::class.java)
     }
     fun setDataToFirebase(user:User):Task<Void>{
         return ref.document(user.userId).set(user)
@@ -45,6 +46,14 @@ class UserDao {
     fun resetPassword(email:String): Task<Void> {
         return Firebase.auth.sendPasswordResetEmail(email)
     }
-
-
+    fun updateNickname(userId:String,nickname: String): Task<Void> {
+        return ref.document(userId).update("userNickname",nickname)
+    }
+    fun deleteUserWithFirestore(userId:String): Task<Void> {
+        return ref.document(userId).delete()
+    }
+    fun deleteUserWithFireAuth(userId:String): Task<Void> {
+        val user = auth.currentUser!!
+        return  user.delete()
+    }
 }

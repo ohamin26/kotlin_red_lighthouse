@@ -52,9 +52,15 @@
             android:orientation="vertical"
             android:background="@android:color/darker_gray">
             <ImageView
+                android:id="@+id/galleryView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:src="@drawable/ic_camera"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사진첩 열기"
+                android:id="@+id/galleryBtn"/>
         </LinearLayout>
 
 

@@ -8,10 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.text.PrecomputedTextCompat
@@ -21,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.core.EventManager
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -33,8 +29,6 @@ import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.user.User
 import kr.ac.kpu.red_lighthouse.user.UserDao
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {

@@ -117,8 +117,8 @@ class LoginActivity : Activity() {
                 }
             }
         }
-            // 비밀번호 찾기 화면 이동 이벤트
-        binding.forgetpasswd.setOnClickListener {
+        // 비밀번호 찾기 화면 이동 이벤트
+        binding.btnFindPw.setOnClickListener {
             var intent = Intent(applicationContext, FindPasswordActivity::class.java)
             startActivityForResult(intent, 0)
         }

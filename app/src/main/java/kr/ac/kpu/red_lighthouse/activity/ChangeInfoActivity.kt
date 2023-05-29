@@ -2,17 +2,43 @@ package kr.ac.kpu.red_lighthouse.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.databinding.ActivityChangeInfoBinding
+import kr.ac.kpu.red_lighthouse.function.CheckUserId
 
 class ChangeInfoActivity : AppCompatActivity(){
+    private  lateinit var binding: ActivityChangeInfoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_info)
-        // 이메일이랑 닉네임 따로따로 변경해야하니까
-        // 따로 만들어야할거 같아
-        // 예를들어 어떤 걸 수정할건지 선택지를 주고 한번 더 들어가서 수정을 한다든가.
-        // 이메일. 닉네임. 비밀번호 변경 수정해야함
+        binding = ActivityChangeInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val btnChange = binding.btnChange
+        btnChange.setOnClickListener {
+            var emailChange : String = binding.emailChange.text.toString()
+            var nicknameChange : String = binding.nicknameChange.text.toString()
+            if("" == emailChange){
+                Toast.makeText(this@ChangeInfoActivity,"이메일을 입력하세요", Toast.LENGTH_SHORT).show()
+                binding.emailChange.requestFocus()
+
+            }else if(!CheckUserId().checkEmail(emailChange)) {
+                Toast.makeText(this@ChangeInfoActivity, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT)
+                    .show()
+                binding.emailChange.requestFocus()
+
+            }else if("" == nicknameChange){
+                Toast.makeText(this@ChangeInfoActivity,"닉네임을 입력하세요", Toast.LENGTH_SHORT).show()
+                binding.nicknameChange.requestFocus()
+
+            }else{
+                var intent = Intent(applicationContext, MenuSelectActivity::class.java)
+                intent.putExtra("user_info_changed",0)
+                startActivity(intent)
+            }
+        }
     }
 }

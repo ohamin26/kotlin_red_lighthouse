@@ -67,7 +67,7 @@
 
         <!--비밀번호 찾기로 이동 버튼-->
         <Button
-            android:id="@+id/btn_find_pw"
+            android:id="@+id/btnFindPw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

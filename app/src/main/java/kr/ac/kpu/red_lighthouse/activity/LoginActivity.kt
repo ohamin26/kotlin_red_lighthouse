@@ -91,6 +91,7 @@ class LoginActivity : Activity() {
                                                     "userDateOfRegist",
                                                     user.userDateOfRegist
                                                 )
+                                                editor.apply()
                                                 var intent = Intent(
                                                     applicationContext,
                                                     MenuSelectActivity::class.java

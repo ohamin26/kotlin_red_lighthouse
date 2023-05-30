@@ -13,14 +13,7 @@
         android:theme="@style/Theme.Red_lighthouse"
         tools:targetApi="31">
         <activity
-            android:name=".LocationAddActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".LocationDetailsActivity"
+            android:name=".activity.LocationAddActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -68,7 +61,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ChangeInfoActivity"
+            android:name=".activity.ChangeInfoNicknameActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -84,6 +77,14 @@
 
         <activity
             android:name=".activity.AppInfoActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".activity.LocationDetailsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

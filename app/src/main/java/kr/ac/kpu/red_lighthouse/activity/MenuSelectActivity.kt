@@ -47,4 +47,8 @@ class MenuSelectActivity : AppCompatActivity(){
             selectedItemId = R.id.first
         }
     }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+    }
 }

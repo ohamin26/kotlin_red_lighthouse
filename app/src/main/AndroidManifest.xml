@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,15 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Red_lighthouse"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC8wj1dlBRYB99v60u4fhHdVbeE1uFJztk" />
         <activity
-            android:name=".LocationAddActivity"
+            android:name=".activity.LocationAddActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LocationDetailsActivity"
+            android:name=".activity.PlaceDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -42,31 +51,36 @@
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.FindPasswordActivity"
+            android:name=".activity.FindPasswdActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".RegisterActivity"
+        <activity android:name=".RegisterActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
         </activity>
-        <activity
-            android:name=".activity.MenuSelectActivity"
+        <activity android:name=".activity.MenuSelectActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
         </activity>
+
         <activity
             android:name=".activity.ChangeInfoActivity"
             android:exported="true">
@@ -88,7 +102,10 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
         </activity>
+
+
     </application>
 
 </manifest>

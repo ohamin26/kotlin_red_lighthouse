@@ -3,53 +3,59 @@ package kr.ac.kpu.red_lighthouse.activity
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
-import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationAddBinding
-import kr.ac.kpu.red_lighthouse.databinding.ActivityMainBinding
 
-class LocationAddActivity : AppCompatActivity() {
-    // 인텐트 갤러리타입은 1
+
+class LocationAddActivity : Fragment() {
     private val GALLERY = 1
-    private  lateinit var binding: ActivityLocationAddBinding
+    private lateinit var binding: ActivityLocationAddBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLocationAddBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.galleryBtn.setOnClickListener{
-            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.setType("image/*")
-            startActivityForResult(intent,GALLERY)
-
-        }
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityLocationAddBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.galleryBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, GALLERY)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if( resultCode == Activity.RESULT_OK){
-            if( requestCode ==  GALLERY)
-            {
-                var ImageData: Uri? = data?.data
-                Toast.makeText(this,ImageData.toString(), Toast.LENGTH_SHORT ).show()
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == GALLERY) {
+                val imageData: Uri? = data?.data
+                Toast.makeText(requireContext(), imageData.toString(), Toast.LENGTH_SHORT).show()
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, ImageData)
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        imageData
+                    )
                     binding.galleryView.setImageBitmap(bitmap)
-                }
-                catch (e:Exception)
-                {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
         }
     }
 }
+

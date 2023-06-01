@@ -32,7 +32,7 @@ class MenuSelectActivity : AppCompatActivity(){
                     }
                     R.id.second -> {
                         // 프래그먼트 화면(공유명소)으로 이동하는 기능
-                        val fragment = UserInfoActivity() //임시 값 / 나중에 공유명소 화면으로 전환하도록 변경 예정
+                        val fragment = LocationAddActivity() //임시 값 / 나중에 공유명소 화면으로 전환하도록 변경 예정
                         supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
                     }
                     R.id.third -> {

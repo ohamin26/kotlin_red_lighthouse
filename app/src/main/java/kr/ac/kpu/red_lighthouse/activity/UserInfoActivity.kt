@@ -67,7 +67,7 @@ class UserInfoActivity : Fragment() {
         }
         // 비밀번호 수정 페이지 이동 이벤트
         btnEditPw.setOnClickListener {
-            val intent = Intent(getActivity(), FindPasswordActivity::class.java)
+            val intent = Intent(getActivity(), FindPasswdActivity::class.java)
             startActivity(intent)
         }
         // 닉네임 수정 페이지 이동 이벤트

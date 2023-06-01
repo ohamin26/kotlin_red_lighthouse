@@ -34,15 +34,13 @@ class UserInfoActivity : Fragment() {
     ): View? {
 
         val binding = ActivityUserInfoBinding.inflate(inflater, container,false)
-        val btnEditPw = binding.btnEditPw     // 이메일, 닉네임 정보 수정 페이지 이동 버튼
-        val btnEditNickname = binding.btnEditNickname     // 이메일, 닉네임 정보 수정 페이지 이동 버튼
         val btnReview = binding.btnReview // 나의 리뷰 페이지 이동
+        val btnEdit = binding.btnEdit // 나의 리뷰 페이지 이동
         val btnCs = binding.btnCs         // 고객센터 버튼, 대표 이메일 안내 화면 이동
         val btnInfo = binding.btnInfo     // 앱 정보 화면 이동 버튼
         val btnPolicy = binding.btnPolicy // 개인정보 처리화면 이동 버튼
         val userEmail = binding.userEmail // 사용자 이메일 표시 텍스트 뷰
         val userName = binding.userName   // 사용자 닉네임 표시 텍스트 뷰
-        val btnBack = binding.btnBack     // 뒤로가기 버튼
         // LoginActivity.kt에서 지정한 preferences(user)값 가져오기
         val prefs = requireContext().getSharedPreferences("user", 0)
         val userId = prefs.getString("userId"," ").toString()
@@ -65,16 +63,7 @@ class UserInfoActivity : Fragment() {
         if(btn.selectedItemId != R.id.third){
             btn.selectedItemId = R.id.third
         }
-        // 비밀번호 수정 페이지 이동 이벤트
-        btnEditPw.setOnClickListener {
-            val intent = Intent(getActivity(), FindPasswordActivity::class.java)
-            startActivity(intent)
-        }
-        // 닉네임 수정 페이지 이동 이벤트
-        btnEditNickname.setOnClickListener {
-            val intent = Intent(getActivity(), ChangeInfoNicknameActivity::class.java)
-            startActivity(intent)
-        }
+
         // 고객센터 안내 페이지 이동 이벤트
         btnCs.setOnClickListener {
             val intent = Intent(getActivity(), CsActivity::class.java)
@@ -89,14 +78,6 @@ class UserInfoActivity : Fragment() {
         btnPolicy.setOnClickListener {
             val intent = Intent(getActivity(), CsActivity::class.java)
             startActivity(intent)
-        }
-        // 뒤로가기 -- MapActivity로 되돌아간다.
-        btnBack.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
-            activity?.supportFragmentManager?.popBackStack()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fl_container, MapActivity())?.commit()
-            btn.selectedItemId = R.id.first
-
         }
         return binding.root
     }

@@ -11,9 +11,10 @@ class MenuSelectActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_select)
 
-        var bnv_main = findViewById<BottomNavigationView>(R.id.bnv_main)
+        val bnv_main = findViewById<BottomNavigationView>(R.id.bnv_main)
         val intent = intent;
         var user_info_change = intent.getIntExtra("user_info_changed",1)
+
         // navi_menu.xml 에서 설정했던 각 아이템들의 id를 통해 알맞은 프래그먼트로 변경하게 한다.
         bnv_main.run { setOnNavigationItemSelectedListener {
 

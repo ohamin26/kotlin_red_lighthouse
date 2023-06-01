@@ -119,7 +119,7 @@ class MapActivity : Fragment(), OnMapReadyCallback {
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {
 
-        val marker = LatLng(37.3455424,126.6879337)
+        val marker = LatLng(37.3452397,126.6879337)
         googleMap.addMarker(MarkerOptions().position(marker).title("빨간등대"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))

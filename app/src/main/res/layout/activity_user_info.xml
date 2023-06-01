@@ -53,7 +53,7 @@
                 android:orientation="vertical">
                     <!--프로필 이미지 뷰-->
                     <ImageView
-                        android:layout_width="100dp"
+                        android:layout_width="105dp"
                         android:layout_height="100dp"
                         android:src="@drawable/customer">
                     </ImageView>

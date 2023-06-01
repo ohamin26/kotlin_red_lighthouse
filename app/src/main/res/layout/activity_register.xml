@@ -55,7 +55,7 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/signup" />
 
-        <!--이메일 입력-->
+        <!--이메일 입력 칸, 입력 가능한 값의 속성을 이메일 주소로 설정-->
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="wrap_content"
@@ -65,9 +65,9 @@
             android:ems="9"
             android:fontFamily="@font/suite1"
             android:hint="이메일"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
-        <!--닉네임 입력-->
+        <!--닉네임 입력 칸, 입력 가능한 값의 속성을 문자열과 숫자로 설정-->
         <EditText
             android:id="@+id/edit_nickname"
             android:layout_width="wrap_content"
@@ -76,9 +76,10 @@
             android:layout_marginLeft="110dp"
             android:ems="9"
             android:hint="닉네임"
-            android:fontFamily="@font/suite1"/>
+            android:fontFamily="@font/suite1"
+            android:inputType="text|number"/>
 
-        <!--비밀 번호 입력-->
+        <!--비밀 번호 입력 칸, 입력 가능한 값의 속성을 패스워드로 설정-->
         <EditText
             android:id="@+id/edit_pw"
             android:layout_width="wrap_content"
@@ -90,7 +91,7 @@
             android:fontFamily="@font/suite1"
             android:inputType="textPassword" />
 
-        <!--비밀 번호 확인-->
+        <!--비밀 번호 확인, 입력 가능한 값의 속성을 패스워드로 설정-->
         <EditText
             android:id="@+id/edit_pw_re"
             android:layout_width="wrap_content"

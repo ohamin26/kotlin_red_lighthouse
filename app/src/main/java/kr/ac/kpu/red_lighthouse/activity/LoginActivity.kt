@@ -125,7 +125,6 @@ class LoginActivity : Activity() {
                             }
                         }
                     }
-
                 } catch (e: Error) {
                     //에러 메세지 출력
                     Log.e("Firebase", e.toString())

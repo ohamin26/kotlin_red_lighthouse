@@ -51,7 +51,7 @@
             android:id="@+id/imageview"
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:src="@drawable/signup" />
 
@@ -61,23 +61,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:ems="9"
             android:fontFamily="@font/suite1"
             android:hint="이메일"
             android:inputType="textEmailAddress" />
 
-        <!--닉네임 입력 칸, 입력 가능한 값의 속성을 문자열과 숫자로 설정-->
+        <!--닉네임 입력 칸, 입력 가능한 값의 속성을 문자열로 설정-->
         <EditText
             android:id="@+id/edit_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:ems="9"
             android:hint="닉네임"
             android:fontFamily="@font/suite1"
-            android:inputType="text|number"/>
+            android:inputType="text"/>
 
         <!--비밀 번호 입력 칸, 입력 가능한 값의 속성을 패스워드로 설정-->
         <EditText
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:ems="9"
             android:hint="비밀번호"
             android:fontFamily="@font/suite1"
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:ems="9"
             android:fontFamily="@font/suite1"
             android:hint="비밀번호 확인"
@@ -112,7 +112,7 @@
             android:background="#ff5f4d"
             android:fontFamily="@font/suite1"
             android:text="회원가입"
-            android:layout_marginLeft="110dp"
+            android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="25dp" />
     </LinearLayout>

@@ -88,6 +88,13 @@
         </activity>
 
         <activity
+            android:name=".activity.UserInfoActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.ChangeInfoActivity"
             android:exported="true"
             android:parentActivityName=".activity.UserInfoActivity">

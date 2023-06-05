@@ -43,6 +43,7 @@ class ChangeInfoNicknameActivity : AppCompatActivity() {
                 edit.apply()
                 var intent = Intent(applicationContext, ChangeInfoActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }

@@ -45,7 +45,6 @@ class MapActivity : Fragment(), OnMapReadyCallback {
     lateinit var searchBtn: Button
     lateinit var searchAddr: EditText
     lateinit var mMap : GoogleMap
-    private val markerList: ArrayList<Marker> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,

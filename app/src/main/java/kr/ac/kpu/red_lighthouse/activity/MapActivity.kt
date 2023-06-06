@@ -135,7 +135,6 @@ class MapActivity : Fragment(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
-
     override fun onStart() {
         super.onStart()
         mView.onStart()

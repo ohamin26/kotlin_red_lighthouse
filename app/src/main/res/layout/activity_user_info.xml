@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/user_info"
     tools:context=".activity.UserInfoActivity">
     <ScrollView
         android:layout_width="match_parent"
@@ -33,7 +34,16 @@
                     android:textSize="20dp"
                     android:text="마이 페이지"
                     android:textStyle="bold"
-                    android:textColor="@android:color/darker_gray"/>
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginLeft="60dp"/>
+                <!-- 로그아웃 버튼 -->
+                <ImageButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_logout"
+                    android:layout_margin="6dp"/>
 
             </LinearLayout>
 

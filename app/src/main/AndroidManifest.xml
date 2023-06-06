@@ -70,9 +70,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".activity.ChangeInfoNicknameActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.CsActivity"
-            android:exported="true"
-            android:parentActivityName=".activity.UserInfoActivity">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -80,41 +86,7 @@
 
         <activity
             android:name=".activity.AppInfoActivity"
-            android:exported="true"
-            android:parentActivityName=".activity.UserInfoActivity">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".activity.UserInfoActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.ChangeInfoActivity"
-            android:exported="true"
-            android:parentActivityName=".activity.UserInfoActivity">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.ChangeInfoNicknameActivity"
-            android:exported="true"
-            android:parentActivityName=".activity.ChangeInfoActivity"
-            >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.PolicyActivity"
-            android:exported="true"
-            android:parentActivityName=".activity.UserInfoActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

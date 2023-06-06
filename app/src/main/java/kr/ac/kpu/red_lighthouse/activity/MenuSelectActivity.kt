@@ -1,5 +1,6 @@
 package kr.ac.kpu.red_lighthouse.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,15 +11,19 @@ class MenuSelectActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_select)
 
-        val bnvMain = findViewById<BottomNavigationView>(R.id.bnv_main)
+        val bnv_main = findViewById<BottomNavigationView>(R.id.bnv_main)
+        val intent = intent;
+        var user_info_change = intent.getIntExtra("user_info_changed",1)
+
         // navi_menu.xml 에서 설정했던 각 아이템들의 id를 통해 알맞은 프래그먼트로 변경하게 한다.
-        bnvMain.run { setOnNavigationItemSelectedListener {
-            // user의 nickname이 변경 되었을 시에는 바로 userInfoActivity로 이동
-            if(intent.getBooleanExtra("userNicknameChange",false)){
+        bnv_main.run { setOnNavigationItemSelectedListener {
+
+            if(user_info_change === 0){
+                // 회원 정보 수정 시에 유저정보 프레그먼트 화면(UserInfoActivity)으로 이동한다.
                 val fragment = UserInfoActivity()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
-            }
-            else{
+                user_info_change = 1
+            }else{
                 when(it.itemId) {
                     R.id.first -> {
                         //  프래그먼트 화면(MapActivity)으로 이동하는 기능
@@ -42,8 +47,7 @@ class MenuSelectActivity : AppCompatActivity(){
             selectedItemId = R.id.first
         }
     }
-    //뒤로가기 막기
-    @Deprecated("Deprecated in Java")
+
     override fun onBackPressed() {
         //super.onBackPressed()
     }

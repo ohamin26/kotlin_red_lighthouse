@@ -61,6 +61,20 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/resume" />
 
+            <!--이메일 입력 칸, inputType : 입력 가능한 값을 모든 문자 / 기호 / 숫자로 설정-->
+            <EditText
+                android:id="@+id/email_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:ems="11"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:hint="Email"
+                android:inputType="textPersonName"
+                android:text="" />
+
             <!--닉네임 입력 칸-->
             <EditText
                 android:id="@+id/nickname_change"
@@ -72,7 +86,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:hint="Nickname"
-                android:inputType="text"/>
+                android:inputType="textPassword"/>
 
             <!--완료 버튼-->
             <Button

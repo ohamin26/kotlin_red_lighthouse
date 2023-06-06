@@ -55,8 +55,6 @@ class MapActivity : Fragment(), OnMapReadyCallback {
         var rootView = inflater.inflate(R.layout.activity_map, container, false)
         mView = rootView.findViewById(R.id.mapView)
         button = rootView.findViewById(R.id.mapBtn)
-        searchBtn = rootView.findViewById(R.id.searchBtn)
-        searchAddr = rootView.findViewById(R.id.searchAddr)
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
         button.setOnClickListener{
@@ -64,69 +62,7 @@ class MapActivity : Fragment(), OnMapReadyCallback {
                 startLocationUpdates()
             }
         }
-
-        searchBtn.setOnClickListener {
-            // 쓰레드 생성
-            val thread = NetworkThread()
-            thread.start()
-            thread.join()
-        }
         return rootView
-    }
-
-    // 정확한 주소 입력해야만 검색 가능, 수정중
-    inner class NetworkThread: Thread(){
-        override fun run() {
-            // 접속할 페이지 주소: Site
-            for(i in 1..14){
-                var site = "https://openapi.gg.go.kr/RegionMnyFacltStus?KEY=ad8bb95db5e54be5a4592904f8d3412a&Type=json&pIndex="+ i +"&pSize=1000&SIGUN_NM=%EC%8B%9C%ED%9D%A5%EC%8B%9C&REFINE_ROADNM_ADDR=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%8B%9C%ED%9D%A5%EC%8B%9C"
-                var url = URL(site)
-                var conn = url.openConnection()
-                var input = conn.getInputStream()
-                var isr = InputStreamReader(input)
-                var br = BufferedReader(isr)
-
-                var str: String? = null
-                var buf = StringBuffer()
-
-                do {
-                    str = br.readLine()
-
-                    if(str!=null){
-                        buf.append(str)
-                    }
-                }while (str!=null)
-
-                var root = JSONObject(buf.toString())
-                var response = root.getJSONArray("RegionMnyFacltStus").getJSONObject(1)
-                var result = response.getJSONArray("row")
-
-                getActivity()?.runOnUiThread {
-                    var searchAddr = searchAddr.getText().toString()
-
-                    var latlng : LatLng? = null
-                    for(i in 0..999){
-                        var obj = result.getJSONObject(i)
-                        var LEAD_TAX_MAN_STATE = obj.getString("LEAD_TAX_MAN_STATE").toString()
-                        var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()
-                        var CMPNM_NM = obj.getString("CMPNM_NM").toString()
-
-                        if(LEAD_TAX_MAN_STATE.equals("계속사업자")) {
-                            if (REFINE_ROADNM_ADDR.contains(searchAddr) or CMPNM_NM.contains(searchAddr)) {
-                                var logt = obj.getString("REFINE_WGS84_LOGT")
-                                var lat = obj.getString("REFINE_WGS84_LAT")
-
-                                latlng = LatLng(lat.toDouble(), logt.toDouble())
-                                mMap.addMarker(
-                                    MarkerOptions().position(latlng).title(obj.getString("CMPNM_NM"))
-                                )
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

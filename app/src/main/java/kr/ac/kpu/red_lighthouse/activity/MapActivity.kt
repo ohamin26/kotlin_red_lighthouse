@@ -42,8 +42,6 @@ class MapActivity : Fragment(), OnMapReadyCallback {
     private lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     private lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
-    lateinit var searchBtn: Button
-    lateinit var searchAddr: EditText
     lateinit var mMap : GoogleMap
 
     override fun onCreateView(

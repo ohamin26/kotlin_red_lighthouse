@@ -171,17 +171,6 @@
                 android:text="오전 9:30 에 영업 시작"/>
         </LinearLayout>
 
-        <!--지도 화면으로 넘어가는 버튼-->
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:textSize="15dp"
-            android:fontFamily="@font/suite1"
-            android:text="지도에서 확인">
-
-        </Button>
 
     </LinearLayout>
 

@@ -13,6 +13,71 @@
         app:layout_constraintBottom_toTopOf="@+id/bnv_main"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <!-- 상단 앱바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_margin="10dp"/>
+
+        <!-- 페이지 제목, 명소 리스트 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/suite1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="명소 리스트"
+
+            android:textStyle="bold"
+            android:textColor="@android:color/darker_gray"/>
+
+        <!--지도 화면으로 넘어가는 버튼-->
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:textSize="17dp"
+            android:fontFamily="@font/suite1"
+            android:textStyle="bold"
+            android:text="Map">
+
+        </Button>
+
+
+
+        \</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        tools:ignore="MissingConstraints">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:id="@+id/list"/>
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize" android:id="@+id/bnv_main" android:background="#FFFFFF"

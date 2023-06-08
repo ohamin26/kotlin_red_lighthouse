@@ -109,6 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="추가 기능"
+                android:textStyle="bold"
+                android:fontFamily="@font/suite"
                 android:textSize="@dimen/headline6"
                 />
             <LinearLayout

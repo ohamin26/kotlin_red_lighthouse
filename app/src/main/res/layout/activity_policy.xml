@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:text="개인정보 처리 방침"
                 android:textStyle="bold
 "               android:fontFamily="@font/suite"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:textSize="30dp"
+                android:textSize="16dp"
                 android:text="내용"
                 android:textStyle="bold
 "               android:fontFamily="@font/suite"

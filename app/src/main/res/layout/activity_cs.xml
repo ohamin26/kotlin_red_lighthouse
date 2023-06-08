@@ -72,7 +72,7 @@
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/suite"
                 android:text="           대표 이메일\n shr0826@naver.com"
-                android:textSize="30dp"
+                android:textSize="24dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -82,10 +82,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/suite"
                 android:text="문의 사항은 위의 대표 이메일로 연락 부탁드립니다."
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <!--영문 안내사항 텍스트 뷰-->
@@ -97,7 +97,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/suite"
                 android:text="Please contact the above email."
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textStyle="bold"/>
 
         </LinearLayout>

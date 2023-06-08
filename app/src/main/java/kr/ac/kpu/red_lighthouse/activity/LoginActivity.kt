@@ -33,6 +33,10 @@ class LoginActivity : Activity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPreference = getSharedPreferences("user", 0)
+        val editor = sharedPreference.edit()
+
+
         // 로그인 시도 이벤트
         // 아이디나 비밀번호나 공백이거나 형식에 맞지 않을 시 다시 입력하게 한다.
         // 맞을 경우 페이지 이동 로그인 정보 전송
@@ -77,8 +81,6 @@ class LoginActivity : Activity() {
                                         var user: User? = User(uid, email, "", "")
                                         if (user != null) {
                                             user = userDao.getDataFromFirebase(user.userId)
-                                            val sharedPreference = getSharedPreferences("user", 0)
-                                            val editor = sharedPreference.edit()
                                             if (user != null) {
                                                 Log.i("데이터베이스", user.userId)
                                                 Log.i("데이터베이스", user.userEmail)
@@ -91,6 +93,11 @@ class LoginActivity : Activity() {
                                                     "userDateOfRegist",
                                                     user.userDateOfRegist
                                                 )
+                                                if(binding.autoLogin.isChecked){
+                                                    editor.putBoolean("autoLogin",true)
+                                                }else{
+                                                    editor.putBoolean("autoLogin",false)
+                                                }
                                                 editor.apply()
                                                 var intent = Intent(
                                                     applicationContext,

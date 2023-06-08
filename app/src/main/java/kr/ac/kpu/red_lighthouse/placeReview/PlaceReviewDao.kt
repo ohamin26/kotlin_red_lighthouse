@@ -4,7 +4,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import kr.ac.kpu.red_lighthouse.place.Place
 import kr.ac.kpu.red_lighthouse.user.User
 
 class PlaceReviewDao {

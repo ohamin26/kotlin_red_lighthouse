@@ -48,40 +48,46 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="410dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                     <!--프로필 이미지 뷰-->
                     <ImageView
                         android:layout_width="105dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/customer">
+                        android:src="@drawable/customer"
+                        android:layout_marginRight="20dp">
                     </ImageView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--사용자 닉네임 텍스트 뷰-->
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="사용자 닉네임"
+                        android:textStyle="bold"
+                        android:textSize="60px"
+                        android:fontFamily="@font/suite"
+                        />
+                    <!--사용자 이메일 텍스트 뷰-->
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/suite"
+                        android:text="사용자 이메일"
+                        android:textSize="48px"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <!--사용자 이메일 텍스트 뷰-->
-                <TextView
-                    android:id="@+id/userEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/suite"
-                    android:text="사용자 이메일"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
-                <!--사용자 닉네임 텍스트 뷰-->
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="사용자 닉네임"
-                    android:textStyle="bold"
-                    android:textSize="32dp"
-                    android:fontFamily="@font/suite"
-                    />
             </LinearLayout>
 
             <LinearLayout

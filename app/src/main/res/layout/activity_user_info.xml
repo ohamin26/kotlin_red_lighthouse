@@ -20,8 +20,6 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="40dp">
-
-
                 <!-- 페이지 제목 -->
                 <TextView
                     android:layout_width="wrap_content"
@@ -38,65 +36,104 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="410dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                     <!--프로필 이미지 뷰-->
                     <ImageView
-                        android:layout_width="105dp"
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/customer">
+                        android:src="@drawable/customer"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp">
                     </ImageView>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <!--사용자 닉네임 텍스트 뷰-->
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="사용자 닉네임"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/headline6"
+                            android:fontFamily="@font/suite"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:text="님"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/headline6"
+                            android:fontFamily="@font/suite"
+                            />
+                    </LinearLayout>
 
-                <!--사용자 이메일 텍스트 뷰-->
-                <TextView
-                    android:id="@+id/userEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/suite"
-                    android:text="사용자 이메일"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
-                <!--사용자 닉네임 텍스트 뷰-->
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="사용자 닉네임"
-                    android:textStyle="bold"
-                    android:textSize="32dp"
-                    android:fontFamily="@font/suite"
-                    />
+                    <!--사용자 이메일 텍스트 뷰-->
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="left"
+                        android:fontFamily="@font/suite"
+                        android:text="사용자 이메일"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/body1"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="?attr/colorButtonNormal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="추가 기능"
+                android:textSize="@dimen/headline6"
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <!--정보 수정 로고 이미지 뷰-->
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/edit">
                 </ImageView>
                 <!--이메일, 닉네임 정보 수정 페이지로 이동 버튼-->
                 <Button
                     android:id="@+id/btn_edit"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:background="#00ff0000"
                     android:text="정보 수정"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="28dp"
+                    android:textSize="@dimen/body1"
                     android:fontFamily="@font/suite"
                     />
             </LinearLayout>
@@ -106,24 +143,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
                 <!--리뷰 이미지 뷰-->
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/review">
                 </ImageView>
                 <!--나의 리뷰 페이지로 이동 버튼-->
                 <Button
                     android:id="@+id/btn_review"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
                     android:text="나의 리뷰 기록"
                     android:textStyle="bold"
-                    android:textSize="28dp"
+                    android:textSize="@dimen/body1"
                     android:background="#00ff0000"
                     android:textColor="@color/black"
                     android:fontFamily="@font/suite"
@@ -135,13 +170,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
             android:orientation="horizontal">
             <!--고객센터 이미지 뷰-->
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="14dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:src="@drawable/service">
             </ImageView>
 
@@ -149,12 +183,12 @@
             <Button
                 android:id="@+id/btn_cs"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="고객센터"
                 android:background="#00ff0000"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:textSize="@dimen/body1"
                 android:fontFamily="@font/suite"
                 />
 
@@ -164,28 +198,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <!--앱 정보 이미지 뷰-->
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="14dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:src="@drawable/information">
             </ImageView>
             <!--앱 정보 화면 이동 버튼-->
             <Button
                 android:id="@+id/btn_Info"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="앱 정보"
                 android:textStyle="bold"
                 android:background="#00ff0000"
                 android:textColor="@color/black"
-                android:textSize="28dp"
-                android:fontFamily="@font/suite"
-                />
+                android:textSize="@dimen/body1"
+                android:fontFamily="@font/suite" />
 
         </LinearLayout>
 
@@ -193,15 +225,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
 
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="4dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:src="@drawable/policy">
             </ImageView>
 
@@ -209,10 +239,10 @@
             <Button
                 android:id="@+id/btn_policy"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="개인정보 처리 방침"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:textSize="@dimen/body1"
                 android:background="#00ff0000"
                 android:textColor="@color/black"
                 android:fontFamily="@font/suite"

@@ -94,25 +94,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
                 <!--정보 수정 로고 이미지 뷰-->
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/edit">
                 </ImageView>
                 <!--이메일, 닉네임 정보 수정 페이지로 이동 버튼-->
                 <Button
                     android:id="@+id/btn_edit"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:background="#00ff0000"
                     android:text="정보 수정"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="28dp"
+                    android:textSize="@dimen/body1"
                     android:fontFamily="@font/suite"
                     />
             </LinearLayout>
@@ -128,15 +128,14 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/review">
                 </ImageView>
                 <!--나의 리뷰 페이지로 이동 버튼-->
                 <Button
                     android:id="@+id/btn_review"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
                     android:text="나의 리뷰 기록"
                     android:textStyle="bold"
                     android:textSize="28dp"

@@ -36,14 +36,6 @@ class LoginActivity : Activity() {
         val sharedPreference = getSharedPreferences("user", 0)
         val editor = sharedPreference.edit()
 
-        // 자동 로그인 이벤트 - 자동 로그인 체크한 유저는 유저 정보가 있을 시 메뉴 화면으로 이동한다.
-        // 로그아웃 버튼 UserInfoActivity 우측 상단에 있습니다!
-        if(sharedPreference.getBoolean("autoLogin", false)){
-            if(sharedPreference != null){
-                val intent = Intent(applicationContext, MenuSelectActivity::class.java)
-                startActivity(intent)
-            }
-        }
 
         // 로그인 시도 이벤트
         // 아이디나 비밀번호나 공백이거나 형식에 맞지 않을 시 다시 입력하게 한다.

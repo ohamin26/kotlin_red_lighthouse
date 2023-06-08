@@ -14,6 +14,11 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import kr.ac.kpu.red_lighthouse.function.CheckUserId
 
+/**
+ * 유저 데이터를 관리 및 제어하는 클래스.
+ *
+ * 최종 수정 일자 : 2023.6.8
+ */
 class UserDao {
     //파이어베이스 연동
     private var auth: FirebaseAuth = Firebase.auth

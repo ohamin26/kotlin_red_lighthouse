@@ -84,7 +84,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/suite"
                         android:text="사용자 이메일"
-                        android:textSize="48px"
+                        android:textSize="@dimen/headline3"
                         android:textStyle="bold" />
                 </LinearLayout>
 

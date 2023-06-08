@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="headline1">96px</dimen>
+    <dimen name="headline2">60px</dimen>
+    <dimen name="headline3">48px</dimen>
+    <dimen name="headline4">34px</dimen>
+    <dimen name="headline5">24px</dimen>
+    <dimen name="headline6">20px</dimen>
+    <dimen name="body1">16px</dimen>
+    <dimen name="body2">14px</dimen>
+</resources>

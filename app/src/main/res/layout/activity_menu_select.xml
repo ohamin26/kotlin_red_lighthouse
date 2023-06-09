@@ -20,75 +20,75 @@
 
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
-
-        <!-- 뒤로가기 버튼 -->
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back_arrow"
-            android:layout_margin="10dp"/>
-
-        <!-- 페이지 제목, 명소 리스트 -->
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/suite1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginRight="60dp"
-            android:textSize="20dp"
-            android:text="명소 리스트"
-            android:textStyle="bold"
-            android:textColor="@android:color/darker_gray"/>
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
 
-        \</LinearLayout>
+            <!-- 뒤로가기 버튼 -->
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back_arrow"
+                android:layout_margin="10dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:layout_marginTop="40dp">
-        <!--검색할 에디트 텍스트-->
-        <EditText
-            android:id="@+id/search_loc"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:ems="10"
-            android:fontFamily="@font/suite1"
-            android:hint="명소 검색"
-            android:inputType="textPersonName"
-            android:text="" />
+            <!-- 페이지 제목, 명소 리스트 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/suite1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginRight="60dp"
+                android:textSize="20dp"
+                android:text="명소 리스트"
+                android:textStyle="bold"
+                android:textColor="@android:color/darker_gray"/>
 
-        <!--검색 이미지 버튼-->
-        <ImageButton
-            android:id="@+id/btn_search"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/search"
-            />
-        <!--지도로 이동하는 이미지 버튼-->
-        <ImageButton
-            android:id="@+id/btn_map"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/maps"
-            />
-    </LinearLayout>
+            \</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            android:layout_marginTop="40dp">
+            <!--검색할 에디트 텍스트-->
+            <EditText
+                android:id="@+id/search_loc"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:ems="10"
+                android:fontFamily="@font/suite1"
+                android:hint="명소 검색"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <!--검색 이미지 버튼-->
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/search"
+                />
+            <!--지도로 이동하는 이미지 버튼-->
+            <ImageButton
+                android:id="@+id/btn_map"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/maps"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

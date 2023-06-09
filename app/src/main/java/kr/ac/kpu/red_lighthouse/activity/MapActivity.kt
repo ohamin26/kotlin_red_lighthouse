@@ -1,10 +1,10 @@
 package kr.ac.kpu.red_lighthouse.activity
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationManager
-import android.location.LocationRequest
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -27,22 +26,17 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kr.ac.kpu.red_lighthouse.R
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
 
 
-class MapActivity : Fragment(), OnMapReadyCallback {
+class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
     private lateinit var mView: MapView
     var mLocationManager: LocationManager? = null
     var mLocationListener: LocationListener? = null
     lateinit var button: Button
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
-    private lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
-    private lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
     lateinit var mMap : GoogleMap
+    var mapList: ArrayList<ArrayList<String>?> = arrayListOf()// map에 전달할 값 저장
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +44,8 @@ class MapActivity : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         var rootView = inflater.inflate(R.layout.activity_map, container, false)
+
+
         mView = rootView.findViewById(R.id.mapView)
         button = rootView.findViewById(R.id.mapBtn)
         mView.onCreate(savedInstanceState)
@@ -125,13 +121,40 @@ class MapActivity : Fragment(), OnMapReadyCallback {
 
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {
-
         mMap = googleMap
-        val marker = LatLng(37.3452397,126.6879337)
-        mMap.addMarker(MarkerOptions().position(marker).title("빨간등대"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
+        val count = arguments?.getInt("count")
+        if(count != null){
+            for(i in 0..count!!-1){
+                mapList.add(arguments?.getStringArrayList("resultKey${i}"))
+                val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
+                mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
+            }
+        }
+        val marker1 = LatLng(37.3452397,126.6879337)
+        mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker1))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+
+        mMap.setOnInfoWindowClickListener(this)
+
+
     }
+
+    override fun onInfoWindowClick(marker: Marker) {
+        val marker1 = LatLng(37.3452397,126.6879337)
+        mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
+        var slat = marker1.latitude
+        var slng = marker1.longitude
+        var sname = "빨간등대"
+        var dlat = marker.position.latitude
+        var dlng = marker.position.longitude
+        var dname = marker.title
+        val url = "nmap://route/public?slat="+slat+"&slng="+slng+"&sname="+sname+"&dlat="+dlat+"&dlng="+dlng+"&dname="+dname+"&appname=kr.ac.kpu.red_lighthouse"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+
 
     override fun onStart() {
         super.onStart()

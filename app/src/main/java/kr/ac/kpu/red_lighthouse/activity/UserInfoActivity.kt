@@ -45,7 +45,7 @@ class UserInfoActivity : Fragment() {
         val prefs = requireContext().getSharedPreferences("user", 0)
         val userId = prefs.getString("userId"," ").toString()
         val userDao = UserDao()
-
+        val edit = prefs.edit()
         //데이터베이스에서 user_nickname,user_email값 가져오기 및 출력
         CoroutineScope(Dispatchers.Main).launch {
             var user: User? = User(userId, "", "", "")
@@ -63,7 +63,13 @@ class UserInfoActivity : Fragment() {
         if(btn.selectedItemId != R.id.third){
             btn.selectedItemId = R.id.third
         }
-
+        // 로그아웃 이벤트
+        binding.btnLogout.setOnClickListener {
+            edit.clear()
+            edit.apply()
+            val intent = Intent(getActivity(), LoginActivity::class.java)
+            startActivity(intent)
+        }
         // 고객센터 안내 페이지 이동 이벤트
         btnCs.setOnClickListener {
             val intent = Intent(getActivity(), CsActivity::class.java)

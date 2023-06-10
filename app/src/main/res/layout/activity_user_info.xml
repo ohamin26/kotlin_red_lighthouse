@@ -42,15 +42,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
-                    <!--프로필 이미지 뷰-->
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/customer"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp">
-                    </ImageView>
+                <!--프로필 이미지 뷰-->
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/customer"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+                </ImageView>
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
@@ -111,6 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="추가 기능"
+                android:textStyle="bold"
+                android:fontFamily="@font/suite"
                 android:textSize="@dimen/headline6"
                 />
             <LinearLayout
@@ -168,99 +170,99 @@
             </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:orientation="horizontal">
-            <!--고객센터 이미지 뷰-->
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/service">
-            </ImageView>
-
-            <!--고객센터 버튼, 대표 이메일 안내 화면으로 이동-->
-            <Button
-                android:id="@+id/btn_cs"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="고객센터"
-                android:background="#00ff0000"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/body1"
-                android:fontFamily="@font/suite"
-                />
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
+                <!--고객센터 이미지 뷰-->
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/service">
+                </ImageView>
 
-        </LinearLayout>
+                <!--고객센터 버튼, 대표 이메일 안내 화면으로 이동-->
+                <Button
+                    android:id="@+id/btn_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="고객센터"
+                    android:background="#00ff0000"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/body1"
+                    android:fontFamily="@font/suite"
+                    />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <!--앱 정보 이미지 뷰-->
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/information">
-            </ImageView>
-            <!--앱 정보 화면 이동 버튼-->
-            <Button
-                android:id="@+id/btn_Info"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="앱 정보"
-                android:textStyle="bold"
-                android:background="#00ff0000"
-                android:textColor="@color/black"
-                android:textSize="@dimen/body1"
-                android:fontFamily="@font/suite" />
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <!--앱 정보 이미지 뷰-->
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/information">
+                </ImageView>
+                <!--앱 정보 화면 이동 버튼-->
+                <Button
+                    android:id="@+id/btn_Info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="앱 정보"
+                    android:textStyle="bold"
+                    android:background="#00ff0000"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body1"
+                    android:fontFamily="@font/suite" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            </LinearLayout>
 
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/policy">
-            </ImageView>
-
-            <!--개인정보 처리 방침화면으로 이동 버튼-->
-            <Button
-                android:id="@+id/btn_policy"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="개인정보 처리 방침"
-                android:textStyle="bold"
-                android:textSize="@dimen/body1"
+                android:layout_marginLeft="15dp"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/policy">
+                </ImageView>
+
+                <!--개인정보 처리 방침화면으로 이동 버튼-->
+                <Button
+                    android:id="@+id/btn_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="개인정보 처리 방침"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/body1"
+                    android:background="#00ff0000"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/suite"
+                    />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="로그아웃"
+                android:textSize="@dimen/body2"
                 android:background="#00ff0000"
                 android:textColor="@color/black"
-                android:fontFamily="@font/suite"
-                />
-        </LinearLayout>
-        <Button
-           android:id="@+id/btn_logout"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:gravity="center"
-           android:layout_gravity="center"
-           android:text="로그아웃"
-           android:textSize="@dimen/body2"
-           android:background="#00ff0000"
-           android:textColor="@color/black"
-           android:fontFamily="@font/suite"/>
+                android:fontFamily="@font/suite"/>
         </LinearLayout>
 
     </ScrollView>

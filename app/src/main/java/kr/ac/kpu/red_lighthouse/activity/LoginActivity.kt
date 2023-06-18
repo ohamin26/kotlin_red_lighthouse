@@ -3,11 +3,15 @@ package kr.ac.kpu.red_lighthouse.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -21,6 +25,7 @@ import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.user.User
 import kr.ac.kpu.red_lighthouse.user.UserDao
 import java.time.LocalDate
+
 
 class LoginActivity : Activity() {
     private lateinit var binding: ActivityLoginBinding
@@ -72,57 +77,63 @@ class LoginActivity : Activity() {
                 dialog.dismiss()
             } else {
                 try {
-                    CoroutineScope(Dispatchers.Main).launch {
                         if (email != "" && password != "") {
-                            userDao.login(email, password).addOnSuccessListener { task ->
+                            userDao.login(email, password).addOnCompleteListener(OnCompleteListener{ task ->
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    val uid: String? = task.user?.uid
-                                    if (uid != null) {
-                                        var user: User? = User(uid, email, "", "")
-                                        if (user != null) {
-                                            user = userDao.getDataFromFirebase(user.userId)
+                                    if(task.isSuccessful){
+                                        val uid: String? = task.getResult().user?.uid;
+                                        if (uid != null) {
+                                            var user: User? = User(uid, email, "", "")
                                             if (user != null) {
-                                                Log.i("데이터베이스", user.userId)
-                                                Log.i("데이터베이스", user.userEmail)
-                                                Log.i("데이터베이스", user.userNickname)
-                                                Log.i("데이터베이스", user.userDateOfRegist)
-                                                editor.putString("userId", user.userId)
-                                                editor.putString("userEmail", user.userEmail)
-                                                editor.putString("userNickname", user.userNickname)
-                                                editor.putString(
-                                                    "userDateOfRegist",
-                                                    user.userDateOfRegist
-                                                )
-                                                if(binding.autoLogin.isChecked){
-                                                    editor.putBoolean("autoLogin",true)
-                                                }else{
-                                                    editor.putBoolean("autoLogin",false)
+                                                user = userDao.getDataFromFirebase(user.userId)
+                                                if (user != null) {
+                                                    Log.i("데이터베이스", user.userId)
+                                                    Log.i("데이터베이스", user.userEmail)
+                                                    Log.i("데이터베이스", user.userNickname)
+                                                    Log.i("데이터베이스", user.userDateOfRegist)
+                                                    editor.putString("userId", user.userId)
+                                                    editor.putString("userEmail", user.userEmail)
+                                                    editor.putString("userNickname", user.userNickname)
+                                                    editor.putString(
+                                                        "userDateOfRegist",
+                                                        user.userDateOfRegist
+                                                    )
+                                                    if(binding.autoLogin.isChecked){
+                                                        editor.putBoolean("autoLogin",true)
+                                                    }else{
+                                                        editor.putBoolean("autoLogin",false)
+                                                    }
+                                                    editor.apply()
+                                                    var intent = Intent(
+                                                        applicationContext,
+                                                        MenuSelectActivity::class.java
+                                                    )
+                                                    dialog.dismiss()
+                                                    startActivity(intent)
                                                 }
-                                                editor.apply()
-                                                var intent = Intent(
-                                                    applicationContext,
-                                                    MenuSelectActivity::class.java
-                                                )
-                                                startActivity(intent)
-                                            } else {
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "이메일 혹은 비밀번호를 제대로 입력해주세요.",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                             }
                                         }
+                                    }else{
+                                        dialog.dismiss()
+                                        // 로그인 실패
+                                        val errorMessage = task.exception?.message ?: ""
+                                        Log.e("Firebase", errorMessage)
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "로그인에 실패. 비밀번호와 이메일을 다시 한번 확인해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
+
                                 }
-                            }
+                            })
                         }
-                    }
                 } catch (e: Error) {
                     //에러 메세지 출력
                     Log.e("Firebase", e.toString())
                     Toast.makeText(
                         applicationContext,
-                        "로그인에 실패. 이메일 혹은 비밀번호를 제대로 입력해주세요.",
+                        "로그인에 실패. 다시 시도해주세요.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

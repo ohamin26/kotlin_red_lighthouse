@@ -19,14 +19,4 @@
         android:fontFamily="@font/suite1"
         android:id="@+id/mapBtn"/>
 
-    <!--바텀 네비게이션 바-->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:id="@+id/bnv_main" android:background="#FFFFFF"
-        app:menu="@menu/navi_menu" app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 </FrameLayout>

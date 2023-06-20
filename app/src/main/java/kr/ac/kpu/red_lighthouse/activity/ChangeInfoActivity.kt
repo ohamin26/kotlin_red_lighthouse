@@ -40,6 +40,9 @@ class ChangeInfoActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener {
+            var intent = Intent(applicationContext, MenuSelectActivity::class.java)
+            intent.putExtra("user_info_changed",true)
+            startActivity(intent)
             finish()
         }
 

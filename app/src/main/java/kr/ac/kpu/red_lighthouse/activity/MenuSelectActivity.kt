@@ -31,6 +31,7 @@ class MenuSelectActivity : AppCompatActivity(){
             if(user_info_change){
                 val fragment = UserInfoActivity()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
+                user_info_change = false
             }else{
                 when(it.itemId) {
                     R.id.first -> {

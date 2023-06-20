@@ -176,7 +176,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             for(i in 0..count!!-1){
                 mapList.add(arguments?.getStringArrayList("resultKey${i}"))
                 val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
-                mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)).snippet(mapList[i]?.get(4)))
+                val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
+                mInfo?.tag = mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
             }
         }
         else{
@@ -198,7 +199,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 var arr = marker.tag.toString().split("/") //마커에 붙인 태그
                 info.text = arr[0]
                 address.text = arr[1]
-//                Log.d("parkinfo", "parkname->"+marker.title+"___pakrwhat->")
                 return false
             }
         })

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--정보 수정 버튼 클릭 시 전환되는 회원 정보 변경 화면-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <!-- 상단 앱바 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="40dp">
+
+
+            <!-- 뒤로가기 버튼 -->
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back_arrow"
+                android:layout_margin="10dp"/>
+
+            <!-- 페이지 제목 -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/suite1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:text="마이 페이지"
+                android:layout_marginRight="60dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="410dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <!--프로필 이미지 뷰-->
+            <ImageView
+                android:layout_width="105dp"
+                android:layout_height="100dp"
+                android:src="@drawable/customer">
+            </ImageView>
+
+            <!--사용자 이메일 텍스트 뷰-->
+            <TextView
+                android:id="@+id/userEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/suite"
+                android:text="사용자 이메일"
+                android:textSize="32dp"
+                android:textStyle="bold" />
+            <!--사용자 닉네임 텍스트 뷰-->
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사용자 닉네임"
+                android:textStyle="bold"
+                android:textSize="32dp"
+                android:fontFamily="@font/suite"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <!--정보 수정 로고 이미지 뷰-->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/edit">
+            </ImageView>
+            <!--이메일, 닉네임 정보 수정 페이지로 이동 버튼-->
+            <Button
+                android:id="@+id/btn_edit_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="#00ff0000"
+                android:text="닉네임 수정"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:fontFamily="@font/suite"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <!--리뷰 이미지 뷰-->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/review">
+            </ImageView>
+            <!--나의 리뷰 페이지로 이동 버튼-->
+            <Button
+                android:id="@+id/btn_edit_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:text="비밀번호 수정"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:background="#00ff0000"
+                android:textColor="@color/black"
+                android:fontFamily="@font/suite"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

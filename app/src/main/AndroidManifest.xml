@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -33,10 +31,8 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -70,27 +66,53 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ChangeInfoNicknameActivity"
-            android:exported="true">
+            android:name=".activity.CsActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.UserInfoActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.CsActivity"
-            android:exported="true">
+            android:name=".activity.AppInfoActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.UserInfoActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
 
         <activity
-            android:name=".activity.AppInfoActivity"
+            android:name=".activity.UserInfoActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.ChangeInfoActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.UserInfoActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.ChangeInfoNicknameActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.ChangeInfoActivity"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.PolicyActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.UserInfoActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
     </application>
-
 </manifest>

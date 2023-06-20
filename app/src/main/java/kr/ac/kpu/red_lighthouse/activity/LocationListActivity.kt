@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import kr.ac.kpu.red_lighthouse.R
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -30,7 +31,10 @@ class LocationListActivity : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         var rootView = inflater.inflate(R.layout.activity_list, container, false)
+        btn_search = rootView.findViewById(R.id.btn_search)
         search_loc = rootView.findViewById(R.id.search_loc)
+        list = rootView.findViewById(R.id.list)
+        btn_map = rootView.findViewById(R.id.btn_map)
         super.onCreate(savedInstanceState)
 
 

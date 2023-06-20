@@ -37,6 +37,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/search"
+                android:id="@+id/btn_search"
                 >
             </ImageButton>
             <!--지도로 이동 버튼-->
@@ -49,12 +50,14 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/suite"
                 android:textSize="20dp"
+                android:id="@+id/btn_map"
                 ></Button>
         </LinearLayout>
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
+            android:id="@+id/list"
             >
         </ListView>
     </FrameLayout>

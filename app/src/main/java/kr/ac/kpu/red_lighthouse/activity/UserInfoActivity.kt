@@ -27,7 +27,7 @@ import kr.ac.kpu.red_lighthouse.user.UserDao
 
 
 class UserInfoActivity : Fragment() {
-    @SuppressLint("CommitTransaction")
+    @SuppressLint("CommitTransaction", "CommitPrefEdits")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,6 +67,10 @@ class UserInfoActivity : Fragment() {
             edit.clear()
             edit.apply()
             val intent = Intent(getActivity(), LoginActivity::class.java)
+            val sharedPreference = this.getActivity()?.getSharedPreferences("user", 0)
+            val editor = sharedPreference?.edit()
+            editor?.putBoolean("autoLogin",false)
+            editor?.apply()
             startActivity(intent)
         }
         // 정보 수정 페이지 이동 이벤트

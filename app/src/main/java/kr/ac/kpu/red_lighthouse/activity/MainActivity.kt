@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         val sharedPreference = getSharedPreferences("user", 0)
 
         // 자동 로그인 이벤트 - 자동 로그인 체크한 유저는 유저 정보가 있을 시 메뉴 화면으로 이동한다.
-        // 로그아웃 버튼 UserInfoActivity 우측 상단에 있습니다!
         if(sharedPreference.getBoolean("autoLogin", false)){
             if(sharedPreference != null){
                 val intent = Intent(applicationContext, MenuSelectActivity::class.java)

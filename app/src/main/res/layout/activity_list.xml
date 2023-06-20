@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MenuSelectActivity">
-    <FrameLayout
-        android:id="@+id/fl_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" >
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            tools:ignore="MissingConstraints">
             <!--검색 에디트 텍스트-->
             <EditText
                 android:id="@+id/search_loc"
@@ -28,6 +21,8 @@
                 android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="검색할 명소 입력"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:fontFamily="@font/suite"
                 android:inputType="textPersonName"
                 android:text="" />
@@ -35,6 +30,7 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/search"
                 >
@@ -45,17 +41,18 @@
                 android:layout_height="wrap_content"
                 android:text="지도"
                 android:layout_marginLeft="20dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/suite"
                 android:textSize="20dp"
                 ></Button>
-        </LinearLayout>
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            >
-        </ListView>
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+             </LinearLayout>
+
+    <ListView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="70dp">
+    </ListView>
+
+
+</FrameLayout>

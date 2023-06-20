@@ -86,7 +86,7 @@ class UserInfoActivity : Fragment() {
         }
         // 개인정보 처리 페이지 이동 이벤트
         binding.btnPolicy.setOnClickListener {
-            val intent = Intent(getActivity(), CsActivity::class.java)
+            val intent = Intent(getActivity(), PolicyActivity::class.java)
             startActivity(intent)
         }
         return binding.root

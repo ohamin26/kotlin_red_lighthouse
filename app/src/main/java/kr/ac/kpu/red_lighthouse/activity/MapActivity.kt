@@ -8,6 +8,7 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
@@ -49,6 +51,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var card_view: LinearLayout
     lateinit var info:TextView
     lateinit var address:TextView
+    lateinit var name:TextView
 
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
@@ -66,8 +69,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         button = rootView.findViewById(R.id.mapBtn)
         card_view = rootView.findViewById(R.id.card_view)
         info = rootView.findViewById(R.id.info)
-        address = rootView.findViewById(R.id.address
-        )
+        address = rootView.findViewById(R.id.address)
+        name = rootView.findViewById(R.id.name)
         mView.onCreate(savedInstanceState)
         mLocationRequest =  LocationRequest.create().apply {
 
@@ -81,7 +84,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         button.setOnClickListener{
             if(checkPermissionForLocation(requireContext())){
                 startLocationUpdates()
-                mLocationCallback
             }
         }
         return rootView
@@ -105,6 +107,11 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             return
         }
 
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+        mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest,
+            mLocationCallback,
+            Looper.getMainLooper());
+
 //        mFusedLocationProviderClient?.requestLocationUpdates(
 //            mLocationRequest,
 //            Looper.getMainLooper()
@@ -123,8 +130,9 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     // 시스템으로 부터 받은 위치정보를 화면에 갱신해주는 메소드
     fun onLocationChanged(location: Location) {
         mLastLocation = location
-        mMap.addMarker(MarkerOptions().position(LatLng(mLastLocation.latitude,mLastLocation.longitude)).title("내위치"))
-
+        var mInfo = mMap.addMarker(MarkerOptions().position(LatLng(mLastLocation.latitude,mLastLocation.longitude)).title("내위치"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
+        mMap.setOnMarkerClickListener(markerClickListener);
     }
 
     private fun checkPermissionForLocation(context: android.content.Context): Boolean {
@@ -166,10 +174,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {
+        if(checkPermissionForLocation(requireContext())){
+            startLocationUpdates()
+        }
         mMap = googleMap
-        val marker1 = LatLng(37.3452397,126.6879337)
-        mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker1))
+        //val marker1 = LatLng(37.3452397,126.6879337)
+        //mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(marker1))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
         val count = arguments?.getInt("count")
         if(count != null){
@@ -188,20 +199,10 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             for(i in 0..count2!!-1){
                 val marker = LatLng(mapList2[i]?.get(2)!!.toDouble(),mapList2[i]?.get(3)!!.toDouble())
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
-                mInfo?.tag = mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
+                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
             }
         }
 
-        //마커 클릭 리스너-마커 클릭하면 카드뷰 띄움
-        googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
-            override fun onMarkerClick(marker: Marker): Boolean {
-                card_view.visibility = View.VISIBLE
-                var arr = marker.tag.toString().split("/") //마커에 붙인 태그
-                info.text = arr[0]
-                address.text = arr[1]
-                return false
-            }
-        })
 
         //맵 클릭 리스너-맵 클릭하면 카드뷰 없어짐
         googleMap!!.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
@@ -215,12 +216,30 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
     }
 
+    //마커 클릭 리스너
+    var markerClickListener =
+        OnMarkerClickListener { marker ->
+            card_view.visibility = View.VISIBLE
+            var arr = marker.tag.toString().split("/") //마커에 붙인 태그
+            if(arr.size > 1) {
+                name.text = arr[0]
+                info.text = arr[1]
+                address.text = arr[2]
+            }
+            else{
+                name.text=""
+                info.text = "현재위치"
+                address.text = ""
+            }
+            false
+        }
+
     override fun onInfoWindowClick(marker: Marker) {
-        val marker1 = LatLng(37.3452397, 126.6879337)
-        mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
+        val marker1 = LatLng(mLastLocation.latitude,mLastLocation.longitude)
+        mMap.addMarker(MarkerOptions().position(marker1).title("현재위치"))
         var slat = marker1.latitude
         var slng = marker1.longitude
-        var sname = "빨간등대"
+        var sname = "현재위치"
         var dlat = marker.position.latitude
         var dlng = marker.position.longitude
         var dname = marker.title
@@ -269,6 +288,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         super.onDestroy()
     }
 
+    var cnt = 0
 
     inner class NetworkThread: Thread(){
         // 키 값
@@ -348,115 +368,31 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                     // 쪽수 별로 데이터를 읽는다.
                     var obj = result.getJSONObject(i)
                     if(obj.getString("LEAD_TAX_MAN_STATE").toString().equals("계속사업자")){
-
-                        var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()
-                        var CMPNM_NM = obj.getString("CMPNM_NM").toString()
-                        var REFINE_WGS84_LAT = obj.getString("REFINE_WGS84_LAT").toString() // 위도
-                        var REFINE_WGS84_LOGT = obj.getString("REFINE_WGS84_LOGT").toString() // 경도
-                        var regionMny = "경기도 지역화폐 가맹점"
-                        if((REFINE_ROADNM_ADDR != "null")&&(CMPNM_NM != "null")
-                            &&(REFINE_WGS84_LAT != "null")&&(REFINE_WGS84_LOGT != "null")){
-                            var searchMap = arrayListOf <String>() // hashMap에 저장할 값
-                            searchMap.add(REFINE_ROADNM_ADDR)
-                            searchMap.add(CMPNM_NM)
-                            searchMap.add(REFINE_WGS84_LAT)
-                            searchMap.add(REFINE_WGS84_LOGT)
-                            searchMap.add(regionMny)
-                            map.put("REFINE_ROADNM_ADDR",searchMap)
-                            mapList2.add(searchMap)
-                        }
-                    }
-                }
-            }
-
-            // 경기도 일반 음식점 api
-            // 페이지 수를 구하기 위해 사용
-            val site2 = "https://openapi.gg.go.kr/GENRESTRT?KEY="+key+"&Type=json"+numOfRows+"&pSize=1000&SIGUN_NM=%EC%8B%9C%ED%9D%A5%EC%8B%9C"+sigun_nm
-
-            val url2 = URL(site2)
-            val conn2 = url2.openConnection()
-            val input2 = conn2.getInputStream()
-            val isr2 = InputStreamReader(input2)
-            // br: 라인 단위로 데이터를 읽어오기 위해서 만듦
-            val br2 = BufferedReader(isr2)
-
-            // Json 문서는 일단 문자열로 데이터를 모두 읽어온 후, Json에 관련된 객체를 만들어서 데이터를 가져옴
-            var str2: String? = null
-            val buf2 = StringBuffer()
-
-            do{
-                str2 = br2.readLine()
-
-                if(str2!=null){
-                    buf2.append(str2)
-                }
-            }while (str2!=null)
-
-            // 전체가 객체로 묶여있기 때문에 객체형태로 가져옴
-            var root2 = JSONObject(buf2.toString())
-            var response2 = root2.getJSONArray("GENRESTRT").getJSONObject(0)
-            var result2 = response2.getJSONArray("head")
-            var pageNumber2 = (result2.getJSONObject(0).getString("list_total_count").toString().toInt()/1000).toInt()
-
-            for(num in 1..pageNumber2+1){
-                // 페이지번호
-                var pageNo = "&pIndex=" + num
-
-                // API 정보를 가지고 있는 주소
-                val site = "https://openapi.gg.go.kr/GENRESTRT?KEY="+key+"&Type=json"+pageNo+numOfRows+sigun_nm
-
-                val url = URL(site)
-                val conn = url.openConnection()
-                val input = conn.getInputStream()
-                val isr = InputStreamReader(input)
-                // br: 라인 단위로 데이터를 읽어오기 위해서 만듦
-                val br = BufferedReader(isr)
-
-                // Json 문서는 일단 문자열로 데이터를 모두 읽어온 후, Json에 관련된 객체를 만들어서 데이터를 가져옴
-                var str: String? = null
-                val buf = StringBuffer()
-
-                do{
-                    str = br.readLine()
-
-                    if(str!=null){
-                        buf.append(str)
-                    }
-                }while (str!=null)
-
-                // 전체가 객체로 묶여있기 때문에 객체형태로 가져옴
-                var root = JSONObject(buf.toString())
-                var response = root.getJSONArray("GENRESTRT").getJSONObject(1)
-                var result = response.getJSONArray("row")
-
-                // 페이지 수만큼 반복하여 데이터를 불러온다.
-                for(i in 0 until  result.length()){
-                    // 쪽수 별로 데이터를 읽는다.
-                    var obj = result.getJSONObject(i)
-                    if(obj.getString("BSN_STATE_NM").toString().equals("영업")){
-
-                        var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()
-                        var BIZPLC_NM = obj.getString("BIZPLC_NM").toString()
-                        var X_CRDNT_VL = obj.getString("X_CRDNT_VL").toString() // 위도
-                        var Y_CRDNT_VL = obj.getString("Y_CRDNT_VL").toString() // 경도
-
-                        // 경기 지역 화폐 매장인지 아닌지 확인
-                        if(!map.containsKey("REFINE_ROADNM_ADDR")){
-                            if((REFINE_ROADNM_ADDR != "null")&&(BIZPLC_NM != "null")
-                                &&(X_CRDNT_VL != "null")&&(Y_CRDNT_VL != "null")){
-                                var searchMap = arrayListOf <String>()
+                        if(cnt<21){
+                            var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()
+                            var CMPNM_NM = obj.getString("CMPNM_NM").toString()
+                            var REFINE_WGS84_LAT = obj.getString("REFINE_WGS84_LAT").toString() // 위도
+                            var REFINE_WGS84_LOGT = obj.getString("REFINE_WGS84_LOGT").toString() // 경도
+                            var regionMny = "경기도 지역화폐 가맹점"
+                            if((REFINE_ROADNM_ADDR != "null")&&(CMPNM_NM != "null")
+                                &&(REFINE_WGS84_LAT != "null")&&(REFINE_WGS84_LOGT != "null")){
+                                var searchMap = arrayListOf <String>() // hashMap에 저장할 값
                                 searchMap.add(REFINE_ROADNM_ADDR)
-                                searchMap.add(BIZPLC_NM)
-                                searchMap.add(X_CRDNT_VL)
-                                searchMap.add(Y_CRDNT_VL)
+                                searchMap.add(CMPNM_NM)
+                                searchMap.add(REFINE_WGS84_LAT)
+                                searchMap.add(REFINE_WGS84_LOGT)
+                                searchMap.add(regionMny)
                                 map.put("REFINE_ROADNM_ADDR",searchMap)
                                 mapList2.add(searchMap)
                             }
+                            cnt++
+                        }
+                        else{
+                            break
                         }
                     }
                 }
             }
-
         }
 
         // 함수를 통해 데이터를 불러온다.

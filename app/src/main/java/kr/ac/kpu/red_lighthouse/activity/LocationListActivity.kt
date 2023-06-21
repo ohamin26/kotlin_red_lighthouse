@@ -61,6 +61,7 @@ class LocationListActivity : Fragment(){
             listItem.clear()
         }
 
+
         btn_map.setOnClickListener{
             var LocationListActivity = MapActivity()
             var bundle = Bundle()

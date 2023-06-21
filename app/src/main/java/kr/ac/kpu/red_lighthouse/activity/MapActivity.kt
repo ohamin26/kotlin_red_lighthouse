@@ -179,6 +179,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         }
     }
 
+
     var cntMyLoc = 0
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {

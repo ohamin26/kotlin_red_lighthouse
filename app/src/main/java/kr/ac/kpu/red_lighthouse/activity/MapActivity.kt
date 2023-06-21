@@ -52,6 +52,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var info:TextView
     lateinit var address:TextView
     lateinit var name:TextView
+    lateinit var tvAdd:TextView
 
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
@@ -62,22 +63,22 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var rootView = inflater.inflate(R.layout.activity_map, container, false)
+        var rootView = inflater.inflate(R.layout.activity_map, container, false).apply {
 
-
-        mView = rootView.findViewById(R.id.mapView)
-        button = rootView.findViewById(R.id.mapBtn)
-        card_view = rootView.findViewById(R.id.card_view)
-        info = rootView.findViewById(R.id.info)
-        address = rootView.findViewById(R.id.address)
-        name = rootView.findViewById(R.id.name)
+            tvAdd = findViewById(R.id.tv_add);
+            mView = findViewById(R.id.mapView)
+            button = findViewById(R.id.mapBtn)
+            card_view = findViewById(R.id.card_view)
+            info = findViewById(R.id.info)
+            address = findViewById(R.id.address)
+            name = findViewById(R.id.name)
+        }
         mView.onCreate(savedInstanceState)
         mLocationRequest =  LocationRequest.create().apply {
 
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
         }
-
         card_view.visibility = View.GONE
 
         mView.getMapAsync(this)

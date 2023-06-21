@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.LocationAddActivity">
+    tools:context=".activity.AddReviewActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +62,7 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
+                    android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -140,7 +141,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/edit_title"
+                android:id="@+id/edit_review"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"

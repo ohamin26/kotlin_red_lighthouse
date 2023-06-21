@@ -17,11 +17,17 @@ import androidx.fragment.app.Fragment
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.databinding.ActivityAddReviewBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
+import java.time.LocalDate
 
 class AddReviewActivity : AppCompatActivity() {
     private val GALLERY = 1
     private lateinit var binding: ActivityAddReviewBinding
     private var cntImg : Int = 0
+    val address = intent.getStringExtra("address")
+    var isCheck = false
+    var placeReviewDao = PlaceReviewDao()
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,18 @@ class AddReviewActivity : AppCompatActivity() {
         }
         binding.btnBack.setOnClickListener{
             finish()
+        }
+        binding.radioGroup.setOnCheckedChangeListener{
+         group,checkId ->
+            when(checkId){
+                R.id.rdo_local_yes -> isCheck = true
+                R.id.rdo_local_no -> isCheck = false
+            }
+        }
+        binding.btnAdd.setOnClickListener{
+            val onlyDate: LocalDate = LocalDate.now()
+            //var placeReview = PlaceReview(address,binding.editPrice.text.toString(),isCheck,,binding.editReview.text.toString(),onlyDate.toString())
+            //placeReviewDao.setDataToFirebase(placeReview)
         }
     }
 

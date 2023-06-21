@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.os.bundleOf
+import android.widget.AdapterView.OnItemClickListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import kr.ac.kpu.red_lighthouse.R
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -24,6 +23,7 @@ class LocationListActivity : Fragment(){
     lateinit var adapter: ArrayAdapter<String>
     var mapList: ArrayList<ArrayList<String>> = arrayListOf() // map에 전달할 값 저장
     var map = HashMap<String,ArrayList<String>>() // 검색한 장소 저장
+    lateinit var clickItem: String // 클릭한 정보 보낼 값
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,10 +61,12 @@ class LocationListActivity : Fragment(){
             listItem.clear()
         }
 
+
         btn_map.setOnClickListener{
             var LocationListActivity = MapActivity()
             var bundle = Bundle()
             bundle.putInt("count",mapList.count())
+            bundle.putString("click",clickItem);
             for(i in 0..mapList.count()-1){
                 bundle.putStringArrayList("resultKey${i}",mapList[i])
             }
@@ -74,6 +76,18 @@ class LocationListActivity : Fragment(){
             activity?.supportFragmentManager!!.beginTransaction()
                 .replace(R.id.fl_container, LocationListActivity)
                 .commit()
+        }
+
+        list.onItemClickListener = object : AdapterView.OnItemClickListener {
+            override fun onItemClick(parent: AdapterView<*>, v: View, position: Int, id: Long) {
+
+                val strText = parent.getItemAtPosition(position) as String
+                clickItem = strText
+
+                Toast.makeText(requireContext(), strText, Toast.LENGTH_SHORT).show();
+
+                // TODO : use strText
+            }
         }
 
         return rootView
@@ -263,6 +277,7 @@ class LocationListActivity : Fragment(){
                                 var BIZPLC_NM = obj.getString("BIZPLC_NM").toString()
                                 var X_CRDNT_VL = obj.getString("X_CRDNT_VL").toString() // 위도
                                 var Y_CRDNT_VL = obj.getString("Y_CRDNT_VL").toString() // 경도
+                                var regionMny = "경기도 지역화폐 가맹점 x"
 
                                 // 경기 지역 화폐 매장인지 아닌지 확인
                                 if(!map.containsKey("REFINE_ROADNM_ADDR")){
@@ -273,6 +288,7 @@ class LocationListActivity : Fragment(){
                                         searchMap.add(BIZPLC_NM)
                                         searchMap.add(X_CRDNT_VL)
                                         searchMap.add(Y_CRDNT_VL)
+                                        searchMap.add(regionMny)
                                         map.put("REFINE_ROADNM_ADDR",searchMap)
 
                                         listItem.add(BIZPLC_NM)

@@ -122,12 +122,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
         mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest,
             mLocationCallback,
-            Looper.getMainLooper());
-
-//        mFusedLocationProviderClient?.requestLocationUpdates(
-//            mLocationRequest,
-//            Looper.getMainLooper()
-//        )
+            Looper.getMainLooper())
     }
 
     // 시스템으로 부터 위치 정보를 콜백으로 받음
@@ -142,7 +137,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     // 시스템으로 부터 받은 위치정보를 화면에 갱신해주는 메소드
     fun onLocationChanged(location: Location) {
         mLastLocation = location
-        var mInfo = mMap.addMarker(MarkerOptions().position(LatLng(mLastLocation.latitude,mLastLocation.longitude)).title("내위치"))
+        mMap.addMarker(MarkerOptions().position(LatLng(mLastLocation.latitude,mLastLocation.longitude)).title("내위치"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
         mMap.setOnMarkerClickListener(markerClickListener);
     }
@@ -184,11 +179,10 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         }
     }
 
+
+    var cntMyLoc = 0
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {
-        if(checkPermissionForLocation(requireContext())){
-            startLocationUpdates()
-        }
         mMap = googleMap
         //val marker1 = LatLng(37.3452397,126.6879337)
         //mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
@@ -198,10 +192,19 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         if(count != null){
             for(i in 0..count!!-1){
                 mapList.add(arguments?.getStringArrayList("resultKey${i}"))
-                val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
-                val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                mInfo?.tag = mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                if(arguments?.getString("click").equals(mapList[i]?.get(1))){
+                    val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
+                    val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
+                }
+                else{
+                    val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
+                    val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                }
             }
+            cntMyLoc++
         }
         else{
             val thread = NetworkThread()
@@ -212,6 +215,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 val marker = LatLng(mapList2[i]?.get(2)!!.toDouble(),mapList2[i]?.get(3)!!.toDouble())
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
                 mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
+            }
+            cntMyLoc++
+        }
+
+        if(cntMyLoc==0){
+            if(checkPermissionForLocation(requireContext())){
+                startLocationUpdates()
             }
         }
 
@@ -225,7 +235,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
         mMap.setOnInfoWindowClickListener(this)
 
-
     }
 
     //마커 클릭 리스너
@@ -236,7 +245,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
 
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
-            if(arr.size > 1) {
+            if(arr.size > 2) {
                 name.text = arr[0]
                 info.text = arr[1]
                 address.text = arr[2]

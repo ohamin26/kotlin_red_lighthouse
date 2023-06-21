@@ -1,9 +1,15 @@
 package kr.ac.kpu.red_lighthouse.activity
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.ListView
+import kr.ac.kpu.red_lighthouse.Adapter.ReviewListAdapter
 import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationDetailsBinding
+import kr.ac.kpu.red_lighthouse.placeReview.myReview
+import kr.ac.kpu.red_lighthouse.placeReview.review
 
 class LocationDetailsActivity : AppCompatActivity() {
     lateinit var title:TextView
@@ -13,17 +19,39 @@ class LocationDetailsActivity : AppCompatActivity() {
     var addressReceive:String? = null
     var indutypeNum:String? = null
 
+    private lateinit var binding: ActivityLocationDetailsBinding
+    var reviewList = arrayListOf<review>(
+        review("고수민", "리뷰 내용", "2023-06-21"),
+        review("서진형", "리뷰 내용", "2023-06-21"),
+        review("오하민", "리뷰 내용", "2023-06-21"),
+        review("정세진", "리뷰 내용", "2023-06-21"),
+        review("손하람", "리뷰 내용", "2023-06-21"),
+    )
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityLocationDetailsBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_details)
+
         title = findViewById(R.id.title)
         tv_attractionName = findViewById(R.id.tv_attractionName)
         address = findViewById(R.id.address)
+        
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
         indutypeNum = intent.getStringExtra("indutype_num")
+
         title.text = nameReceive
         tv_attractionName.text = nameReceive
         address.text = addressReceive
+
+        setContentView(binding.root)
+
+        val reviewAdapter = ReviewListAdapter(this, reviewList)
+        binding.reviewList.adapter = reviewAdapter
+
+        binding.btnBack.setOnClickListener{
+            finish()
+        }
     }
 }

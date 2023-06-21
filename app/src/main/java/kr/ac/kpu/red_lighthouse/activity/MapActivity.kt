@@ -56,7 +56,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var name:TextView
     lateinit var tvAdd:TextView
     lateinit var cntReview: TextView
-    lateinit var tv_details:TextView
+    lateinit var tvDetails:TextView
     lateinit var indutype_num:TextView
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
@@ -77,7 +77,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             address = findViewById(R.id.address)
             name = findViewById(R.id.name)
             cntReview = findViewById(R.id.cnt_review)
-            tv_details = findViewById(R.id.tv_details)
+            tvDetails = findViewById(R.id.tv_details)
             indutype_num = findViewById(R.id.indutype_num)
         }
         mView.onCreate(savedInstanceState)
@@ -99,7 +99,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             startActivity(intent)
         }
 
-        tv_details.setOnClickListener{
+        tvDetails.setOnClickListener{
             var intent = Intent(
                 context,
                 LocationDetailsActivity::class.java
@@ -213,13 +213,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 if(arguments?.getString("click").equals(mapList[i]?.get(1))){
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
                 }
                 else{
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
                 }
             }
             cntMyLoc++
@@ -232,7 +232,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             for(i in 0..count2!!-1){
                 val marker = LatLng(mapList2[i]?.get(2)!!.toDouble(),mapList2[i]?.get(3)!!.toDouble())
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
-                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)+"/"+mapList2[i]?.get(5)
+                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
             }
             cntMyLoc++
         }

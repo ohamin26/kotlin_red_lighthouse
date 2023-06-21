@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.LocationDetailsActivity">
+    tools:context=".activity.LocationDetailsActivity"
+    android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="20dp"
-                android:text="한국공학대학교"
+                android:text=""
                 android:id="@+id/title"
                 android:textStyle="bold"
                 android:textColor="@android:color/darker_gray"/>
@@ -76,18 +77,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/suite1"
             android:padding="16dp"
-            android:text="한국공학대학교"
+            android:text="명소 이름"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <!-- 명소 내용을 설명해주느 텍스트뷰 -->
-        <TextView
-            android:id="@+id/tv_attractionDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/suite1"
-            android:text="한국공학대학교는 기술 인력 양성을 위해 대한민국 산업통상자원부가 출연하여 설립한 경기도 시흥시의 사립 대학이다. 영문 약칭은 TUKOREA이며, 국문 약칭으로 한국공대가 쓰인다. 산업통상자원부가 설립한 대학으로서 연구 및 실험실습의 비중이 큰 편이다."
-            android:padding="16dp" />
 
         <!-- 주소를 설명해주는 텍스트뷰 -->
         <LinearLayout
@@ -100,7 +93,7 @@
                 android:fontFamily="@font/suite1"
                 android:padding="16dp"
                 android:textColor="@color/black"
-                android:text="주소 : "/>
+                android:text="분류 : "/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +101,7 @@
                 android:padding="16dp"
                 android:textColor="@color/black"
                 android:id="@+id/address"
-                android:text="경기도 시흥시 산기대학로 237"/>
+                android:text="분류"/>
 
         </LinearLayout>
 
@@ -124,7 +117,7 @@
                 android:fontFamily="@font/suite1"
                 android:padding="16dp"
                 android:textColor="@color/black"
-                android:text="연락처 : "/>
+                android:text="주소 : "/>
             <TextView
                 android:id="@+id/tv_call"
                 android:layout_width="wrap_content"
@@ -132,49 +125,22 @@
                 android:fontFamily="@font/suite1"
                 android:padding="16dp"
                 android:textColor="@color/black"
-                android:text="031-8041-1000"/>
+                android:text="주소"/>
         </LinearLayout>
 
-
-        <!-- 현재 영업상태와 오픈시간을 보여주는 텍스트뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/suite1"
                 android:padding="16dp"
-                android:textColor="@color/black"
-                android:text="영업시간 : "/>
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
+                android:text="후기"/>
+            <ListView
+                android:id="@+id/reviewList"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/suite1"
-                android:padding="16dp"
-                android:textColor="@android:color/holo_red_light"
-                android:text="영업 종료"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/suite1"
-                android:padding="16dp"
-                android:textColor="@color/black"
-                android:text="/"/>
-            <TextView
-                android:id="@+id/tv_openinghours"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/suite1"
-                android:padding="16dp"
-                android:textColor="@color/black"
-                android:text="오전 9:30 에 영업 시작"/>
+                android:layout_width="wrap_content">
+            </ListView>
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </ScrollView>

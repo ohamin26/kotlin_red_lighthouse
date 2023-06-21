@@ -1,13 +1,10 @@
 package kr.ac.kpu.red_lighthouse.activity
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import kr.ac.kpu.red_lighthouse.databinding.ActivityChangeInfoNicknameBinding
-import kr.ac.kpu.red_lighthouse.function.CheckUserId
 import kr.ac.kpu.red_lighthouse.user.UserDao
 
 class ChangeInfoNicknameActivity : AppCompatActivity() {

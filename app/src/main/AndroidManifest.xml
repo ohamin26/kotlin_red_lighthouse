@@ -127,6 +127,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name=".activity.MyReviewActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.UserInfoActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>

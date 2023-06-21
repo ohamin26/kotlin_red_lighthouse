@@ -20,7 +20,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kr.ac.kpu.red_lighthouse.R
-import kr.ac.kpu.red_lighthouse.databinding.ActivityMenuSelectBinding
 import kr.ac.kpu.red_lighthouse.databinding.ActivityUserInfoBinding
 import kr.ac.kpu.red_lighthouse.user.User
 import kr.ac.kpu.red_lighthouse.user.UserDao
@@ -93,6 +92,12 @@ class UserInfoActivity : Fragment() {
             val intent = Intent(getActivity(), PolicyActivity::class.java)
             startActivity(intent)
         }
+        // 나의 리뷰기록 페이지 이동 이벤트
+        binding.btnReview.setOnClickListener {
+            val intent = Intent(getActivity(), MyReviewActivity::class.java)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 }

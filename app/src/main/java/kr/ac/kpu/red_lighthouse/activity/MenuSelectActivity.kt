@@ -1,19 +1,9 @@
 package kr.ac.kpu.red_lighthouse.activity
 
-import android.R.string
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kr.ac.kpu.red_lighthouse.R
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
 
 
 class MenuSelectActivity : AppCompatActivity(){
@@ -56,6 +46,7 @@ class MenuSelectActivity : AppCompatActivity(){
             selectedItemId = R.id.first
         }
     }
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         //super.onBackPressed()
     }

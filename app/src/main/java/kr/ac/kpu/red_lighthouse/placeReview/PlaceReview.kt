@@ -1,7 +1,7 @@
 package kr.ac.kpu.red_lighthouse.placeReview
 
 class PlaceReview (
-    var address: String,// 명소 사업자 등록증
+    var address: String,
     var uid: String,
     var placePrice: String,
     var isLocalCurrency:Boolean,

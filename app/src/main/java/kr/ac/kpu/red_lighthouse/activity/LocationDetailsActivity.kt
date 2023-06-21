@@ -21,11 +21,11 @@ class LocationDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLocationDetailsBinding
     var reviewList = arrayListOf<review>(
-        review("고수민", "리뷰 내용", "2023-06-21"),
-        review("서진형", "리뷰 내용", "2023-06-21"),
-        review("오하민", "리뷰 내용", "2023-06-21"),
-        review("정세진", "리뷰 내용", "2023-06-21"),
-        review("손하람", "리뷰 내용", "2023-06-21"),
+        review("logo","고수민","리뷰내용","2023-06-01"),
+        review("logo","서진형","리뷰내용","2023-06-01"),
+        review("logo","오하민","리뷰내용","2023-06-01"),
+        review("logo","정세진","리뷰내용","2023-06-01"),
+        review("logo","손하람","리뷰내용","2023-06-01"),
     )
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class LocationDetailsActivity : AppCompatActivity() {
         title = findViewById(R.id.title)
         tv_attractionName = findViewById(R.id.tv_attractionName)
         address = findViewById(R.id.address)
-        
+
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
         indutypeNum = intent.getStringExtra("indutype_num")

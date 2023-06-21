@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.placeReview.review
@@ -17,6 +18,7 @@ class ReviewListAdapter (val context : Context, val reviewList : ArrayList<revie
 
         val view: View = LayoutInflater.from(context).inflate(R.layout.review_item, null)
 
+        val reviewImage = view.findViewById<ImageView>(R.id.reviewImage)
         val userName = view.findViewById<TextView>(R.id.userName)
         val date = view.findViewById<TextView>(R.id.date)
         val reviewContent = view.findViewById<TextView>(R.id.review_content)
@@ -26,6 +28,8 @@ class ReviewListAdapter (val context : Context, val reviewList : ArrayList<revie
         userName.text = review.userName
         date.text = review.date
         reviewContent.text = review.reviewData
+        val resourceId = context.resources.getIdentifier(review.reviewImage, "drawable", context.packageName)
+        reviewImage.setImageResource(resourceId)
 
         return view
     }

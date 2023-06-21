@@ -82,6 +82,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         card_view.visibility = View.GONE
 
         mView.getMapAsync(this)
+        tvAdd.setOnClickListener{
+            var intent = Intent(
+                context,
+                AddReviewActivity::class.java
+            )
+            startActivity(intent)
+        }
         button.setOnClickListener{
             if(checkPermissionForLocation(requireContext())){
                 startLocationUpdates()

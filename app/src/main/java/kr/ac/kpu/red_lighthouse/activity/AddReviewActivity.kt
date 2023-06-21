@@ -1,8 +1,10 @@
 package kr.ac.kpu.red_lighthouse.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -10,30 +12,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.Fragment
-import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationAddBinding
+import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.databinding.ActivityAddReviewBinding
+import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 
-
-class LocationAddActivity : Fragment() {
+class AddReviewActivity : AppCompatActivity() {
     private val GALLERY = 1
-    private lateinit var binding: ActivityLocationAddBinding
+    private lateinit var binding: ActivityAddReviewBinding
     private var cntImg : Int = 0
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = ActivityLocationAddBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    @SuppressLint("CommitPrefEdits")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAddReviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         binding.galleryBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, GALLERY)
+        }
+        binding.btnBack.setOnClickListener{
+            finish()
         }
     }
 
@@ -44,12 +44,12 @@ class LocationAddActivity : Fragment() {
                 val imageData: Uri? = data?.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(
-                        requireActivity().contentResolver,
+                        contentResolver,//requireActivity().contentResolver
                         imageData
                     )
                     // 이미지뷰를 생성합니다.
                     if(cntImg < 3) {
-                        val imageView = ImageView(context)
+                        val imageView = ImageView(applicationContext)
                         var displayMetrics = resources.displayMetrics
                         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
                         imageView.setImageBitmap(bitmap)
@@ -70,5 +70,3 @@ class LocationAddActivity : Fragment() {
         }
     }
 }
-
-

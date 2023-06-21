@@ -49,22 +49,22 @@
                             android:id="@+id/name"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:text="한국공학대학교"
+                            android:text=""
                             android:textSize="@dimen/body1"
                             android:textColor="#000000" />
                         <TextView
                             android:id="@+id/info"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:text="ㅇㄹㄴㄹㅇㄴ"
+                            android:text=""
                             android:textSize="@dimen/body2"
                             android:textColor="#000000"
                             />
                         <TextView
-                            android:id="@+id/address"
+                                android:id="@+id/address"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:text="경기도 시흥시"
+                            android:text=""
                             android:textSize="@dimen/body2"
                             android:textColor="#000000"/>
                     </LinearLayout>
@@ -86,7 +86,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="4124"
+                            android:text="0"
                             android:textSize="14dp"
                             android:textColor="#000000"/>
                         <TextView

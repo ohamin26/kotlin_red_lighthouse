@@ -29,6 +29,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
+import kr.ac.kpu.red_lighthouse.user.UserDao
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -53,7 +55,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var address:TextView
     lateinit var name:TextView
     lateinit var tvAdd:TextView
-
+    lateinit var cntReview: TextView
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
@@ -72,6 +74,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             info = findViewById(R.id.info)
             address = findViewById(R.id.address)
             name = findViewById(R.id.name)
+            cntReview = findViewById(R.id.cnt_review)
         }
         mView.onCreate(savedInstanceState)
         mLocationRequest =  LocationRequest.create().apply {
@@ -87,6 +90,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 context,
                 AddReviewActivity::class.java
             )
+            intent.putExtra("address",address.text)
             startActivity(intent)
         }
         button.setOnClickListener{
@@ -228,16 +232,21 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     var markerClickListener =
         OnMarkerClickListener { marker ->
             card_view.visibility = View.VISIBLE
+            var placeReviewDao = PlaceReviewDao()
+
+
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
             if(arr.size > 1) {
                 name.text = arr[0]
                 info.text = arr[1]
                 address.text = arr[2]
+                cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
             }
             else{
                 name.text=""
                 info.text = "현재위치"
                 address.text = ""
+                cntReview.text = "0"
             }
             false
         }

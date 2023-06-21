@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.Fragment
 import kr.ac.kpu.red_lighthouse.R
@@ -25,7 +26,7 @@ class AddReviewActivity : AppCompatActivity() {
     private val GALLERY = 1
     private lateinit var binding: ActivityAddReviewBinding
     private var cntImg : Int = 0
-    val address = intent.getStringExtra("address")
+    var address:String? = null
     var isCheck = false
     var placeReviewDao = PlaceReviewDao()
     @SuppressLint("CommitPrefEdits")
@@ -33,6 +34,7 @@ class AddReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        address = intent.getStringExtra("address")
         binding.galleryBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"

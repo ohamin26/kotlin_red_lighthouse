@@ -61,7 +61,6 @@ class LocationListActivity : Fragment(){
             listItem.clear()
         }
 
-
         btn_map.setOnClickListener{
             var LocationListActivity = MapActivity()
             var bundle = Bundle()
@@ -107,7 +106,7 @@ class LocationListActivity : Fragment(){
 
             // 지역화폐 api
             // 페이지 수를 구하기 위해 사용
-            val site1 = "https://openapi.gg.go.kr/RegionMnyFacltStus?KEY="+key+"&Type=json&pIndex=1"+numOfRows+"&SIGUN_NM=시흥시"
+            val site1 = "https://openapi.gg.go.kr/RegionMnyFacltStus?KEY="+key+"&Type=json&pIndex=1"+numOfRows+sigun_nm
 
             val url1 = URL(site1)
             val conn1 = url1.openConnection()
@@ -181,6 +180,7 @@ class LocationListActivity : Fragment(){
                                 var REFINE_WGS84_LAT = obj.getString("REFINE_WGS84_LAT").toString() // 위도
                                 var REFINE_WGS84_LOGT = obj.getString("REFINE_WGS84_LOGT").toString() // 경도
                                 var regionMny = "경기도 지역화폐 가맹점"
+                                var INDUTYPE_NM = obj.getString("INDUTYPE_NM").toString()
 
                                 if((REFINE_ROADNM_ADDR != "null")&&(CMPNM_NM != "null")
                                     &&(REFINE_WGS84_LAT != "null")&&(REFINE_WGS84_LOGT != "null")){
@@ -190,6 +190,7 @@ class LocationListActivity : Fragment(){
                                     searchMap.add(REFINE_WGS84_LAT)
                                     searchMap.add(REFINE_WGS84_LOGT)
                                     searchMap.add(regionMny)
+                                    searchMap.add(INDUTYPE_NM)
                                     map.put("REFINE_ROADNM_ADDR",searchMap)
 
                                     listItem.add(CMPNM_NM)
@@ -204,7 +205,7 @@ class LocationListActivity : Fragment(){
 
             // 경기도 일반 음식점 api
             // 페이지 수를 구하기 위해 사용
-            val site2 = "https://openapi.gg.go.kr/GENRESTRT?KEY="+key+"&Type=json"+numOfRows+"&pSize=1000&SIGUN_NM=%EC%8B%9C%ED%9D%A5%EC%8B%9C"+sigun_nm
+            val site2 = "https://openapi.gg.go.kr/GENRESTRT?KEY="+key+"&Type=json"+numOfRows+sigun_nm
 
             val url2 = URL(site2)
             val conn2 = url2.openConnection()
@@ -278,6 +279,7 @@ class LocationListActivity : Fragment(){
                                 var X_CRDNT_VL = obj.getString("X_CRDNT_VL").toString() // 위도
                                 var Y_CRDNT_VL = obj.getString("Y_CRDNT_VL").toString() // 경도
                                 var regionMny = "경기도 지역화폐 가맹점 x"
+                                var SANITTN_BIZCOND_NM = obj.getString("SANITTN_BIZCOND_NM").toString()
 
                                 // 경기 지역 화폐 매장인지 아닌지 확인
                                 if(!map.containsKey("REFINE_ROADNM_ADDR")){
@@ -289,6 +291,7 @@ class LocationListActivity : Fragment(){
                                         searchMap.add(X_CRDNT_VL)
                                         searchMap.add(Y_CRDNT_VL)
                                         searchMap.add(regionMny)
+                                        searchMap.add(SANITTN_BIZCOND_NM)
                                         map.put("REFINE_ROADNM_ADDR",searchMap)
 
                                         listItem.add(BIZPLC_NM)

@@ -56,6 +56,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var name:TextView
     lateinit var tvAdd:TextView
     lateinit var cntReview: TextView
+    lateinit var tv_details:TextView
+    lateinit var indutype_num:TextView
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
@@ -75,6 +77,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             address = findViewById(R.id.address)
             name = findViewById(R.id.name)
             cntReview = findViewById(R.id.cnt_review)
+            tv_details = findViewById(R.id.tv_details)
+            indutype_num = findViewById(R.id.indutype_num)
         }
         mView.onCreate(savedInstanceState)
         mLocationRequest =  LocationRequest.create().apply {
@@ -85,6 +89,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         card_view.visibility = View.GONE
 
         mView.getMapAsync(this)
+
         tvAdd.setOnClickListener{
             var intent = Intent(
                 context,
@@ -93,6 +98,19 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             intent.putExtra("address",address.text)
             startActivity(intent)
         }
+
+        tv_details.setOnClickListener{
+            var intent = Intent(
+                context,
+                LocationDetailsActivity::class.java
+            )
+            intent.putExtra("address",address.text)
+            intent.putExtra("name",name.text)
+            intent.putExtra("info",info.text)
+            intent.putExtra("indutype_num",indutype_num.text)
+            startActivity(intent)
+        }
+
         button.setOnClickListener{
             if(checkPermissionForLocation(requireContext())){
                 startLocationUpdates()
@@ -195,13 +213,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 if(arguments?.getString("click").equals(mapList[i]?.get(1))){
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
                 }
                 else{
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
                 }
             }
             cntMyLoc++
@@ -214,7 +232,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             for(i in 0..count2!!-1){
                 val marker = LatLng(mapList2[i]?.get(2)!!.toDouble(),mapList2[i]?.get(3)!!.toDouble())
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
-                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
+                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)+"/"+mapList2[i]?.get(5)
             }
             cntMyLoc++
         }
@@ -249,13 +267,16 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 name.text = arr[0]
                 info.text = arr[1]
                 address.text = arr[2]
+                indutype_num.text = arr[3]
                 cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
+
             }
             else{
                 name.text=""
                 info.text = "현재위치"
                 address.text = ""
                 cntReview.text = "0"
+
             }
             false
         }
@@ -400,6 +421,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                             var REFINE_WGS84_LAT = obj.getString("REFINE_WGS84_LAT").toString() // 위도
                             var REFINE_WGS84_LOGT = obj.getString("REFINE_WGS84_LOGT").toString() // 경도
                             var regionMny = "경기도 지역화폐 가맹점"
+                            var INDUTYPE_NM = obj.getString("INDUTYPE_NM").toString()
                             if((REFINE_ROADNM_ADDR != "null")&&(CMPNM_NM != "null")
                                 &&(REFINE_WGS84_LAT != "null")&&(REFINE_WGS84_LOGT != "null")){
                                 var searchMap = arrayListOf <String>() // hashMap에 저장할 값
@@ -408,6 +430,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                                 searchMap.add(REFINE_WGS84_LAT)
                                 searchMap.add(REFINE_WGS84_LOGT)
                                 searchMap.add(regionMny)
+                                searchMap.add(INDUTYPE_NM)
                                 map.put("REFINE_ROADNM_ADDR",searchMap)
                                 mapList2.add(searchMap)
                             }

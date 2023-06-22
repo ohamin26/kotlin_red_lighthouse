@@ -58,8 +58,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var cntReview: TextView
     lateinit var tvDetails:TextView
     lateinit var indutype_num:TextView
-    lateinit var storedName: String
-    lateinit var storedEmail: String
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
@@ -97,8 +95,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 context,
                 AddReviewActivity::class.java
             )
-            intent.putExtra("name",name.text)
-            intent.putExtra("address",info.text)
+            intent.putExtra("name",name.text.toString())
+            intent.putExtra("address",address.text.toString())
             startActivity(intent)
         }
 

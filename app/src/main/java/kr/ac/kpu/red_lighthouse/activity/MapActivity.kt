@@ -462,9 +462,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             }
         }
     }
-
-
-
 }
 
 

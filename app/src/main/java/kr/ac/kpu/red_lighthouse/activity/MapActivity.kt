@@ -260,14 +260,14 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         OnMarkerClickListener { marker ->
             card_view.visibility = View.VISIBLE
             var placeReviewDao = PlaceReviewDao()
-
+            Log.e("마커", marker.toString())
 
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
             if(arr.size > 2) {
                 name.text = arr[2]
                 info.text = arr[0]
                 address.text = arr[1]
-                cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
+                cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[1]).toString()
             }
             else{
                 name.text=""

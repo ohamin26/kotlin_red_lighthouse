@@ -280,7 +280,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 address.text = arr[2]
                 indutype_num.text = arr[3]
                 CoroutineScope(Dispatchers.IO).launch {
-                    var cnt :String = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
+                    var documents = placeReviewDao.getDataWithAddress(arr[2])
+                    var cnt :String = documents.size.toString()
                     Log.e("파이어베이스",cnt)
                     launch(Dispatchers.Main) {
                         cntReview.text = cnt

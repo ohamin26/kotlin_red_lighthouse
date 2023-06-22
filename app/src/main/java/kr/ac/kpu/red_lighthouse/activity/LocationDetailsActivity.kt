@@ -36,7 +36,6 @@ class LocationDetailsActivity : AppCompatActivity() {
             for (document in documents){
                 reviewList.add(document)
             }
-
         }
 
         binding = ActivityLocationDetailsBinding.inflate(layoutInflater)

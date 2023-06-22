@@ -28,7 +28,7 @@ class MyReviewActivity() : AppCompatActivity(){
 
         CoroutineScope(Dispatchers.Main).launch {
             val reviewDao = PlaceReviewDao()
-            var review : PlaceReview? = PlaceReview("",prefs.getString("userEmail","").toString(),prefs.getString("userId","").toString(),"",false,"","","")
+            var review : PlaceReview? = PlaceReview()
 
             if (review != null) {
                 review = reviewDao.getDataFromFirebase(review.uid)

@@ -20,7 +20,6 @@ class MyReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceR
         val date = view.findViewById<TextView>(R.id.date)
         val reviewContent = view.findViewById<TextView>(R.id.review_content)
 
-        /* ArrayList<Dog>의 변수 dog의 이미지와 데이터를 ImageView와 TextView에 담는다. */
         val review = reviewList[position]
         placeName.text = review.placeName
         date.text = review.dateOfReview

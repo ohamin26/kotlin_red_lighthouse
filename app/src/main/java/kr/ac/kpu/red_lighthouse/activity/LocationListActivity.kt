@@ -65,7 +65,8 @@ class LocationListActivity : Fragment(){
             var LocationListActivity = MapActivity()
             var bundle = Bundle()
             bundle.putInt("count",mapList.count())
-            bundle.putString("click",clickItem);
+            bundle.putString("click",clickItem)
+            //bundle.putString("click",clickItem);
             for(i in 0..mapList.count()-1){
                 bundle.putStringArrayList("resultKey${i}",mapList[i])
             }
@@ -172,7 +173,7 @@ class LocationListActivity : Fragment(){
 
                         // 쪽수 별로 데이터를 읽는다.
                         var obj = result.getJSONObject(i)
-                        if(obj.getString("CMPNM_NM").toString().contains(search_loc.getText().toString())) {
+                        if(obj.getString("CMPNM_NM").toString().contains(search_loc.getText().toString()) || obj.getString("REFINE_ROADNM_ADDR").toString().contains(search_loc.getText().toString())) {
                             if(obj.getString("LEAD_TAX_MAN_STATE").toString().equals("계속사업자")){
 
                                 var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()
@@ -271,7 +272,7 @@ class LocationListActivity : Fragment(){
 
                         // 쪽수 별로 데이터를 읽는다.
                         var obj = result.getJSONObject(i)
-                        if(obj.getString("BIZPLC_NM").toString().contains(search_loc.getText().toString())) {
+                        if(obj.getString("BIZPLC_NM").toString().contains(search_loc.getText().toString()) || obj.getString("REFINE_ROADNM_ADDR").toString().contains(search_loc.getText().toString())) {
                             if(obj.getString("BSN_STATE_NM").toString().equals("영업")){
 
                                 var REFINE_ROADNM_ADDR = obj.getString("REFINE_ROADNM_ADDR").toString()

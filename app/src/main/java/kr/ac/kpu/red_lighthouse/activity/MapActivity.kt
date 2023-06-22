@@ -108,7 +108,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             intent.putExtra("address",address.text)
             intent.putExtra("name",name.text)
             intent.putExtra("info",info.text)
-            intent.putExtra("indutype_num",indutype_num.text)
             startActivity(intent)
         }
 
@@ -265,12 +264,10 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
             if(arr.size > 2) {
-                name.text = arr[0]
-                info.text = arr[1]
-                address.text = arr[2]
-                indutype_num.text = arr[3]
+                name.text = arr[2]
+                info.text = arr[0]
+                address.text = arr[1]
                 cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
-
             }
             else{
                 name.text=""

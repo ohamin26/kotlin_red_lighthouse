@@ -21,7 +21,6 @@ class LocationDetailsActivity : AppCompatActivity() {
     lateinit var sort:TextView
     var nameReceive:String? = null
     var addressReceive:String? = null
-    var indutypeNum:String? = null
     var placeReviewDao = PlaceReviewDao()
     private lateinit var binding: ActivityLocationDetailsBinding
     private var reviewList = arrayListOf<review>()
@@ -57,7 +56,6 @@ class LocationDetailsActivity : AppCompatActivity() {
 
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
-        indutypeNum = intent.getStringExtra("indutype_num")
 
         title.text = nameReceive
         tv_attractionName.text = nameReceive

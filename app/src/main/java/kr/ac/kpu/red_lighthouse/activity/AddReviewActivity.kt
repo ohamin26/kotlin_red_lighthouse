@@ -49,6 +49,8 @@ class AddReviewActivity : AppCompatActivity() {
         }
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.i(intent.getStringExtra("address"),"success")
+        Log.i(intent.getStringExtra("name"), "success")
         address = intent.getStringExtra("address")
         name = intent.getStringExtra("name")
         binding.galleryBtn.setOnClickListener {
@@ -97,7 +99,7 @@ class AddReviewActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode != Activity.RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             Toast.makeText(this,"잘못된 접근입니다",Toast.LENGTH_SHORT).show()
             return
         }

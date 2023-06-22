@@ -30,6 +30,7 @@ class AddReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddReviewBinding
     private var cntImg : Int = 0
     var address:String? = null
+    var name:String? = null
     var isCheck = false
     var placeReviewDao = PlaceReviewDao()
     var uriArr: Uri? = null
@@ -49,6 +50,7 @@ class AddReviewActivity : AppCompatActivity() {
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         address = intent.getStringExtra("address")
+        name = intent.getStringExtra("name")
         binding.galleryBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
@@ -76,6 +78,7 @@ class AddReviewActivity : AppCompatActivity() {
                 val uid = sharedPreference.getString("userId", "")
                 print("----------------------------------------------------")
                 var placeReview = PlaceReview(
+                    name!!,
                     address!!,
                     uid!!,
                     binding.editPrice.text.toString(),

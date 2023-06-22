@@ -100,8 +100,8 @@
                 android:fontFamily="@font/suite1"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:id="@+id/address"
-                android:text="분류"/>
+                android:id="@+id/sort"
+                android:text=""/>
 
         </LinearLayout>
 
@@ -119,13 +119,12 @@
                 android:textColor="@color/black"
                 android:text="주소 : "/>
             <TextView
-                android:id="@+id/tv_call"
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/suite1"
                 android:padding="10dp"
-                android:textColor="@color/black"
-                android:text="주소"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

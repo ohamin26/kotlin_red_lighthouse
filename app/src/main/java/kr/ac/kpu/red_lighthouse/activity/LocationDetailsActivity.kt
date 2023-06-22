@@ -18,34 +18,42 @@ class LocationDetailsActivity : AppCompatActivity() {
     lateinit var title:TextView
     lateinit var tv_attractionName:TextView
     lateinit var address:TextView
+    lateinit var sort:TextView
     var nameReceive:String? = null
     var addressReceive:String? = null
     var indutypeNum:String? = null
     var placeReviewDao = PlaceReviewDao()
     private lateinit var binding: ActivityLocationDetailsBinding
-    var reviewList = arrayListOf<review>(
-        review("logo","고수민","리뷰내용","2023-06-01"),
-        review("logo","서진형","리뷰내용","2023-06-01"),
-        review("logo","오하민","리뷰내용","2023-06-01"),
-        review("logo","정세진","리뷰내용","2023-06-01"),
-        review("logo","손하람","리뷰내용","2023-06-01"),
-    )
+    private var reviewList = arrayListOf<review>()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        val prefs = getSharedPreferences("user",0)
+
+        CoroutineScope(Dispatchers.Main).launch{
+            val reviewDao = PlaceReviewDao()
+            var review1 : PlaceReview? = PlaceReview()
+            if(review1 != null){
+                review1 = reviewDao.getDataFromFirebase(review1.uid)
+                while(review1 != null){
+                    reviewList.add(review(review1.placePhotos1,review1.uid,review1.review,review1.dateOfReview))
+                }
+            }
+//            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())
+//            for (document in documents){
+//                reviewList.add(document)
+//            }
+        }
+
         binding = ActivityLocationDetailsBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_location_details)
-        var reviewList = arrayListOf<PlaceReview>()
-        CoroutineScope(Dispatchers.Main).launch{
-            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())
-            for (document in documents){
-                reviewList.add(document)
-            }
-        }
+        setContentView(binding.root)
+
 
         title = findViewById(R.id.title)
         tv_attractionName = findViewById(R.id.tv_attractionName)
         address = findViewById(R.id.address)
+        sort = findViewById(R.id.sort)
 
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
@@ -54,9 +62,8 @@ class LocationDetailsActivity : AppCompatActivity() {
         title.text = nameReceive
         tv_attractionName.text = nameReceive
         address.text = addressReceive
-
+        var reviewList = arrayListOf<PlaceReview>()
         setContentView(binding.root)
-
         val reviewAdapter = ReviewListAdapter(this, reviewList)
         binding.reviewList.adapter = reviewAdapter
 

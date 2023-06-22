@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +61,8 @@
             android:fontFamily="@font/suite1"
             android:text="가입한 이메일을 입력해주세요.\n이메일에 첨부된 링크를 통해\n비밀번호 재설정을 할 수 있습니다."
             android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#5a5a5a"/>
 
         <!--이메일 입력-->
         <EditText
@@ -79,7 +81,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.518"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:backgroundTint="@color/black"
+            android:textColorHint="#747679"
+            android:textColor="#5a5a5a" />
 
         <!--재설정 링크 전송 버튼-->
         <androidx.appcompat.widget.AppCompatButton

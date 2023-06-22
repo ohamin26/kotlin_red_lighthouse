@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AddReviewActivity">
+    tools:context=".activity.AddReviewActivity"
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,7 +113,10 @@
                     android:hint="10000"
                     android:textSize="@dimen/body1"
                     android:inputType="textPersonName"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/black"
+                    android:textColorHint="#747679"
+                    android:textColor="#5a5a5a"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,7 +153,10 @@
                 android:fontFamily="@font/suite1"
                 android:hint="한줄 후기"
                 android:textSize="@dimen/body1"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:backgroundTint="@color/black"
+                android:textColorHint="#747679"
+                android:textColor="#5a5a5a" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

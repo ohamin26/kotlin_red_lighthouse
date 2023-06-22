@@ -53,11 +53,12 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="Email"
+
+            android:backgroundTint="@color/black"
             android:textColorHint="#747679"
             android:textColor="#5a5a5a"
             android:inputType="textPersonName"
-            android:text=""
-            android:backgroundTint="@color/black"/>
+            android:text=""/>
 
         <!--비밀번호 입력-->
         <EditText

@@ -106,7 +106,6 @@
         </LinearLayout>
 
 
-        <!-- 전화번호를 설명해주는 텍스트뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

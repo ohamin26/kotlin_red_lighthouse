@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/uid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -37,11 +37,32 @@
             android:layout_gravity="left"
             android:textSize="12dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/userName"
-            app:layout_constraintStart_toEndOf="@+id/userName"
-            app:layout_constraintTop_toTopOf="@+id/userName"
+            app:layout_constraintBottom_toBottomOf="@+id/uid"
+            app:layout_constraintStart_toEndOf="@+id/uid"
+            app:layout_constraintTop_toTopOf="@+id/uid"
             tools:text="날짜:" />
-
+        <TextView
+            android:id="@+id/isLocalCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/date"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toTopOf="@+id/date"
+            tools:text="지역화폐 사용가능여부:" />
+        <TextView
+            android:id="@+id/placePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/isLocalCurrency"
+            app:layout_constraintStart_toEndOf="@+id/isLocalCurrency"
+            app:layout_constraintTop_toTopOf="@+id/isLocalCurrency"
+            tools:text="평균 가격:" />
         <TextView
             android:id="@+id/review_content"
             android:layout_width="wrap_content"

@@ -35,7 +35,7 @@ class LocationDetailsActivity : AppCompatActivity() {
             if(review1 != null){
                 review1 = reviewDao.getDataFromFirebase(review1.uid)
                 while(review1 != null){
-                    reviewList.add(review(review1.placePhotos1,review1.uid,review1.review,review1.dateOfReview))
+                    reviewList.add(review(review1.placePhotos1,review1.uid,review1.review,review1.dateOfReview,review1.isLocalCurrency.toString(),review1.placePrice))
                 }
             }
 //            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())

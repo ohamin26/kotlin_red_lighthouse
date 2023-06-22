@@ -27,18 +27,22 @@ class ReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceRev
         val view: View = LayoutInflater.from(context).inflate(R.layout.review_item, null)
 
         val reviewImage = view.findViewById<ImageView>(R.id.reviewImage)
-        val userName = view.findViewById<TextView>(R.id.userName)
+        val uid = view.findViewById<TextView>(R.id.uid)
         val date = view.findViewById<TextView>(R.id.date)
         val reviewContent = view.findViewById<TextView>(R.id.review_content)
+        val isLocalCurrency = view.findViewById<TextView>(R.id.isLocalCurrency)
+        val placePrice = view.findViewById<TextView>(R.id.placePrice)
         val userDao = UserDao()
         val review = reviewList[position]
         var users : User?
         CoroutineScope(Dispatchers.Main).launch{
             users = userDao.getDataFromFirebase(review.uid)
-            userName.text = users?.userNickname
+            uid.text = users?.userNickname
         }
         date.text = review.dateOfReview
         reviewContent.text = review.review
+        isLocalCurrency.text = review.isLocalCurrency.toString()
+        placePrice.text = review.placePrice
         reviewImage.setImageBitmap(BitmapFactory.decodeStream(URL(review.placePhotos1).openStream()))
 
         return view

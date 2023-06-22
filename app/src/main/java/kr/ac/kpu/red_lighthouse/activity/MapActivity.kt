@@ -62,6 +62,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
+    var cntMyLoc = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -157,7 +158,9 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     fun onLocationChanged(location: Location) {
         mLastLocation = location
         mMap.addMarker(MarkerOptions().position(LatLng(mLastLocation.latitude,mLastLocation.longitude)).title("내위치"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
+        if(cntMyLoc == 0){
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
+        }
         mMap.setOnMarkerClickListener(markerClickListener);
     }
 
@@ -198,10 +201,11 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
         }
     }
 
-
-    var cntMyLoc = 0
     //최초로는 오이도 빨간등대가 나오도록
     override fun onMapReady(googleMap: GoogleMap) {
+        if(checkPermissionForLocation(requireContext())){
+            startLocationUpdates()
+        }
         mMap = googleMap
         //val marker1 = LatLng(37.3452397,126.6879337)
         //mMap.addMarker(MarkerOptions().position(marker1).title("빨간등대"))
@@ -235,14 +239,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
                 mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)+"/"+mapList2[i]?.get(5)
             }
-            cntMyLoc++
         }
 
-        if(cntMyLoc==0){
+        //if(cntMyLoc==0){
             if(checkPermissionForLocation(requireContext())){
                 startLocationUpdates()
             }
-        }
+        //}
 
 
         //맵 클릭 리스너-맵 클릭하면 카드뷰 없어짐

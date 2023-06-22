@@ -23,13 +23,12 @@ class MyReviewActivity() : AppCompatActivity(){
         val prefs = getSharedPreferences("user", 0)
 
         CoroutineScope(Dispatchers.Main).launch {
-
-            CoroutineScope(Dispatchers.Main).launch{
-                var documents = reviewDao.getDataWithUId(prefs.getString("userId","").toString())
-                for (document in documents){
-                    reviewList.add(document)
-                }
+            var documents = reviewDao.getDataWithUId(prefs.getString("userId","").toString())
+            for (document in documents){
+                reviewList.add(document)
             }
+            Log.e("파이어베이스",documents[0].uid)
+            adapter(reviewList)
         }
         binding = ActivityMyReviewBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -39,13 +38,15 @@ class MyReviewActivity() : AppCompatActivity(){
         binding.userEmail.text = prefs.getString("userEmail","").toString()
         binding.userName.text = prefs.getString("userNickname","").toString()
 
-
-        val reviewAdapter = MyReviewListAdapter(this, reviewList)
-        binding.reviewListView.adapter = reviewAdapter
-
         binding.btnBack.setOnClickListener {
             finish()
         }
+
+
+    }
+    fun adapter(reviewList:ArrayList<PlaceReview>){
+        val reviewAdapter = MyReviewListAdapter(this, reviewList)
+        binding.reviewListView.adapter = reviewAdapter
     }
 }
 

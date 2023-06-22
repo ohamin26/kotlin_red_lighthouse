@@ -21,6 +21,6 @@
         android:layout_height="?attr/actionBarSize" android:id="@+id/bnv_main"
         app:menu="@menu/navi_menu" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/white"/>
+        android:background="#ff5f4d"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

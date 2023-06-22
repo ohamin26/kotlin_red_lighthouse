@@ -21,6 +21,7 @@ class LocationDetailsActivity : AppCompatActivity() {
     lateinit var sort:TextView
     var nameReceive:String? = null
     var addressReceive:String? = null
+    var indutype_num:String? = null
     var placeReviewDao = PlaceReviewDao()
     private lateinit var binding: ActivityLocationDetailsBinding
     var reviewList = arrayListOf<PlaceReview>()
@@ -48,10 +49,12 @@ class LocationDetailsActivity : AppCompatActivity() {
 
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
+        indutype_num = intent.getStringExtra("indutype_num")
 
         title.text = nameReceive
         tv_attractionName.text = nameReceive
         address.text = addressReceive
+        sort.text = indutype_num
         var reviewList = arrayListOf<PlaceReview>()
         setContentView(binding.root)
         val reviewAdapter = ReviewListAdapter(this, reviewList)

@@ -58,6 +58,8 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     lateinit var cntReview: TextView
     lateinit var tvDetails:TextView
     lateinit var indutype_num:TextView
+    lateinit var storedName: String
+    lateinit var storedEmail: String
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
@@ -96,7 +98,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 AddReviewActivity::class.java
             )
             intent.putExtra("name",name.text)
-            intent.putExtra("address",address.text)
+            intent.putExtra("address",info.text)
             startActivity(intent)
         }
 
@@ -108,7 +110,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             intent.putExtra("address",address.text)
             intent.putExtra("name",name.text)
             intent.putExtra("info",info.text)
-            intent.putExtra("indutype_num",indutype_num.text)
             startActivity(intent)
         }
 
@@ -265,12 +266,10 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
             if(arr.size > 2) {
-                name.text = arr[0]
-                info.text = arr[1]
-                address.text = arr[2]
-                indutype_num.text = arr[3]
+                name.text = arr[2]
+                info.text = arr[0]
+                address.text = arr[1]
                 cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
-
             }
             else{
                 name.text=""

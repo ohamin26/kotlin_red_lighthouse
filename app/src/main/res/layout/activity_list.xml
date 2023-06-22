@@ -55,7 +55,8 @@
                 android:fontFamily="@font/suite"
                 android:text="지도"
                 android:textSize="20dp"
-                android:textStyle="bold"></Button>
+                android:textStyle="bold"
+                android:textColor="@color/white"></Button>
         </LinearLayout>
 
         <ListView

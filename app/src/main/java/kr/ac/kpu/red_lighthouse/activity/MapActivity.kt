@@ -3,6 +3,7 @@ package kr.ac.kpu.red_lighthouse.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -28,8 +29,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
+import kr.ac.kpu.red_lighthouse.placeReview.review
 import kr.ac.kpu.red_lighthouse.user.UserDao
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -274,7 +279,14 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 info.text = arr[1]
                 address.text = arr[2]
                 indutype_num.text = arr[3]
-                cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
+                CoroutineScope(Dispatchers.IO).launch {
+                    var documents = placeReviewDao.getDataWithAddress(arr[2])
+                    var cnt :String = documents.size.toString()
+                    Log.e("파이어베이스",cnt)
+                    launch(Dispatchers.Main) {
+                        cntReview.text = cnt
+                    }
+                }
             }
             else{
                 name.text=""
@@ -462,9 +474,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             }
         }
     }
-
-
-
 }
 
 

@@ -43,8 +43,15 @@ class ReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceRev
         reviewContent.text = review.review
         isLocalCurrency.text = review.isLocalCurrency.toString()
         placePrice.text = review.placePrice
-        reviewImage.setImageBitmap(BitmapFactory.decodeStream(URL(review.placePhotos1).openStream()))
+        CoroutineScope(Dispatchers.IO).launch {
+            val url = URL(review.placePhotos1)
+            val stream = url.openStream()
+            val bitmap = BitmapFactory.decodeStream(stream)
+            launch(Dispatchers.Main) {
+                reviewImage.setImageBitmap(bitmap)
+            }
 
+        }
         return view
     }
 

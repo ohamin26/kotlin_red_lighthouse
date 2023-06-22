@@ -2,17 +2,25 @@ package kr.ac.kpu.red_lighthouse.Adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.ac.kpu.red_lighthouse.R
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
 import kr.ac.kpu.red_lighthouse.placeReview.review
+import kr.ac.kpu.red_lighthouse.user.User
+import kr.ac.kpu.red_lighthouse.user.UserDao
+import java.net.URL
 
 
-class ReviewListAdapter (val context : Context, val reviewList : ArrayList<review>) : BaseAdapter(){
+class ReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceReview>) : BaseAdapter(){
     @SuppressLint("MissingInflatedId", "ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -22,14 +30,16 @@ class ReviewListAdapter (val context : Context, val reviewList : ArrayList<revie
         val userName = view.findViewById<TextView>(R.id.userName)
         val date = view.findViewById<TextView>(R.id.date)
         val reviewContent = view.findViewById<TextView>(R.id.review_content)
-
-
+        val userDao = UserDao()
         val review = reviewList[position]
-        userName.text = review.userName
-        date.text = review.date
-        reviewContent.text = review.reviewData
-        val resourceId = context.resources.getIdentifier(review.reviewImage, "drawable", context.packageName)
-        reviewImage.setImageResource(resourceId)
+        var users : User?
+        CoroutineScope(Dispatchers.Main).launch{
+            users = userDao.getDataFromFirebase(review.uid)
+            userName.text = users?.userNickname
+        }
+        date.text = review.dateOfReview
+        reviewContent.text = review.review
+        reviewImage.setImageBitmap(BitmapFactory.decodeStream(URL(review.placePhotos1).openStream()))
 
         return view
     }

@@ -4,23 +4,26 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.databinding.ActivityAddReviewBinding
-import kr.ac.kpu.red_lighthouse.databinding.ActivityLoginBinding
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
 import java.time.LocalDate
+
 
 class AddReviewActivity : AppCompatActivity() {
     private val GALLERY = 1
@@ -29,9 +32,20 @@ class AddReviewActivity : AppCompatActivity() {
     var address:String? = null
     var isCheck = false
     var placeReviewDao = PlaceReviewDao()
+    var uriArr: Uri? = null
+
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try{
+            FirebaseApp.initializeApp(/*context=*/this)
+            val firebaseAppCheck = FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance()
+            )
+        }catch (e : Exception){
+
+        }
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         address = intent.getStringExtra("address")
@@ -52,41 +66,66 @@ class AddReviewActivity : AppCompatActivity() {
         }
         binding.btnAdd.setOnClickListener{
             val onlyDate: LocalDate = LocalDate.now()
-            //var placeReview = PlaceReview(address,binding.editPrice.text.toString(),isCheck,,binding.editReview.text.toString(),onlyDate.toString())
-            //placeReviewDao.setDataToFirebase(placeReview)
+            var imageArr: String? = ""
+            CoroutineScope(Dispatchers.Main).launch{
+                if (uriArr!= null) {
+                    imageArr = placeReviewDao.uploadPhoto(uriArr!!, "img")
+                }
+                Log.e("파이어베이스", "${imageArr}")
+                val sharedPreference = getSharedPreferences("user", 0)
+                val uid = sharedPreference.getString("userId", "")
+                print("----------------------------------------------------")
+                var placeReview = PlaceReview(
+                    address!!,
+                    uid!!,
+                    binding.editPrice.text.toString(),
+                    isCheck,
+                    imageArr.toString(),
+                    binding.editReview.text.toString(),
+                    onlyDate.toString()
+                )
+                placeReviewDao.setDataToFirebase(placeReview)
+            }
+            val intent = Intent(applicationContext, MenuSelectActivity::class.java)
+            startActivity(intent)
+
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == GALLERY) {
-                val imageData: Uri? = data?.data
-                try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(
-                        contentResolver,//requireActivity().contentResolver
-                        imageData
-                    )
-                    // 이미지뷰를 생성합니다.
-                    if(cntImg < 3) {
-                        val imageView = ImageView(applicationContext)
-                        var displayMetrics = resources.displayMetrics
-                        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                        imageView.setImageBitmap(bitmap)
-                        val imageLayoutParams = LinearLayout.LayoutParams(
-                            Math.round(200 * displayMetrics.density),
-                            Math.round(150 * displayMetrics.density)
-                        )
-                        imageLayoutParams.leftMargin = Math.round(10 * displayMetrics.density)
-                        imageView.setLayoutParams(imageLayoutParams)
+        if (resultCode != Activity.RESULT_OK) {
+            Toast.makeText(this,"잘못된 접근입니다",Toast.LENGTH_SHORT).show()
+            return
+        }
 
-                        binding.layoutImagelist.addView(imageView)
-                        cntImg += 1
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
+        if (requestCode == GALLERY) {
+            val imageData: Uri? = data?.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(
+                    contentResolver,//requireActivity().contentResolver
+                    imageData
+                )
+                // 이미지뷰를 생성합니다.
+                if(cntImg < 1) {
+                    val imageView = ImageView(applicationContext)
+                    var displayMetrics = resources.displayMetrics
+                    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    imageView.setImageBitmap(bitmap)
+                    val imageLayoutParams = LinearLayout.LayoutParams(
+                        Math.round(200 * displayMetrics.density),
+                        Math.round(150 * displayMetrics.density)
+                    )
+                    imageLayoutParams.leftMargin = Math.round(10 * displayMetrics.density)
+                    imageView.layoutParams = imageLayoutParams
+                    uriArr = data?.data
+                    binding.layoutImagelist.addView(imageView)
+                    cntImg += 1
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
+
 }

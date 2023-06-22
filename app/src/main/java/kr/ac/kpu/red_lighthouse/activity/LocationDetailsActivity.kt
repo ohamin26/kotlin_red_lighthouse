@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.ListView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.ac.kpu.red_lighthouse.Adapter.ReviewListAdapter
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationDetailsBinding
-import kr.ac.kpu.red_lighthouse.placeReview.myReview
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
 import kr.ac.kpu.red_lighthouse.placeReview.review
 
 class LocationDetailsActivity : AppCompatActivity() {
@@ -18,7 +21,7 @@ class LocationDetailsActivity : AppCompatActivity() {
     var nameReceive:String? = null
     var addressReceive:String? = null
     var indutypeNum:String? = null
-
+    var placeReviewDao = PlaceReviewDao()
     private lateinit var binding: ActivityLocationDetailsBinding
     var reviewList = arrayListOf<review>(
         review("logo","고수민","리뷰내용","2023-06-01"),
@@ -32,6 +35,13 @@ class LocationDetailsActivity : AppCompatActivity() {
         binding = ActivityLocationDetailsBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_details)
+        var reviewList = arrayListOf<PlaceReview>()
+        CoroutineScope(Dispatchers.Main).launch{
+            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())
+            for (document in documents){
+                reviewList.add(document)
+            }
+        }
 
         title = findViewById(R.id.title)
         tv_attractionName = findViewById(R.id.tv_attractionName)

@@ -214,13 +214,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 if(arguments?.getString("click").equals(mapList[i]?.get(1))){
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
                 }
                 else{
                     val marker = LatLng(mapList[i]?.get(2)!!.toDouble(),mapList[i]?.get(3)!!.toDouble())
                     val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList[i]?.get(1)))
-                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)
+                    mInfo?.tag = mInfo?.title +"/"+mapList[i]?.get(4)+"/"+mapList[i]?.get(0)+"/"+mapList[i]?.get(5)
                 }
             }
             cntMyLoc++
@@ -233,7 +233,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             for(i in 0..count2!!-1){
                 val marker = LatLng(mapList2[i]?.get(2)!!.toDouble(),mapList2[i]?.get(3)!!.toDouble())
                 val mInfo = mMap.addMarker(MarkerOptions().position(marker).title(mapList2[i]?.get(1)))
-                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)
+                mInfo?.tag = mapList2[i]?.get(1)+"/"+mapList2[i]?.get(4)+"/"+mapList2[i]?.get(0)+"/"+mapList2[i]?.get(5)
             }
             cntMyLoc++
         }

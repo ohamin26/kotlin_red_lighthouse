@@ -33,7 +33,7 @@ class LocationDetailsActivity : AppCompatActivity() {
             val reviewDao = PlaceReviewDao()
             var review1 : PlaceReview? = PlaceReview()
             if(review1 != null){
-                review1 = reviewDao.getDataFromFirebase(review1.uid)
+                review1 = reviewDao.getDataFromFirebase(review1.address)
                 while(review1 != null){
                     reviewList.add(review(review1.placePhotos1,review1.uid,review1.review,review1.dateOfReview,review1.isLocalCurrency.toString(),review1.placePrice))
                 }

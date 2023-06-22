@@ -3,6 +3,7 @@ package kr.ac.kpu.red_lighthouse.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ListView
 import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,7 @@ class LocationDetailsActivity : AppCompatActivity() {
     lateinit var tv_attractionName:TextView
     lateinit var address:TextView
     lateinit var sort:TextView
+    lateinit var addReviewList:ListView
     var nameReceive:String? = null
     var addressReceive:String? = null
     var indutype_num:String? = null
@@ -46,6 +48,7 @@ class LocationDetailsActivity : AppCompatActivity() {
         tv_attractionName = findViewById(R.id.tv_attractionName)
         address = findViewById(R.id.address)
         sort = findViewById(R.id.sort)
+        addReviewList = findViewById(R.id.addReviewList)
 
         nameReceive = intent.getStringExtra("name")
         addressReceive = intent.getStringExtra("address")
@@ -58,7 +61,8 @@ class LocationDetailsActivity : AppCompatActivity() {
         var reviewList = arrayListOf<PlaceReview>()
         setContentView(binding.root)
         val reviewAdapter = ReviewListAdapter(this, reviewList)
-        binding.reviewList.adapter = reviewAdapter
+        binding.addReviewList.adapter = reviewAdapter
+
 
         binding.btnBack.setOnClickListener{
             finish()

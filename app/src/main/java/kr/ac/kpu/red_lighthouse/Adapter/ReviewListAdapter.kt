@@ -27,7 +27,7 @@ class ReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceRev
         val view: View = LayoutInflater.from(context).inflate(R.layout.review_item, null)
 
         val reviewImage = view.findViewById<ImageView>(R.id.reviewImage)
-        val uid = view.findViewById<TextView>(R.id.uid)
+        val uid = view.findViewById<TextView>(R.id.userName)
         val date = view.findViewById<TextView>(R.id.date)
         val reviewContent = view.findViewById<TextView>(R.id.review_content)
         val isLocalCurrency = view.findViewById<TextView>(R.id.isLocalCurrency)

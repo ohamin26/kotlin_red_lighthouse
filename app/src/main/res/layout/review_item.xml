@@ -26,10 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/reviewImage"
-                app:layout_constraintTop_toTopOf="@+id/reviewImage"
-                tools:text="유저이름"/>
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -41,9 +38,6 @@
                 android:layout_gravity="left"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/date"
-                app:layout_constraintStart_toEndOf="@+id/date"
-                app:layout_constraintTop_toTopOf="@+id/date"
                 tools:text="지역화폐 사용가능여부:" />
             <TextView
                 android:id="@+id/isLocalCurrency"
@@ -88,8 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                tools:text="내용:" />
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/review_content"
                 android:layout_width="wrap_content"

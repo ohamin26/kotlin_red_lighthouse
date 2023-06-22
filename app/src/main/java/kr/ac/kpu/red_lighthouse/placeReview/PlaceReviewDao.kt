@@ -30,6 +30,10 @@ class PlaceReviewDao {
         return ref.whereEqualTo("address", address).get().await()
             .toObjects(PlaceReview::class.java)
     }
+    suspend fun getDataWithUId(uid:String): MutableList<PlaceReview> {
+        return ref.whereEqualTo("uid", uid).get().await()
+            .toObjects(PlaceReview::class.java)
+    }
     fun deletePlaceReviewWithFirestore(placeReviewId:String): Task<Void> {
         return ref.document(placeReviewId).delete()
     }

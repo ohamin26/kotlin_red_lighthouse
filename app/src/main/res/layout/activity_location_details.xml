@@ -63,13 +63,6 @@
 
         </LinearLayout>
 
-        <!-- 명소 이미지 -->
-        <ImageView
-            android:id="@+id/img_attraction"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ex1"/>
 
         <!-- 이름을 알려주는 텍스트뷰 -->
         <TextView
@@ -78,7 +71,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/suite1"
             android:padding="12dp"
-            android:text="명소 이름"
+            android:text=""
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 

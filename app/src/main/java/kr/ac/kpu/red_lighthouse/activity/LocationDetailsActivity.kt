@@ -13,8 +13,6 @@ import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationDetailsBinding
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
 import kr.ac.kpu.red_lighthouse.placeReview.review
-import kr.ac.kpu.red_lighthouse.user.User
-import kr.ac.kpu.red_lighthouse.user.UserDao
 
 class LocationDetailsActivity : AppCompatActivity() {
     lateinit var title:TextView
@@ -29,7 +27,7 @@ class LocationDetailsActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
-        val prefs = getSharedPreferences("user",0)
+//        val prefs = getSharedPreferences("user",0)
 
         CoroutineScope(Dispatchers.Main).launch{
             var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())

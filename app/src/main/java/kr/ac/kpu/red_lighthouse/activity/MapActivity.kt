@@ -264,9 +264,9 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
             Log.i(arr.toString(),"success")
             if(arr.size > 2) {
-                name.text = arr[2]
-                info.text = arr[0]
-                address.text = arr[1]
+                name.text = arr[0]
+                info.text = arr[1]
+                address.text = arr[2]
                 indutype_num.text = arr[3]
                 cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
             }

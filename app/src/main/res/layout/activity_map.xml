@@ -18,7 +18,8 @@
         android:text="내위치 표시"
         android:textStyle="bold"
         android:fontFamily="@font/suite1"
-        android:id="@+id/mapBtn"/>
+        android:id="@+id/mapBtn"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:id="@+id/card_view"

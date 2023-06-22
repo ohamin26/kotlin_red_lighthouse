@@ -73,19 +73,23 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:hint="Nickname"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:backgroundTint="@color/black"
+                android:textColorHint="#747679"
+                android:textColor="#5a5a5a"/>
 
             <!--완료 버튼-->
             <Button
                 android:id="@+id/btn_change"
-                android:layout_width="150dp"
+                android:layout_width="130dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="60dp"
                 android:text="변경"
                 android:fontFamily="@font/suite"
                 android:textStyle="bold"
-                android:textSize="30dp"/>
+                android:textSize="24dp"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </LinearLayout>

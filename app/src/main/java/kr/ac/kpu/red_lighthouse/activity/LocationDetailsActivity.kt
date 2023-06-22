@@ -3,11 +3,13 @@ package kr.ac.kpu.red_lighthouse.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ListView
 import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.ac.kpu.red_lighthouse.Adapter.MyReviewListAdapter
 import kr.ac.kpu.red_lighthouse.Adapter.ReviewListAdapter
 import kr.ac.kpu.red_lighthouse.R
 import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationDetailsBinding
@@ -37,6 +39,8 @@ class LocationDetailsActivity : AppCompatActivity() {
             for (document in documents){
                 reviewList.add(document)
             }
+            Log.e("파이어베이스",documents[0].uid)
+            adapter(reviewList)
         }
 
         binding = ActivityLocationDetailsBinding.inflate(layoutInflater)
@@ -58,14 +62,16 @@ class LocationDetailsActivity : AppCompatActivity() {
         tv_attractionName.text = nameReceive
         address.text = addressReceive
         sort.text = indutype_num
-        var reviewList = arrayListOf<PlaceReview>()
         setContentView(binding.root)
-        val reviewAdapter = ReviewListAdapter(this, reviewList)
-        binding.addReviewList.adapter = reviewAdapter
+
 
 
         binding.btnBack.setOnClickListener{
             finish()
         }
+    }
+    fun adapter(reviewList:ArrayList<PlaceReview>){
+        val reviewAdapter = ReviewListAdapter(this, reviewList)
+        binding.addReviewList.adapter = reviewAdapter
     }
 }

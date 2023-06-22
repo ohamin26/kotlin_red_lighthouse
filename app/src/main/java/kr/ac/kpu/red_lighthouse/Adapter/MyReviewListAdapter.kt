@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import kr.ac.kpu.red_lighthouse.R
-import kr.ac.kpu.red_lighthouse.placeReview.myReview
+import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
 
-class MyReviewListAdapter (val context : Context, val reviewList : ArrayList<myReview>) : BaseAdapter(){
+class MyReviewListAdapter(val context: Context, val reviewList: ArrayList<PlaceReview>) : BaseAdapter(){
     @SuppressLint("MissingInflatedId", "ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         /* LayoutInflater는 item을 Adapter에서 사용할 View로 부풀려주는(inflate) 역할을 한다. */
@@ -23,8 +23,8 @@ class MyReviewListAdapter (val context : Context, val reviewList : ArrayList<myR
         /* ArrayList<Dog>의 변수 dog의 이미지와 데이터를 ImageView와 TextView에 담는다. */
         val review = reviewList[position]
         placeName.text = review.placeName
-        date.text = review.date
-        reviewContent.text = review.reviewData
+        date.text = review.dateOfReview
+        reviewContent.text = review.review
 
         return view
     }

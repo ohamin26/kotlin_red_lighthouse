@@ -108,6 +108,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             intent.putExtra("address",address.text)
             intent.putExtra("name",name.text)
             intent.putExtra("info",info.text)
+            intent.putExtra("indutype_num",indutype_num.text)
             startActivity(intent)
         }
 
@@ -243,7 +244,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             }
         }
 
-
         //맵 클릭 리스너-맵 클릭하면 카드뷰 없어짐
         googleMap!!.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
             override fun onMapClick(latLng: LatLng) {
@@ -261,12 +261,13 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             card_view.visibility = View.VISIBLE
             var placeReviewDao = PlaceReviewDao()
 
-
             var arr = marker.tag.toString().split("/") //마커에 붙인 태그
+            Log.i(arr.toString(),"success")
             if(arr.size > 2) {
                 name.text = arr[2]
                 info.text = arr[0]
                 address.text = arr[1]
+                indutype_num.text = arr[3]
                 cntReview.text = placeReviewDao.countOfReviewWithAddress(arr[2]).toString()
             }
             else{
@@ -274,7 +275,6 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 info.text = "현재위치"
                 address.text = ""
                 cntReview.text = "0"
-
             }
             false
         }

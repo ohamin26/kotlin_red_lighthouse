@@ -13,6 +13,8 @@ import kr.ac.kpu.red_lighthouse.databinding.ActivityLocationDetailsBinding
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReview
 import kr.ac.kpu.red_lighthouse.placeReview.PlaceReviewDao
 import kr.ac.kpu.red_lighthouse.placeReview.review
+import kr.ac.kpu.red_lighthouse.user.User
+import kr.ac.kpu.red_lighthouse.user.UserDao
 
 class LocationDetailsActivity : AppCompatActivity() {
     lateinit var title:TextView
@@ -23,25 +25,17 @@ class LocationDetailsActivity : AppCompatActivity() {
     var addressReceive:String? = null
     var placeReviewDao = PlaceReviewDao()
     private lateinit var binding: ActivityLocationDetailsBinding
-    private var reviewList = arrayListOf<review>()
+    var reviewList = arrayListOf<PlaceReview>()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         val prefs = getSharedPreferences("user",0)
 
         CoroutineScope(Dispatchers.Main).launch{
-            val reviewDao = PlaceReviewDao()
-            var review1 : PlaceReview? = PlaceReview()
-            if(review1 != null){
-                review1 = reviewDao.getDataFromFirebase(review1.address)
-                while(review1 != null){
-                    reviewList.add(review(review1.placePhotos1,review1.uid,review1.review,review1.dateOfReview,review1.isLocalCurrency.toString(),review1.placePrice))
-                }
+            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())
+            for (document in documents){
+                reviewList.add(document)
             }
-//            var documents = placeReviewDao.getDataWithAddress(intent.getStringExtra("address").toString())
-//            for (document in documents){
-//                reviewList.add(document)
-//            }
         }
 
         binding = ActivityLocationDetailsBinding.inflate(layoutInflater)

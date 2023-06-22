@@ -78,11 +78,13 @@ class AddReviewActivity : AppCompatActivity() {
                 Log.e("파이어베이스", "${imageArr}")
                 val sharedPreference = getSharedPreferences("user", 0)
                 val uid = sharedPreference.getString("userId", "")
+                val userName = sharedPreference.getString("userNickname", "")
                 print("----------------------------------------------------")
                 var placeReview = PlaceReview(
                     name!!,
                     address!!,
                     uid!!,
+                    userName!!,
                     binding.editPrice.text.toString(),
                     isCheck,
                     imageArr.toString(),

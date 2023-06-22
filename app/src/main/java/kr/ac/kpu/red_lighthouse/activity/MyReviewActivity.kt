@@ -29,6 +29,8 @@ class MyReviewActivity() : AppCompatActivity(){
                 for (document in documents){
                     reviewList.add(document)
                 }
+                val reviewAdapter = MyReviewListAdapter(this, reviewList)
+                binding.reviewListView.adapter = reviewAdapter
             }
         }
         binding = ActivityMyReviewBinding.inflate(layoutInflater)
@@ -38,10 +40,6 @@ class MyReviewActivity() : AppCompatActivity(){
         //이메일, 닉네임 표시
         binding.userEmail.text = prefs.getString("userEmail","").toString()
         binding.userName.text = prefs.getString("userNickname","").toString()
-
-
-        val reviewAdapter = MyReviewListAdapter(this, reviewList)
-        binding.reviewListView.adapter = reviewAdapter
 
         binding.btnBack.setOnClickListener {
             finish()

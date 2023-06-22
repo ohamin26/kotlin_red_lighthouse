@@ -53,8 +53,11 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="Email"
+            android:textColorHint="#747679"
+            android:textColor="#5a5a5a"
             android:inputType="textPersonName"
-            android:text="" />
+            android:text=""
+            android:backgroundTint="@color/black"/>
 
         <!--비밀번호 입력-->
         <EditText
@@ -64,7 +67,11 @@
             android:layout_gravity="center"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="#747679"
+            android:textColor="#5a5a5a"
+            android:backgroundTint="@color/black"
+            />
 
         <!--비밀번호 찾기로 이동 버튼-->
         <Button
@@ -102,7 +109,8 @@
                 android:id="@+id/auto_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"/>
+                android:checked="false"
+                android:buttonTint="#787878"/>
         </LinearLayout>
         <!--로그인 버튼-->
         <androidx.appcompat.widget.AppCompatButton

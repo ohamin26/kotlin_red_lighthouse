@@ -3,6 +3,7 @@ package kr.ac.kpu.red_lighthouse.placeReview
 import android.content.SharedPreferences
 
 class PlaceReview(
+    var placeName : String,
     var address: String,
     var uid: String,
     var placePrice: String,
@@ -11,5 +12,5 @@ class PlaceReview(
     var review: String,
     var dateOfReview:String,
 ) {
-    constructor() : this("", "","",false,"", "", "")
+    constructor() : this("","", "","",false,"", "", "")
 }

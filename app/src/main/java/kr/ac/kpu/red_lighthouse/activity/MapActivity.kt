@@ -95,6 +95,7 @@ class MapActivity : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
                 context,
                 AddReviewActivity::class.java
             )
+            intent.putExtra("name",name.text)
             intent.putExtra("address",address.text)
             startActivity(intent)
         }
